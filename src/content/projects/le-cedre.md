@@ -1,0 +1,71 @@
+// le-cedre.md
+
+
+## @metadata
+le-cedre
+Le Cèdre
+Création d'un outil de gestion et de suivi des contrats
+/projects/maif/cover.jpg
+
+## @hero
+Le Cèdre
+Conception d'un outil de gestion des contrats de prestations externes.
+
+## @carousel
+- /projects/lecedre/image1.jpg
+- /projects/lecedre/image2.jpg
+- /projects/lecedre/image3.jpg
+- /projects/lecedre/image4.jpg
+
+## @columns
+# Device
+Desktop
+Mobile  
+
+# Attibuts de projet
+Application professionnel
+Mission freelance
+
+## @article
+# Contexte du projet
+Le projet visait à améliorer l'efficacité des gestionnaires de contrats en restructurant leurs outils de travail. La méthodologie OOUX (Object-Oriented UX) a été retenue pour sa capacité à organiser les interfaces autour des objets métier essentiels avant d'aborder les aspects interactifs.
+
+## @quote
+Une conception orientée objet pour plus de flexibilité
+
+## @article
+# Choix méthodologique
+Le contexte professionnel implique des interactions quotidiennes avec diverses entités (contrats, clients, documents) soumises à des règles spécifiques. L'approche OOUX permet d'éviter la fragmentation des fonctionnalités et offre une vision plus cohérente du système.
+
+## @article
+# Processus collaboratif
+La conception s'est appuyée sur un dialogue constant avec les équipes de Le Cèdre pour assurer l'adéquation de l'outil avec les besoins opérationnels.
+
+## @article
+# Phases de conception
+Le développement du projet s'est articulé autour de plusieurs étapes :
+
+Entretiens avec les gestionnaires pour identifier leurs besoins
+Sessions de co-conception pour définir la structure des objets métier
+Évaluations régulières pour valider les orientations
+
+Cette méthodologie a permis d'établir une base solide tout en restant aligné avec les contraintes pratiques du terrain.
+
+## @singleImage
+/projects/maif/large-image.jpg
+Description de l'image
+
+## @columns
+# Bénéfices observés
+- Meilleure lisibilité de l'interface
+- Navigation simplifiée
+- Adaptabilité aux évolutions futures
+
+# Méthodologie
+Organisation de l'interface selon une hiérarchie d'objets métier claire, facilitant la manipulation des contrats.
+
+## @article
+# Synthèse
+L'application de la méthode OOUX, associée à une démarche collaborative, a abouti à un outil adapté aux pratiques des gestionnaires de contrats. La solution développée transforme un système complexe en une interface structurée et évolutive.
+
+La conception orientée objet s'est révélée particulièrement pertinente pour organiser l'information et faciliter la compréhension des interactions, tout en maintenant la capacité d'évolution du système.

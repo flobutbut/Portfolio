@@ -1,0 +1,1 @@
+{"root":["./src/main.ts","./src/router/index.ts","./src/app.vue","./src/components/navbar.vue","./src/components/icons/iconcommunity.vue","./src/components/icons/icondocumentation.vue","./src/components/icons/iconecosystem.vue","./src/components/icons/iconsupport.vue","./src/components/icons/icontooling.vue","./src/views/overviewpage.vue"],"version":"5.7.3"}

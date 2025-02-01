@@ -1,0 +1,32 @@
+<template>
+  <svg
+    width="224"
+    height="120"
+    viewBox="0 0 224 120"
+    preserveAspectRatio="xMidYMid meet"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <rect x="0.5" y="26.5" width="31" height="31" rx="1.5" stroke="#C7CCD1" />
+    <rect x="36.5" y="26.5" width="31" height="31" rx="1.5" stroke="#C7CCD1" />
+    <rect x="0.5" y="62.5" width="31" height="31" rx="1.5" stroke="#C7CCD1" />
+    <rect x="36" y="62" width="32" height="32" rx="2" fill="#132430" />
+    <rect x="84" y="59.5" width="40" height="1" rx="0.5" fill="#DDE0E3" />
+    <rect x="140" y="18" width="84" height="84" rx="4" fill="#132430" />
+    <rect x="148" y="26" width="32" height="32" rx="2" fill="#EB1C4E" />
+    <rect x="184" y="26" width="32" height="32" rx="2" fill="#EB1C4E" />
+    <rect x="148" y="62" width="32" height="32" rx="2" fill="#EB1C4E" />
+  </svg>
+</template>
+
+<script setup lang="ts">
+// Pas besoin de logique particulière
+</script>
+
+<style scoped>
+svg {
+  width: 100%;
+  height: auto;
+  display: block; /* Enlève l'espace blanc sous le SVG */
+}
+</style>
