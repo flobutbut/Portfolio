@@ -45,4 +45,4 @@ dist-ssr
 # Generated JavaScript files from TypeScript
 *.js
 !vite.config.js
-!eslint.config.js
+!eslint.config.jsnode_modules/.yarn-integrity
