@@ -40,7 +40,7 @@ const SECTION_COMPONENTS = {
   article: ArticleSection,
   columns: ColumnsSection,
   singleImage: SingleImageSection,
-  parallaxImage: ParallaxImageSection, 
+  parallaxImage: ParallaxImageSection,
   quote: CoteSection,
 } as const;
 
@@ -64,9 +64,10 @@ const parser = new MarkdownProjectParser();
 
 const loadProject = async () => {
   try {
-    const modules = import.meta.glob("../content/projects/*.md", {
-      as: "raw",
+    const modules = (import.meta as any).glob("../content/projects/*.md", {
+      query: "?raw",
       eager: true,
+      import: "default",
     });
 
     // Trouver le module correspondant à l'ID du projet

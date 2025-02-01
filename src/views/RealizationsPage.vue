@@ -18,9 +18,10 @@ const parser = new MarkdownProjectParser();
 
 onMounted(async () => {
   try {
-    const modules = import.meta.glob("../content/projects/*.md", {
-      as: "raw",
+    const modules = (import.meta as any).glob("../content/projects/*.md", {
+      query: "?raw",
       eager: true,
+      import: "default",
     });
 
     console.log("Loaded modules:", modules);
