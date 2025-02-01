@@ -31,7 +31,7 @@ const props = defineProps<Props>();
 
 const sectionRef = ref<HTMLElement | null>(null);
 const containerRef = ref<HTMLElement | null>(null);
-const imageRef = ref<HTMLElement | null>(null);
+const imageRef = ref<HTMLImageElement | null>(null);
 const translateY = ref(0);
 const imageRatio = ref(1.5); // Default scaling factor for parallax effect
 const naturalRatio = ref(0); // Will store image's natural aspect ratio
@@ -94,9 +94,9 @@ const scrollHandler = () => {
 // Debounce helper for resize handling
 const debounce = (fn: Function, ms = 300) => {
   let timeoutId: ReturnType<typeof setTimeout>;
-  return function (...args: any[]) {
+  return (...args: any[]) => {
     clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => fn.apply(this, args), ms);
+    timeoutId = setTimeout(() => fn(...args), ms);
   };
 };
 

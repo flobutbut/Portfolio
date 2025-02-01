@@ -7,6 +7,7 @@ interface ProjectMetadata {
    title: string
    description: string
    imageUrl: string
+   [key: string]: string;
  }
 }
 
