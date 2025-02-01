@@ -34,6 +34,8 @@ Ancrée au cœur de la Vendée, JP Racing incarne l'excellence dans la conceptio
 # Vision du projet
 Notre challenge : propulser JP Racing dans une nouvelle dimension digitale. Au cœur de cette transformation, un configurateur 3D révolutionnaire permettant aux cyclistes de créer leurs roues sur-mesure, en sélectionnant des composants parfaitement compatibles avec leur discipline. Une expérience e-commerce repensée complète cette mutation technologique.
 
+## @ParallaxImageSection
+
 ## @article
 # Une expérience d'achat immersive
 Composer et personnaliser sa roue de vélo avec les composants compatibles entre eux et adaptés à sa pratique du cyclisme devient un jeux d'enfant avec son comparateur et ses suggestions de configuration.

@@ -6,17 +6,13 @@
         <div class="strategy-item">
           <h4 class="md-bold">Environnement agile</h4>
           <p class="md-regular">
-            Chaque itération de sprint est une opportunité d’ajuster, tester et
-            livrer des solutions alignées sur les objectifs stratégiques et les
-            besoins utilisateurs.
+            Chaque itération de sprint est une opportunité d'ajuster, tester et livrer des solutions alignées sur les objectifs stratégiques et les besoins des utilisateurs.
           </p>
         </div>
         <div class="strategy-item">
           <h4 class="md-bold">Stratégie produit</h4>
           <p class="md-regular">
-            J'intègre la vision stratégique et les objectifs business dans la
-            roadmap design pour que les projets évoluent en synergie avec votre
-            entreprise.
+            J'intègre la vision stratégique et les objectifs business dans la roadmap design afin d'assurer une évolution cohérente et alignée avec votre entreprise.
           </p>
         </div>
       </div>
@@ -28,17 +24,13 @@
         <div class="strategy-item">
           <h4 class="md-bold">Écosysteme produits</h4>
           <p class="md-regular">
-            Je conçois des écosystèmes produits harmonieux, alliant cohérence
-            graphique, ergonomique et interopérabilité pour une expérience
-            utilisateur fluide et évolutive.
+            Je conçois des écosystèmes produits harmonieux, assurant une cohérence graphique et ergonomique, ainsi qu'une interopérabilité optimale pour une expérience utilisateur fluide et évolutive.
           </p>
         </div>
         <div class="strategy-item">
           <h4 class="md-bold">Design system</h4>
           <p class="md-regular">
-            Un Design System permet de conserver une grande cohérence entre vos
-            produits sur le plan ergonomique et graphique, il va aussi permettre
-            de gagner du temps en conception et en développement.
+            Je mets en place des Design Systems pour garantir une unité visuelle et ergonomique entre vos produits. J’optimise également les processus de conception et de développement afin de vous faire gagner du temps.
           </p>
         </div>
       </div>
@@ -50,17 +42,13 @@
         <div class="strategy-item">
           <h4 class="md-bold">Outils d’analyse</h4>
           <p class="md-regular">
-            Les données utilisateurs sont essentielles pour établir des
-            observations claires qui guideront vos décisions et optimiseront les
-            performances de votre produit.
+            J’analyse les données utilisateurs pour extraire des insights pertinents qui orientent les décisions stratégiques et optimisent la performance des produits
           </p>
         </div>
         <div class="strategy-item">
           <h4 class="md-bold">Indicateurs de performance</h4>
           <p class="md-regular">
-            Les indicateurs de performance sont au cœur de l'amélioration
-            produit pour évaluer l'efficacité des interfaces et orienter vers
-            choix de conception pertinents.
+            J'intègre des KPIs pour évaluer l'efficacité des interfaces et ajuster les choix de conception en fonction des besoins réels des utilisateurs.
           </p>
         </div>
       </div>
