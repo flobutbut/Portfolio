@@ -37,3 +37,12 @@ dist-ssr
 # Environment variables
 .env
 .env.*
+
+# Source maps
+*.map
+*.js.map
+
+# Generated JavaScript files from TypeScript
+*.js
+!vite.config.js
+!eslint.config.js
