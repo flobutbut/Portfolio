@@ -17,7 +17,7 @@ import { computed, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import NavBar from './components/sections/NavBar.vue'
 import Footer from './components/sections/Footer.vue'
-// import { Analytics } from '@vercel/analytics/vue'
+import { Analytics } from '@vercel/analytics/vue'
 
 const route = useRoute()
 const isBlankLayout = computed(() => route.meta.layout === 'blank')
