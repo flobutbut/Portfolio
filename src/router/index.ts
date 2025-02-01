@@ -1,12 +1,12 @@
 // router/index.ts
-import { createRouter, createWebHashHistory } from 'vue-router'
+import { createRouter, createWebHistory } from 'vue-router'
 import OverviewPage from '../views/OverviewPage.vue'
 import RealizationsPage from '../views/RealizationsPage.vue'
 import ContactPage from '../views/ContactPage.vue'
 import RealizationDetail from '../views/RealizationDetail.vue'
 
 const router = createRouter({
- history: createWebHashHistory(),
+ history: createWebHistory(),
  routes: [
    { 
      path: '/', 
