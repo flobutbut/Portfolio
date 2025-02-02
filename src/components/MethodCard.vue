@@ -21,7 +21,7 @@ defineProps<Props>();
 .method-card {
   background-color: var(--surface-medium);
   border-radius: var(--radius-md);
-  padding: calc(var(--space-md) * 4);
+  padding: calc(var(--space-md) * 3);
   display: flex;
   flex-direction: column;
   gap: calc(var(--space-md) * 2);

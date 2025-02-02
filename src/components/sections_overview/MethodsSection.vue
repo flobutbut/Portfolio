@@ -24,10 +24,10 @@
 
 <script setup lang="ts">
 import MethodCard from "../MethodCard.vue";
-import CollaborationIcon from "../icons/MethodeCollaborationIcon.vue"
-import EmpathyIcon from "../icons/MethodeEmpathyIcon.vue"
-import PlanificationIcon from "../icons/MethodePlanificationIcon.vue"
-import PragmatismeIcon from "../icons/MethodePragmatismeIcon.vue"
+import CollaborationIcon from "../icons/MethodeCollaborationIcon.vue";
+import EmpathyIcon from "../icons/MethodeEmpathyIcon.vue";
+import PlanificationIcon from "../icons/MethodePlanificationIcon.vue";
+import PragmatismeIcon from "../icons/MethodePragmatismeIcon.vue";
 
 const methods = [
   {
@@ -64,9 +64,8 @@ const methods = [
 
   padding-top: calc(var(--space-md) * 20);
   padding-bottom: calc(var(--space-md) * 10);
-  padding-right: calc(var(--space-md) * 6);
-  padding-left: calc(var(--space-md) * 10);
-
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 .subtitle {
@@ -105,8 +104,8 @@ const methods = [
     padding-top: calc(var(--space-md) * 10);
     padding-bottom: calc(var(--space-md) * 10);
 
-    padding-right: calc(var(--space-md) * 5);
-    padding-left: calc(var(--space-md) * 5);
+    padding-left: 10%;
+    padding-right: 10%;
     gap: var(--space-none);
   }
 
@@ -124,7 +123,7 @@ const methods = [
   .methods-section {
     padding-top: calc(var(--space-md) * 4);
     padding-bottom: calc(var(--space-md) * 4);
-    
+
     padding-left: calc(var(--space-md) * 3);
     padding-right: calc(var(--space-md) * 3);
     gap: var(--space-none);

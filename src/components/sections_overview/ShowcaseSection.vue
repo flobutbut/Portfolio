@@ -31,9 +31,8 @@
   padding-top: calc(var(--space-md) * 10);
   padding-bottom: calc(var(--space-md) * 10);
 
-  padding-left: calc(var(--space-md) * 10);
-  padding-right: 0px;
-
+  padding-left: 15%;
+  padding-right: var(--space-none);
 }
 
 .showcase-container {
@@ -47,7 +46,9 @@
   aspect-ratio: 16/9;
   background-color: var(--highlight-default);
   border-radius: var(--radius-lg) 0 0 var(--radius-lg);
+
   padding: calc(var(--space-md) * 6) calc(var(--space-md) * 6);
+
   display: flex;
   flex-direction: column;
   gap: calc(var(--space-md) * 4);
@@ -77,7 +78,7 @@
     padding-top: calc(var(--space-md) * 10);
     padding-bottom: calc(var(--space-md) * 20);
 
-    padding-left: calc(var(--space-md) * 5);
+    padding-left: 10%;
     padding-right: var(--space-none);
   }
 

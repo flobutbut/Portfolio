@@ -155,14 +155,15 @@ onBeforeUnmount(() => {
   flex-direction: column;
   padding-top: calc(var(--space-md) * 10);
   padding-bottom: calc(var(--space-md) * 10);
-  padding-right: calc(var(--space-md) * 0);
-  padding-left: calc(var(--space-md) * 10);
+
+  padding-left: 15%;
+  padding-right: var(--space-none);
 }
 
 .subtitle {
   color: var(--text-medium);
   margin-bottom: calc(var(--space-md) * 2);
-  max-width: 700px;
+  max-width: 600px;
 }
 
 .competence-section h3 {
@@ -199,8 +200,9 @@ onBeforeUnmount(() => {
   .competence-section {
     padding-top: calc(var(--space-md) * 10);
     padding-bottom: calc(var(--space-md) * 10);
-    padding-left: calc(var(--space-md) * 5);
-    padding-right: calc(var(--space-md) * 0);
+    
+    padding-left: 10%;
+    padding-right: var(--space-none);
   }
 
   .competence-container {
@@ -209,6 +211,7 @@ onBeforeUnmount(() => {
 
   .subtitle {
     max-width: 600px;
+    margin-right: 10%;
   }
 }
 

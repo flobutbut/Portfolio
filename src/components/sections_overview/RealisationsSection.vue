@@ -51,8 +51,8 @@ const projects = [
   padding-top: calc(var(--space-md) * 10);
   padding-bottom: calc(var(--space-md) * 10);
   
-  padding-right: calc(var(--space-md) * 10);
-  padding-left: calc(var(--space-md) * 10);
+  padding-right: 15%;
+  padding-left: 15%;
 }
 
 .subtitle {
@@ -73,8 +73,8 @@ const projects = [
     padding-top: calc(var(--space-md) * 10);
     padding-bottom: calc(var(--space-md) * 10);
 
-    padding-left: calc(var(--space-md) * 5);
-    padding-right: calc(var(--space-md) * 5);
+    padding-left: 10%;
+    padding-right: 10%;
   }
 
   .projects-grid {

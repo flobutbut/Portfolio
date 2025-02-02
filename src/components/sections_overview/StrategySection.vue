@@ -66,16 +66,16 @@
   padding-top: calc(var(--space-md) * 10);
   padding-bottom: calc(var(--space-md) * 10);
 
-  padding-left: calc(var(--space-md) * 30);
-  padding-right: calc(var(--space-md) * 10);
+  padding-left: 30%;
+  padding-right: 15%;
 
 }
 
 /* Tablettes */
 @media (max-width: 1024px) {
   .strategy-section {
-    padding-left: calc(var(--space-md) * 20);
-    padding-right: calc(var(--space-md) * 5);
+    padding-left: 25%;
+    padding-right: 10%;
 
     gap: calc(var(--space-md) * 8);
   }

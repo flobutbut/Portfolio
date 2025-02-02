@@ -34,7 +34,7 @@ const copyEmail = async () => {
 .email-copy {
   display: flex;
   align-items: center;
-  background-color: var(--surface-back);
+  background-color: var(--surface-medium);
   border-radius: var(--radius-sm);
   overflow: hidden;
 }

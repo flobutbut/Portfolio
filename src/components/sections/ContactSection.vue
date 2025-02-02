@@ -40,19 +40,21 @@ import LinkedinIcon from "../icons/LinkedinIcon.vue";
   background-color: var(--surface-back);
   padding-top: calc(var(--space-md) * 10);
   padding-bottom: calc(var(--space-md) * 10);
-  padding-right: calc(var(--space-md) * 10);
-  padding-left: calc(var(--space-md) * 10);
+  padding-left: 15%;
+  padding-right: 15%;
 }
 
 .contact-card {
-  background-color: var(--surface-medium);
-  border-radius: var(--radius-lg);
-  padding: calc(var(--space-md) * 4);
+  /* background-color: var(--surface-medium); 
+  padding: calc(var(--space-md) * 3);
+  border-radius: var(--radius-md); */
+
+
   width: 100%;
 }
 
 .contact-content {
-  max-width: 800px;
+  max-width: 600px;
   display: flex;
   flex-direction: column;
   gap: calc(var(--space-md) * 2);
@@ -96,13 +98,13 @@ import LinkedinIcon from "../icons/LinkedinIcon.vue";
     padding-top: calc(var(--space-md) * 10);
     padding-bottom: calc(var(--space-md) * 10);
 
-    padding-right: calc(var(--space-md) * 5);
-    padding-left: calc(var(--space-md) * 5);
+    padding-left: 10%;
+    padding-right: 10%;
   }
 
 
   .contact-card {
-    padding: calc(var(--space-md) * 6);
+    /* padding: calc(var(--space-md) * 6) */;
   }
 
   .contact-content {
@@ -120,8 +122,7 @@ import LinkedinIcon from "../icons/LinkedinIcon.vue";
   }
 
   .contact-card {
-    padding: calc(var(--space-md) * 4);
-    border-radius: var(--radius-md);
+    /* padding: calc(var(--space-md) * 4); */
   }
 
 

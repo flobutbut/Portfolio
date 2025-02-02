@@ -13,13 +13,13 @@
 <style scoped>
 .hero {
   height: 70vh;
-  max-width: 800px;
+  max-width: 1200px;
   display: flex;
   flex-direction: column;
   justify-content: center;
 
-  padding-left: calc(var(--space-md) * 10);
-  padding-right: calc(var(--space-md) * 10);
+  padding-left: 15%;
+  padding-right: 15%;
   
   gap: var(--space-md);
 }
@@ -27,8 +27,8 @@
 /* Tablettes */
 @media (max-width: 1024px) {
   .hero {
-    padding-left: calc(var(--space-md) * 5);
-    padding-right: calc(var(--space-md) * 5);
+    padding-left: 10%;
+    padding-right: 10%;
     transform: translateY(-20px);
   }
 }
