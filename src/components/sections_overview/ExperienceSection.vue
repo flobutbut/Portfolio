@@ -17,52 +17,52 @@
 </template>
 
 <script setup lang="ts">
-import desoutterLogo from "@/assets/logos/desoutter.png";
-import polysoudeLogo from "@/assets/logos/polysoude.png";
-import impacttrackLogo from "@/assets/logos/impacttrack.png";
-import maifLogo from "@/assets/logos/maif.png";
-import witcoLogo from "@/assets/logos/witco.png";
-import sharingcloudLogo from "@/assets/logos/sharingcloud.png";
-import jpracingLogo from "@/assets/logos/jpracing.png";
-import feniksoLogo from "@/assets/logos/fenikso.png";
-import altranLogo from "@/assets/logos/altran.png";
+import desoutterLogo from '@/assets/logos/desoutter.png'
+import polysoudeLogo from '@/assets/logos/polysoude.png'
+import impacttrackLogo from '@/assets/logos/impacttrack.png'
+import maifLogo from '@/assets/logos/maif.png'
+import witcoLogo from '@/assets/logos/witco.png'
+import sharingcloudLogo from '@/assets/logos/sharingcloud.png'
+import jpracingLogo from '@/assets/logos/jpracing.png'
+import feniksLogo from '@/assets/logos/fenikso.png'
+import altranLogo from '@/assets/logos/altran.png'
 
 const companies = [
 {
     name: "witco",
-    logo: witcoLogo,
+    logo: witcoLogo
   },
   {
     name: "Sharingcloud",
-    logo: sharingcloudLogo,
+    logo: sharingcloudLogo
   },
   {
     name: "Desoutter",
-    logo: desoutterLogo,
+    logo: desoutterLogo
   },
   {
     name: "Polysoude",
-    logo: polysoudeLogo,
+    logo: polysoudeLogo
   },
   {
     name: "MAIF",
-    logo: maifLogo,
+    logo: maifLogo
   },
   {
     name: "fenikso",
-    logo: feniksoLogo,
+    logo: feniksLogo
   },
   {
     name: "Impact Track",
-    logo: impacttrackLogo,
+    logo: impacttrackLogo
   },
   {
     name: "jpracing",
-    logo: jpracingLogo,
+    logo: jpracingLogo
   },
   {
     name: "altran",
-    logo: altranLogo,
+    logo: altranLogo
   },
 
 ];
