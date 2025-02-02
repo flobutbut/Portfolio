@@ -2,12 +2,12 @@
 ## @metadata
 jp-racing
 JP Racing
-E-commerce et configurateur 3D haute performance pour roues de vélo
+Plateforme e-commerce et configurateur 3D pour roues de vélo
 /projects/jpracing/cover.jpg
 
 ## @hero
 JP Racing
-Révolutionner l'achat de roues de compétition grâce à un configurateur 3D unique et un e-commerce nouvelle génération
+Une solution digitale complète associant e-commerce et configurateur 3D pour la personnalisation de roues de vélo
 
 ## @carousel
 - /projects/jpracing/image1.jpg
@@ -17,28 +17,32 @@ Révolutionner l'achat de roues de compétition grâce à un configurateur 3D un
 
 ## @columns
 # Device
-Ux design
-Ui design
-Branding e-commerce
+Conception UX/UI
+Développement e-commerce
+Création de marque digitale
 
-# Attibuts de projet
-E-commerce
-Site responsive
-Configuration produit
-
-## @article
-# L'ADN JP Racing
-Ancrée au cœur de la Vendée, JP Racing incarne l'excellence dans la conception de roues de vélo haute performance. Notre mission : équiper chaque cycliste, du passionné au compétiteur, avec des roues assemblées à la main qui subliment leur style de pilotage et maximisent leurs performances.
+# Caractéristiques
+Site e-commerce
+Interface responsive
+Configurateur produit 3D
 
 ## @article
-# Vision du projet
-Notre challenge : propulser JP Racing dans une nouvelle dimension digitale. Au cœur de cette transformation, un configurateur 3D révolutionnaire permettant aux cyclistes de créer leurs roues sur-mesure, en sélectionnant des composants parfaitement compatibles avec leur discipline. Une expérience e-commerce repensée complète cette mutation technologique.
-
-## @ParallaxImageSection
+# Présentation
+JP Racing est une entreprise vendéenne spécialisée dans la conception et l'assemblage de roues de vélo sur mesure. Leur expertise permet d'équiper les cyclistes avec des roues assemblées main, adaptées à leur pratique et leurs besoins spécifiques.
 
 ## @article
-# Une expérience d'achat immersive
-Composer et personnaliser sa roue de vélo avec les composants compatibles entre eux et adaptés à sa pratique du cyclisme devient un jeux d'enfant avec son comparateur et ses suggestions de configuration.
+# Objectifs du projet
+Le projet visait deux objectifs principaux : moderniser la plateforme e-commerce existante et développer un configurateur 3D permettant aux utilisateurs de personnaliser leurs roues. Cette solution devait intégrer un système de vérification de compatibilité entre les différents composants selon l'usage prévu.
+
+## @article
+# Solution e-commerce
+La nouvelle plateforme e-commerce de JP Racing a été conçue pour simplifier le processus de sélection et de personnalisation des roues de vélo. L'interface guide les utilisateurs à travers les différentes options de configuration tout en assurant la compatibilité technique des composants.
+
+Le système intègre un comparateur intelligent qui aide les cyclistes à évaluer différentes configurations selon leurs besoins spécifiques. Des suggestions de configurations pré-établies sont également proposées, s'appuyant sur l'expertise de JP Racing pour différents types de pratiques cyclistes.
+
+Cette approche structure le parcours d'achat autour de deux axes principaux :
+- l'accompagnement technique pour les clients souhaitant une personnalisation détaillée.
+- Une solutions clé en main pour ceux préférant s'appuyer sur des configurations éprouvées.
 
 ## @singleImage
 /projects/jpracing/large-image.jpg
@@ -47,16 +51,17 @@ Description de l'image
 ## @article
 
 ## @quote
-La personnalisation 3D au service de la performance cycliste
+Un configurateur 3D intuitif pour une personnalisation précise
 
 ## @article
-# Innovation technologique
-La conception du configurateur 3D s'est appuyée sur une collaboration étroite avec les experts JP Racing. Cette synergie nous a permis de développer un outil qui allie précision technique et facilité d'utilisation. Chaque paramètre est optimisé pour garantir des configurations parfaitement adaptées aux exigences de chaque discipline cycliste.
+# Le configurateur
+La conception du configurateur s'est appuyée sur une collaboration étroite avec JP Racing pour garantir la précision technique des options proposées. Cette approche a permis de développer un outil à la fois fonctionnel et accessible, répondant aux besoins des utilisateurs comme aux exigences techniques du produit.
 
 ## @singleImage
 /projects/jpracing/large-image.jpg
 Description de l'image
 
 ## @article
-# pour ganger la descente
-En fusionnant expertise technique et innovation digitale, j'ai créé pour JP Racing une plateforme qui redéfinit les standards de la vente en ligne de roues de compétition. Le configurateur 3D, véritable concentré de technologie, permet aux cyclistes de visualiser et personnaliser leurs futures roues avec une précision inégalée. Cette solution sur-mesure positionne JP Racing comme un leader innovant dans le secteur du cyclisme de haute performance.
+# Résultats
+La nouvelle plateforme répond aux objectifs initiaux en offrant une expérience d'achat fluide et un outil de configuration précis. L'interface modernisée et le configurateur 3D permettent à JP Racing de proposer une solution digitale complète, adaptée aux attentes actuelles des clients et aux spécificités techniques du secteur.
+La combinaison du site e-commerce et du configurateur 3D offre aux clients une expérience d'achat guidée, tout en conservant la flexibilité nécessaire pour des choix personnalisés. Cette solution maintient un équilibre entre accessibilité pour l'utilisateur et précision technique du produit final.

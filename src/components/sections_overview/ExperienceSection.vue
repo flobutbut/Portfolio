@@ -3,40 +3,69 @@
   <div class="experience-section">
     <h3 class="h3">Expérience</h3>
     <p class="subtitle md-regular">
-        Je conçois des solutions UX/UI guidées par une vision stratégique pour résoudre des problèmes, optimiser les performances et créer des expériences impactantes.
+      Je conçois des solutions UX/UI guidées par une vision stratégique pour
+      résoudre des problèmes, optimiser les performances et créer des
+      expériences impactantes.
     </p>
-    
+
     <div class="logos-container">
       <div v-for="company in companies" :key="company.name" class="logo-card">
-        <img :src="company.logo" :alt="company.name">
+        <img :src="company.logo" :alt="company.name" />
       </div>
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
+import desoutterLogo from "@/assets/logos/desoutter.png";
+import polysoudeLogo from "@/assets/logos/polysoude.png";
+import impacttrackLogo from "@/assets/logos/impacttrack.png";
+import maifLogo from "@/assets/logos/maif.png";
+import witcoLogo from "@/assets/logos/witco.png";
+import sharingcloudLogo from "@/assets/logos/sharingcloud.png";
+import jpracingLogo from "@/assets/logos/jpracing.png";
+import feniksoLogo from "@/assets/logos/fenikso.png";
+import altranLogo from "@/assets/logos/altran.png";
+
 const companies = [
-  {
-    name: 'Desoutter',
-    logo: '../assets/logos/desoutter.svg'
+{
+    name: "witco",
+    logo: witcoLogo,
   },
   {
-    name: 'Polysoude',
-    logo: '../assets/logos/polysoude.svg'
+    name: "Sharingcloud",
+    logo: sharingcloudLogo,
   },
   {
-    name: 'Impact Track',
-    logo: '../assets/logos/impact-track.svg'
+    name: "Desoutter",
+    logo: desoutterLogo,
   },
   {
-    name: 'MAIF',
-    logo: '../assets/logos/maif.svg'
+    name: "Polysoude",
+    logo: polysoudeLogo,
   },
   {
-    name: 'Sharingcloud',
-    logo: '../assets/logos/sharingcloud.svg'
-  }
-]
+    name: "MAIF",
+    logo: maifLogo,
+  },
+  {
+    name: "fenikso",
+    logo: feniksoLogo,
+  },
+  {
+    name: "Impact Track",
+    logo: impacttrackLogo,
+  },
+  {
+    name: "jpracing",
+    logo: jpracingLogo,
+  },
+  {
+    name: "altran",
+    logo: altranLogo,
+  },
+
+];
 </script>
 
 <style scoped>
@@ -44,10 +73,10 @@ const companies = [
   display: flex;
   flex-direction: column;
   color: var(--text-front);
-  
+
   padding-top: calc(var(--space-md) * 10);
   padding-bottom: calc(var(--space-md) * 10);
-  
+
   padding-left: 15%;
   padding-right: var(--space-none);
 }
