@@ -65,7 +65,7 @@ const methods = [
   padding-top: calc(var(--space-md) * 20);
   padding-bottom: calc(var(--space-md) * 10);
   padding-left: 15%;
-  padding-right: 15%;
+  padding-right: 5%;
 }
 
 .subtitle {
@@ -105,7 +105,7 @@ const methods = [
     padding-bottom: calc(var(--space-md) * 10);
 
     padding-left: 10%;
-    padding-right: 10%;
+    padding-right: 5%;
     gap: var(--space-none);
   }
 

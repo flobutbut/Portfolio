@@ -112,6 +112,8 @@ const goBack = () => {
   min-height: 100vh;
   background-color: var(--surface-back);
   position: relative;
+  padding-bottom: calc(var(--space-md) * 20);
+
 }
 
 .close-button {
@@ -141,4 +143,9 @@ const goBack = () => {
 .content {
   color: var(--text-front);
 }
+
+:deep(.contact-section) {
+  margin-top: calc(var(--space-md) * 25);
+}
 </style>
+

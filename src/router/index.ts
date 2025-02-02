@@ -40,7 +40,16 @@ const router = createRouter({
      path: '/:pathMatch(.*)*',
      redirect: '/'
    }
- ]
+ ],
+  // Ajout de la configuration scrollBehavior
+  scrollBehavior(to, from, savedPosition) {
+    // Si l'utilisateur utilise les boutons back/forward du navigateur
+    if (savedPosition) {
+      return savedPosition
+    }
+    // Dans tous les autres cas, retour en haut de la page
+    return { top: 0 }
+  }
 })
 
 export default router

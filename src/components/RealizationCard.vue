@@ -29,6 +29,8 @@ defineProps<Props>()
   overflow: hidden;
   text-decoration: none;
   transition: transform 0.2s ease;
+
+  margin-bottom: calc(var(--space-md) * 4);
 }
 
 .realization-card:hover {
@@ -41,7 +43,7 @@ defineProps<Props>()
   background-color: var(--highlight-default);
   border-radius: var(--radius-md);
   overflow: hidden;
-  margin-bottom: calc(var(--space-md)*2);
+  margin-bottom: var(--space-md);
 }
 
 .card-image {

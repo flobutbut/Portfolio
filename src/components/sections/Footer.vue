@@ -10,17 +10,28 @@
       <!-- Colonne Contact -->
       <div class="footer-column">
         <h3 class="md-bold">Contact</h3>
-        <p class="md-regular">hello@florianbutour.com </p>
-        <p class="md-regular">07 61 28 88 20 </p>
+        <p class="md-regular">hello@florianbutour.com</p>
+        <p class="md-regular">07 61 28 88 20</p>
       </div>
 
       <!-- Colonne Société -->
       <div class="footer-column">
-        <h3 class="md-bold">CV</h3>
-        <a href="https://www.linkedin.com/in/florianbutour/" target="_blank" rel="noopener" class="footer-link md-regular">Linkedin</a>
-        <a href="/cv.pdf" download class="footer-link md-regular">CV</a>
+        <h3 class="md-bold">À propos</h3>
+        <a
+          href="https://www.linkedin.com/in/florianbutour/"
+          target="_blank"
+          rel="noopener"
+          class="footer-link md-regular"
+          >Linkedin</a
+        >
+        <a
+          href="CV-FlorianButour-2025.pdf"
+          target="_blank"
+          rel="noopener"
+          class="footer-link md-regular"
+          >CV</a
+        >
       </div>
-
     </div>
   </footer>
 </template>
@@ -74,7 +85,7 @@
   .footer {
     padding: calc(var(--space-md) * 3);
   }
-  
+
   .footer-content {
     grid-template-columns: 1fr;
     gap: calc(var(--space-md) * 3);

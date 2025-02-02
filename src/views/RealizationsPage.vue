@@ -127,7 +127,7 @@ onMounted(async () => {
 
   .realizations-grid {
     grid-template-columns: 1fr;
-    gap: calc(var(--space-md) * 10);
+
 
     padding-bottom: calc(var(--space-md) * 15);
   }
