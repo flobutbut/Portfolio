@@ -66,6 +66,7 @@ const technicalSkills = [
   "Design de service",
   "Design system",
   "Branding d'interface",
+  "Mapping d'interface",
   "Stratégie produit",
   "Amélioration continue",
   "Roadmap produit",

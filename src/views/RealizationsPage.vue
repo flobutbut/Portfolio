@@ -72,8 +72,8 @@ onMounted(async () => {
 
 <style scoped>
 .realizations-page {
-  padding-left: 10%;
-  padding-right: 10%;
+  padding-left: 15%;
+  padding-right: 15%;
 
   min-height: 100vh;
 }
@@ -101,7 +101,6 @@ onMounted(async () => {
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   gap: calc(var(--space-md) * 4);
   padding-bottom: calc(var(--space-md) * 20);
-  max-width: 1200px;
   margin: 0 auto;
 }
 
