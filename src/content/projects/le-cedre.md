@@ -4,18 +4,18 @@
 ## @metadata
 le-cedre
 Le Cèdre
-Création d'un outil de gestion et de suivi des contrats
-/projects/maif/cover.jpg
+Outil de gestion de contrat de prestations immobilières
+/src/assets/projects/lecedre/Contrat.png
 
 ## @hero
 Le Cèdre
-Conception d'un outil de gestion des contrats de prestations externes.
+Conception d'un outil de gestion de contrat de prestations immobilières
 
 ## @carousel
-- /projects/lecedre/image1.jpg
-- /projects/lecedre/image2.jpg
-- /projects/lecedre/image3.jpg
-- /projects/lecedre/image4.jpg
+- /src/assets/projects/lecedre/Contrat.png
+- /src/assets/projects/lecedre/Agenda.png
+- /src/assets/projects/lecedre/TousLescontrats.png
+- /src/assets/projects/lecedre/Sites.png
 
 ## @columns
 # Device
@@ -52,7 +52,7 @@ Sessions de co-conception pour définir la structure des objets métier
 Cette méthodologie a permis d'établir une base solide tout en restant aligné avec les contraintes pratiques du terrain.
 
 ## @singleImage
-/projects/maif/large-image.jpg
+/src/assets/projects/lecedre/TousLescontrats.png
 Description de l'image
 
 ## @columns

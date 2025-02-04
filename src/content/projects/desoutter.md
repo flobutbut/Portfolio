@@ -3,17 +3,17 @@
 desoutter
 Desoutter
 Desing sytem et ecosystem SaaS dans l'industrie du vissage
-/projects/desoutter/cover.jpg
+/src/assets/projects/desoutter/Multi.png
 
 ## @hero
 Desoutter
-Création d'un site ecommerce spéicalisé dans la roue de vélo assmeblée mains et ses accessoires
+Mise ne place d'un design systeme et transformation des outils traditionnels en SaaS pour l'industrie du vissage
 
 ## @carousel
-- /projects/desoutter/image1.jpg
-- /projects/desoutter/image2.jpg
-- /projects/desoutter/image3.jpg
-- /projects/desoutter/image4.jpg
+- /src/assets/projects/desoutter/Multi.png
+- /src/assets/projects/desoutter/Main.png
+- /src/assets/projects/desoutter/Flow.png
+- /src/assets/projects/desoutter/DesignSystem.png
 
 ## @article
 # Contexte du projet
@@ -39,7 +39,7 @@ Ces interactions ont permis d'affiner le périmètre du projet et d'éviter les 
 L’approche OOUX permet d’établir une structure plus intuitive en modélisant les objets métier, leurs attributs et leurs relations. Cette méthode favorise ainsi la cohérence de l’expérience utilisateur, réduit la charge cognitive et améliore la navigation.
 
 ## @singleImage
-/projects/desoutter/large-image.jpg
+/src/assets/projects/desoutter/Flow.png
 Description de l'image
 
 ## @columns

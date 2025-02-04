@@ -3,17 +3,17 @@
 onetouch
 onetouch-hospitality
 Application tablette de service dans l'hotellerie
-/projects/onetouch/cover.jpg
+src/assets/projects/onetouch/Cover.png
 
 ## @hero
 Onetouch Hospitality
 Réinventer l'expérience client grâce à une conciergerie numérique d'exception
 
 ## @carousel
-- /projects/onetouch/image1.jpg
-- /projects/onetouch/image2.jpg
-- /projects/onetouch/image3.jpg
-- /projects/onetouch/image4.jpg
+- /src/assets/projects/onetouch/Modules.png
+- /src/assets/projects/onetouch/Menu.png
+- /src/assets/projects/onetouch/Boutique-2.png
+- /src/assets/projects/onetouch/BackOffice-3.png
 
 
 ## @quote
@@ -37,7 +37,11 @@ La boutique de luxe s'invite dans votre suite
 OneTouch Hospitality réinvente le service en chambre. Parcourez la collection exclusive de la boutique depuis votre tablette et demandez à essayer vos coups de cœur directement dans votre chambre. Le personnel de la boutique vous apporte une sélection personnalisée, transformant votre suite en un espace d'essayage privé.
 
 ## @singleImage
-/projects/onetouch/large-image.jpg
+/src/assets/projects/onetouch/Boutique-1.png
+Description de l'image
+
+## @singleImage
+/src/assets/projects/onetouch/Boutique-2.png
 Description de l'image
 
 
@@ -47,6 +51,14 @@ Une orchestration parfaite du service hôtelier
 ## @article
 # Une plateforme intelligente
 OneTouch Hospitality orchestre une symphonie de services. Chaque demande client est instantanément transmise au service concerné de l'hôtel. Un système de droits d'accès sophistiqué permet à chaque département de gérer ses missions efficacement, garantissant une coordination parfaite de l'expérience client.
+
+## @singleImage
+/src/assets/projects/onetouch/BackOffice-3.png
+Description de l'image
+
+## @singleImage
+/src/assets/projects/onetouch/BackOffice-2.png
+Description de l'image
 
 ## @columns
 # Défis

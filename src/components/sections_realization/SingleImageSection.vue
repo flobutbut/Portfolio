@@ -33,14 +33,13 @@ defineProps<Props>();
   max-height: 420px;
   background-color: var(--highlight-default);
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 6px;
 }
 
 .image {
   width: 100%;
   height: auto; /* au lieu de 100% */
   object-fit: contain;
-  border-radius: var(--radius-lg);
 }
 
 /* Tablettes */

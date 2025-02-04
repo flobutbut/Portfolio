@@ -130,7 +130,6 @@ onMounted(() => {
   width: 100%;
   height: auto;
   object-fit: cover;
-  border-radius: var(--radius-lg);
 }
 
 .carousel-item {
@@ -139,7 +138,7 @@ onMounted(() => {
   flex-shrink: 0;
   background-color: var(--highlight-default);
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 6px;
 }
 
 /* Tablettes */
