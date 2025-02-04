@@ -7,7 +7,7 @@ Desing sytem et ecosystem SaaS dans l'industrie du vissage
 
 ## @hero
 Desoutter
-Mise ne place d'un design systeme et transformation des outils traditionnels en SaaS pour l'industrie du vissage
+Mise ne place d'un design system et transformation des outils traditionnels en SaaS pour l'industrie du vissage
 
 ## @carousel
 - /src/assets/projects/desoutter/Multi.png

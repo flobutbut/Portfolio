@@ -14,7 +14,7 @@
 </template>
 
 <script setup lang="ts">
-import ExperienceCard from "../ExperienceCard.vue";
+import ExperienceCard from "../../components/ExperienceCard.vue";
 const experiences = [
   {
     id: 'sharingcloud',

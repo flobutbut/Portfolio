@@ -56,14 +56,14 @@ export class MarkdownProjectParser {
 
 parseProject(content: string): ProjectData | null {
   try {
-    // Transforme les chemins d'images avant le parsing
     const transformedContent = this.transformImagePaths(content);
     const sections = transformedContent.split(/\n## @/).filter(Boolean);
-       sections: {
-         order: [],
-         content: {}
-       }
-     }
+    const projectData: Partial<ProjectData> = {
+      sections: {
+        order: [],
+        content: {}
+      }
+    };
 
      sections.forEach(section => {
        const [type, ...lines] = section.trim().split('\n')

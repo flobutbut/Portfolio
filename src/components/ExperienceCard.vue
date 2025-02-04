@@ -25,8 +25,8 @@ interface Props {
   role: string
 }
 
-const props = defineProps<Props>()
 const router = useRouter()
+const props = defineProps<Props>()
 const goToDetail = () => {
   router.push({ name: 'realization', params: { id: props.title.toLowerCase() }})
 }
