@@ -70,6 +70,7 @@
   height: 100%;
   border-radius: var(--radius-sm);
   object-fit: cover;
+  object-position: top;
 }
 
 /* Tablettes */

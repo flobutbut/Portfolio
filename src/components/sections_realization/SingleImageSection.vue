@@ -28,15 +28,18 @@ defineProps<Props>();
 }
 
 .image-container {
-  width: calc(420px * 1.8); /* 16/10 ratio basé sur height 480px */
-  height: 420px;
+  width: calc(420px * 1.8);
+  height: fit-content; /* au lieu de height fixe */
+  max-height: 420px;
   background-color: var(--highlight-default);
+  overflow: hidden;
+  border-radius: 12px;
 }
 
 .image {
   width: 100%;
-  height: 100%;
-  object-fit: cover;
+  height: auto; /* au lieu de 100% */
+  object-fit: contain;
   border-radius: var(--radius-lg);
 }
 

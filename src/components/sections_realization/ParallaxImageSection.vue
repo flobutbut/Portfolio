@@ -151,6 +151,7 @@ onUnmounted(() => {
   background-color: var(--highlight-default);
   overflow: hidden;
   border-radius: var(--radius-lg);
+  border-radius: 12px;
 }
 
 /* When no aspect ratio is provided, use default height */

@@ -46,10 +46,19 @@ export class MarkdownProjectParser {
      .trim()
  }
 
- parseProject(content: string): ProjectData | null {
-   try {
-     const sections = content.split(/\n## @/).filter(Boolean)
-     const projectData: Partial<ProjectData> = {
+ private transformImagePaths(content: string): string {
+  // Transforme @/assets en /src/assets
+  return content.replace(
+    /(?:@\/assets|\/src\/assets)\/Projects\/([^)\s]+)/g, 
+    '/src/assets/Projects/$1'
+  );
+}
+
+parseProject(content: string): ProjectData | null {
+  try {
+    // Transforme les chemins d'images avant le parsing
+    const transformedContent = this.transformImagePaths(content);
+    const sections = transformedContent.split(/\n## @/).filter(Boolean);
        sections: {
          order: [],
          content: {}

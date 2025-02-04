@@ -10,10 +10,10 @@ JP Racing
 Une solution digitale complète associant e-commerce et configurateur 3D pour la personnalisation de roues de vélo
 
 ## @carousel
-- /projects/jpracing/image1.jpg
-- /projects/jpracing/image2.jpg
-- /projects/jpracing/image3.jpg
-- /projects/jpracing/image4.jpg
+- /src/assets/Projects/jpracing/home.png
+- /src/assets/Projects/jpracing/marque.png
+- /src/assets/Projects/jpracing/Page-produit.png
+- /src/assets/Projects/jpracing/3D-02.png
 
 ## @columns
 # Device
@@ -45,7 +45,7 @@ Cette approche structure le parcours d'achat autour de deux axes principaux :
 - Une solutions clé en main pour ceux préférant s'appuyer sur des configurations éprouvées.
 
 ## @singleImage
-/projects/jpracing/large-image.jpg
+/src/assets/Projects/jpracing/Profil-cycliste-1.png
 Description de l'image
 
 ## @article
@@ -58,7 +58,7 @@ Un configurateur 3D intuitif pour une personnalisation précise
 La conception du configurateur s'est appuyée sur une collaboration étroite avec JP Racing pour garantir la précision technique des options proposées. Cette approche a permis de développer un outil à la fois fonctionnel et accessible, répondant aux besoins des utilisateurs comme aux exigences techniques du produit.
 
 ## @singleImage
-/projects/jpracing/large-image.jpg
+/src/assets/Projects/jpracing/3D-02.png
 Description de l'image
 
 ## @article

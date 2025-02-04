@@ -138,6 +138,8 @@ onMounted(() => {
   height: 440px;
   flex-shrink: 0;
   background-color: var(--highlight-default);
+  overflow: hidden;
+  border-radius: 12px;
 }
 
 /* Tablettes */
