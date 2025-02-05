@@ -12,32 +12,5 @@ metadata:
 client: SharingCloud
 title: Refonte des produits de l'écosystème SharingCloud et mise en place d'un design system dans un environnement agile.
 
-## @carousel
-images:
-  - /assets/projects/desoutter/Multi.png
-  - /assets/projects/desoutter/Main.png
-  - /assets/projects/desoutter/Flow.png
-  - /assets/projects/desoutter/DesignSystem.png
-
-## @columns
-left:
-  title: Produits
-  items:
-    - WorkplaceToBe web et mobile
-    - Addin outlook
-    - Instant Signage
-    - Instant metrics
-
-right:
-  title: Collaboration
-  items:
-    - Intégration du design aux méthodes agiles
-    - Construction de la roadmap produit
-
-## @article
-title: Pourquoi l'OOUX ?
-content: |
-  Dans un environnement métier complexe, les utilisateurs interagissent avec des entités essentielles...
-
 ## @quote
-content: Refonte complète des produits et harmonisation des processus
+content: Page en cours de construction
