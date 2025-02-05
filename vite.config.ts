@@ -13,17 +13,16 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     }
   },
+  base: '/',
   build: {
     assetsDir: 'assets',
     rollupOptions: {
       output: {
-        assetFileNames: (assetInfo) => {
-          const info = assetInfo.name.split('.')
-          const ext = info[info.length - 1]
-          if (/png|jpe?g|svg|gif|tiff|bmp|ico/i.test(ext)) {
-            return `assets/images/[name]-[hash][extname]`
+        assetFileNames: ({name}) => {
+          if (/\.(gif|jpe?g|png|svg)$/i.test(name ?? '')) {
+            return 'assets/images/[name][extname]'
           }
-          return `assets/[name]-[hash][extname]`
+          return 'assets/[name][hash][extname]'
         }
       }
     }

@@ -14,9 +14,10 @@ title: Refonte des produits de l'écosystème SharingCloud et mise en place d'un
 
 ## @carousel
 images:
-  - assets/projects/sharingcloud/Multi.png
-  - assets/projects/sharingcloud/Main.png
-  - assets/projects/sharingcloud/Flow.png
+  - /assets/projects/desoutter/Multi.png
+  - /assets/projects/desoutter/Main.png
+  - /assets/projects/desoutter/Flow.png
+  - /assets/projects/desoutter/DesignSystem.png
 
 ## @columns
 left:
