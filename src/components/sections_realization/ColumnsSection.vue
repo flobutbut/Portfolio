@@ -5,7 +5,7 @@
       <!-- Colonne de gauche -->
       <div class="column left-column">
         <h4 class="h4">{{ left.title }}</h4>
-        <ul>
+        <ul class="custom-list">
           <li v-for="(item, index) in left.items" 
               :key="index" 
               class="md-regular">
@@ -17,7 +17,7 @@
       <!-- Colonne de droite -->
       <div class="column right-column">
         <h4 class="h4">{{ right.title }}</h4>
-        <ul>
+        <ul class="custom-list">
           <li v-for="(item, index) in right.items" 
               :key="index" 
               class="md-regular">
@@ -40,7 +40,8 @@ interface Props {
   right: Column;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+console.log('ColumnsSection props:', props); // Debug log
 </script>
 
 <style scoped>
@@ -75,6 +76,24 @@ defineProps<Props>();
 .md-regular {
   color: var(--text-medium);
   white-space: pre-wrap;
+}
+
+.custom-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.custom-list li {
+  position: relative;
+  padding-left: calc(var(--space-md) * 2);
+}
+
+.custom-list li::before {
+  content: "•";
+  position: absolute;
+  left: 0;
+  color: var(--text-medium);
 }
 
 /* Tablettes */

@@ -18,6 +18,20 @@ images:
   - /assets/projects/onetouch/Boutique-2.png
   - /assets/projects/onetouch/BackOffice-3.png
 
+## @columns
+left:
+  title: Compétences
+  items:
+    - Application tablette
+    - Design System
+    - Multi-services
+
+right:
+  title: Device
+  items:
+    - Tablette
+    - Desktop
+
 ## @article
 title: Une nouvelle ère du service hôtelier
 content: |
@@ -26,28 +40,31 @@ content: |
   Une élégante tablette vous attend dans votre chambre, votre portail vers une expérience hôtelière personnalisée. En quelques gestes intuitifs, commandez votre petit-déjeuner avec vos préférences spécifiques, découvrez les trésors de la boutique de l'hôtel, ou formulez des demandes sur-mesure. Cette interface raffinée remplace l'appel téléphonique traditionnel par une expérience fluide et discrète.
 
 ## @quote
-Une orchestration parfaite du service hôtelier
+content: Une orchestration parfaite du service hôtelier
 
 ## @article
 title: Un marché en quête d'excellence
 content: |
   Le secteur de l'hôtellerie de luxe attendait une solution à la hauteur de ses exigences. Les applications existantes, avec leurs interfaces désuètes et leurs animations tape-à-l'œil, ne reflétaient pas l'élégance et le raffinement attendus dans l'univers du luxe. Les clients méritaient une expérience plus sophistiquée et plus intuitive.
 
-## @singleImage
+
+## @parallaxImage
 /assets/projects/onetouch/Modules.png
 Description de l'image
+16/17
 
 ## @article
 title: Une expérience shopping personnalisée
 content: |
   OneTouch Hospitality réinvente le service en chambre. Parcourez la collection exclusive de la boutique depuis votre tablette et demandez à essayer vos coups de cœur directement dans votre chambre. Le personnel de la boutique vous apporte une sélection personnalisée, transformant votre suite en un espace d'essayage privé.
 
-## @singleImage
+## @parallaxImage
 /assets/projects/onetouch/Boutique-2.png
 Description de l'image
+16/22
 
 ## @quote
-La boutique de luxe s'invite dans votre suite
+content: La boutique de luxe s'invite dans votre suite
 
 ## @article
 title: Une plateforme intelligente
@@ -59,13 +76,17 @@ content: |
 Description de l'image
 
 ## @columns
-# Défis
-- Décrypter la complexité des processus hôteliers
-- Créer une solution adaptable aux spécificités de chaque service
+left:
+  title: Défis
+  items:
+    - Décrypter la complexité des processus hôteliers
+    - Créer une solution adaptable aux spécificités de chaque service
 
-# Solutions
-- Développer une plateforme modulaire et intuitive
-- Intégrer les besoins spécifiques de chaque département
+right:
+  title: Solutions
+  items:
+    - Développer une plateforme modulaire et intuitive
+    - Intégrer les besoins spécifiques de chaque département
 
 ## @article
 title: L'innovation au service de l'excellence

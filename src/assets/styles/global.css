@@ -1,5 +1,5 @@
 /* Reset CSS */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;500;600;700&display=swap');
 
 * {
   margin: 0;
@@ -10,7 +10,7 @@
 :root {
   /* Colors */
   --text-front: #FFFFFF;
-  --text-medium: #C7CCD1;
+  --text-medium: #d4d8dd;
   --surface-back: #132430;
   --surface-medium: #1E3342;
   --surface-bright: #FFFFFF;
@@ -32,8 +32,22 @@
 /* Typography */
 @font-face {
   font-family: 'Inter';
+  src: url('/fonts/Inter-Light.woff2') format('woff2');
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
   src: url('/fonts/Inter-Regular.woff2') format('woff2');
   font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: 'Inter';
+  src: url('/fonts/Inter-Medium.woff2') format('woff2');
+  font-weight: 500;
   font-style: normal;
 }
 
@@ -97,9 +111,9 @@
 
 .md-regular {
   font-family: 'Inter';
-  font-weight: 400;
+  font-weight: 300;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 28px;
   letter-spacing: 0.2px;
 }
 
@@ -107,7 +121,7 @@
   font-family: 'Inter';
   font-weight: 500;
   font-size: 16px;
-  line-height: 24px;
+  line-height: 28px;
   letter-spacing: 0.2px;
 }
 

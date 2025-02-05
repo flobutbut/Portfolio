@@ -76,28 +76,12 @@ export class ContentParser {
           const lines = rawData.trim().split('\n').filter(line => line.trim());
           data = {
             imageUrl: lines[0]?.trim() || '',
-            alt: lines[1]?.trim() || '',  // Renommé en 'alt' pour ParallaxImage
-            aspectRatio: lines[2]?.trim() || '16/9'  // Optionnel, avec valeur par défaut
+            alt: lines[1]?.trim() || '',
+            aspectRatio: lines[2]?.trim() || '16/9'
           };
         } else if (component === 'columns') {
-          // Parse le contenu markdown pour extraire les titres et les items
-          const parts = rawData.split('\n#').filter(Boolean);
-          if (parts.length >= 2) {
-            const [leftContent, rightContent] = parts;
-            const leftLines = leftContent.trim().split('\n').filter(Boolean);
-            const rightLines = rightContent.trim().split('\n').filter(Boolean);
-            
-            data = {
-              left: {
-                title: leftLines[0].trim(),
-                items: leftLines.slice(1).map(line => line.replace(/^[*-]\s*/, '').trim())
-              },
-              right: {
-                title: rightLines[0].trim(),
-                items: rightLines.slice(1).map(line => line.replace(/^[*-]\s*/, '').trim())
-              }
-            };
-          }
+          // Utiliser directement yaml.load pour parser la structure YAML
+          data = yaml.load(rawData.trim());
         } else {
           data = rawData.includes(':') 
             ? yaml.load(rawData.trim())
@@ -110,6 +94,7 @@ export class ContentParser {
         });
       } catch (e) {
         console.error(`Erreur parsing section ${component}:`, e);
+        console.error('Raw data:', rawData);
       }
     }
 

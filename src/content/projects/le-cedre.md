@@ -63,7 +63,7 @@ content: |
 ## @parallaxImage
 /assets/projects/lecedre/Contrat.png
 Description de l'image
-16/10
+16/20
 
 ## @columns 
 left:
