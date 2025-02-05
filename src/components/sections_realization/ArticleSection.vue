@@ -14,7 +14,8 @@ interface Props {
   content: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+console.log('ArticleSection props:', props); // Debug
 </script>
 
 <style scoped>

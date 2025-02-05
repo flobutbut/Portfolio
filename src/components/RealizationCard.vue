@@ -1,6 +1,6 @@
 # components/RealizationCard.vue
 <template>
-  <router-link :to="{ name: 'realization', params: { id: id }}" class="realization-card">
+  <div class="realization-card" @click="navigateToDetail">
     <div class="image-container">
       <img :src="imageUrl" :alt="title" class="card-image" />
     </div>
@@ -8,18 +8,36 @@
       <h4 class="h4">{{ title }}</h4>
       <p class="md-regular">{{ description }}</p>
     </div>
-  </router-link>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
+
 interface Props {
-  id: string
-  title: string
-  description: string
-  imageUrl: string
+  id: string;
+  title: string;
+  description: string;
+  imageUrl: string;
 }
 
-defineProps<Props>()
+const props = defineProps<Props>();
+const router = useRouter();
+
+const navigateToDetail = () => {
+  console.log('Navigating to project:', props.id);
+  console.log('Current route:', router.currentRoute.value.name);
+  
+  router.push({
+    name: 'realization',
+    params: { id: props.id },
+    query: { from: router.currentRoute.value.name as string }
+  }).then(() => {
+    console.log('Navigation successful');
+  }).catch((error) => {
+    console.error('Navigation failed:', error);
+  });
+};
 </script>
 
 <style scoped>
@@ -27,9 +45,8 @@ defineProps<Props>()
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  text-decoration: none;
+  cursor: pointer;
   transition: transform 0.2s ease;
-
   margin-bottom: calc(var(--space-md) * 4);
 }
 

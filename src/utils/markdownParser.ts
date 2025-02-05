@@ -1,199 +1,89 @@
 // utils/markdownParser.ts
-import MarkdownIt from 'markdown-it'
+import matter from 'gray-matter';
+import yaml from 'js-yaml';
 
-interface ProjectMetadata {
- id: string
- card: {
-   title: string
-   description: string
-   imageUrl: string
-   [key: string]: string;
- }
+interface BaseMetadata {
+  type: 'experience' | 'project';
+  id: string;
+  metadata: {
+    title: string;
+    description: string;
+    [key: string]: any;
+  }
 }
 
-interface SectionData {
- type: string
- data: any
+interface ComponentSection {
+  component: string; // le nom après @
+  data: any;        // les données yaml parsées
 }
 
-interface ProjectData extends ProjectMetadata {
- sections: {
-   order: string[]
-   content: {
-     [key: string]: SectionData
-   }
- }
-}
+export class ContentParser {
+  parseForCard(content: string) {
+    try {
+      // Extraction simple des métadonnées avec une regex
+      const metadataMatch = content.match(/---\n([\s\S]*?)\n---/);
+      if (!metadataMatch) return null;
+      
+      const metadata = yaml.load(metadataMatch[1]);
+      return {
+        id: metadata.id,
+        title: metadata.metadata?.title,
+        role: metadata.metadata?.role,
+        description: metadata.metadata?.description,
+        cover: metadata.metadata?.cover
+      };
+    } catch (e) {
+      console.error('Erreur parsing metadata:', e);
+      return null;
+    }
+  }
 
-export class MarkdownProjectParser {
- private md: MarkdownIt
+  parseContent(content: string) {
+    try {
+      // Extraction des métadonnées
+      const metadataMatch = content.match(/---\n([\s\S]*?)\n---/);
+      if (!metadataMatch) return null;
+      
+      const metadata = yaml.load(metadataMatch[1]);
+      
+      // Extraction du contenu après les métadonnées
+      const mainContent = content.replace(/---\n[\s\S]*?\n---/, '').trim();
+      
+      // Parse les sections
+      const sections = this.parseSections(mainContent);
+      
+      return {
+        metadata,
+        sections
+      };
+    } catch (e) {
+      console.error('Erreur parsing content:', e);
+      return null;
+    }
+  }
 
- constructor() {
-   this.md = new MarkdownIt({
-     html: true,
-     breaks: true,
-     linkify: true,
-     typographer: true
-   })
- }
+  private parseSections(content: string) {
+    const sectionRegex = /## @(\w+)\n([\s\S]*?)(?=## @|$)/g;
+    const sections = [];
+    let match;
 
- private parseMarkdownContent(content: string): string {
-   // Enlever les balises p et nettoyer les br
-   return content
-     .replace(/^# /gm, '') // Enlève les # des titres
-     .replace(/<\/?p>/g, '') // Enlève les balises <p>
-     .replace(/<br>/g, '\n') // Remplace les <br> par des retours à la ligne
-     .trim()
- }
+    while ((match = sectionRegex.exec(content)) !== null) {
+      const [_, component, rawData] = match;
+      try {
+        // Si le contenu est une simple chaîne, on la traite différemment
+        const data = rawData.includes(':') 
+          ? yaml.load(rawData.trim())
+          : { content: rawData.trim() };
 
- private transformImagePaths(content: string): string {
-  // Transforme @/assets en /src/assets
-  return content.replace(
-    /(?:@\/assets|\/src\/assets)\/Projects\/([^)\s]+)/g, 
-    '/src/assets/Projects/$1'
-  );
-}
-
-parseProject(content: string): ProjectData | null {
-  try {
-    const transformedContent = this.transformImagePaths(content);
-    const sections = transformedContent.split(/\n## @/).filter(Boolean);
-    const projectData: Partial<ProjectData> = {
-      sections: {
-        order: [],
-        content: {}
+        sections.push({
+          component,
+          data
+        });
+      } catch (e) {
+        console.error(`Erreur parsing section ${component}:`, e);
       }
-    };
+    }
 
-     sections.forEach(section => {
-       const [type, ...lines] = section.trim().split('\n')
-       const sectionContent = lines.join('\n').trim()
-       const sectionType = type.trim()
-       const sectionId = `${sectionType}-${projectData.sections!.order.length}`
-
-       switch (sectionType) {
-         case 'metadata':
-           const [id, title, description, imageUrl] = lines.map(line => line.trim())
-           projectData.id = id
-           projectData.card = { title, description, imageUrl }
-           break
-
-         case 'hero':
-           const [client, ...titleLines] = lines
-           projectData.sections!.content[sectionId] = {
-             type: 'hero',
-             data: {
-               client: this.parseMarkdownContent(client),
-               title: this.parseMarkdownContent(titleLines.join('\n'))
-             }
-           }
-           projectData.sections!.order.push(sectionId)
-           break
-
-         case 'carousel':
-           projectData.sections!.content[sectionId] = {
-             type: 'carousel',
-             data: {
-               images: lines
-                 .filter(line => line.trim().startsWith('-'))
-                 .map(line => line.replace('-', '').trim())
-             }
-           }
-           projectData.sections!.order.push(sectionId)
-           break
-
-         case 'article':
-           const titleMatch = sectionContent.match(/^# (.+)$/m)
-           const articleTitle = titleMatch ? titleMatch[1].trim() : ''
-           const articleContent = sectionContent
-             .replace(/^# .+$/m, '')
-             .trim()
-
-           projectData.sections!.content[sectionId] = {
-             type: 'article',
-             data: {
-               title: this.parseMarkdownContent(articleTitle),
-               content: this.parseMarkdownContent(articleContent)
-             }
-           }
-           projectData.sections!.order.push(sectionId)
-           break
-
-         case 'columns':
-           const parts = sectionContent.split(/(?=^# )/m).filter(Boolean)
-           if (parts.length >= 2) {
-             const leftMatch = parts[0].match(/^# (.+)\n([\s\S]+)/)
-             const rightMatch = parts[1].match(/^# (.+)\n([\s\S]+)/)
-
-             if (leftMatch && rightMatch) {
-               projectData.sections!.content[sectionId] = {
-                 type: 'columns',
-                 data: {
-                   leftTitle: this.parseMarkdownContent(leftMatch[1]),
-                   leftContent: this.parseMarkdownContent(leftMatch[2]),
-                   rightTitle: this.parseMarkdownContent(rightMatch[1]),
-                   rightContent: this.parseMarkdownContent(rightMatch[2])
-                 }
-               }
-               projectData.sections!.order.push(sectionId)
-             }
-           }
-           break
-
-         case 'singleImage':
-           const [imgUrl, alt] = lines
-           projectData.sections!.content[sectionId] = {
-             type: 'singleImage',
-             data: {
-               imageUrl: imgUrl.trim(),
-               alt: alt.trim()
-             }
-           }
-           projectData.sections!.order.push(sectionId)
-           break
-
-         case 'quote':
-           projectData.sections!.content[sectionId] = {
-             type: 'quote',
-             data: {
-               title: this.parseMarkdownContent(sectionContent)
-             }
-           }
-           projectData.sections!.order.push(sectionId)
-           break
-       }
-     })
-
-     if (this.validateProjectData(projectData)) {
-       return projectData as ProjectData
-     }
-     return null
-
-   } catch (error) {
-     console.error('Error parsing project:', error)
-     return null
-   }
- }
-
- private validateProjectData(data: Partial<ProjectData>): boolean {
-   if (!data.id || !data.card || !data.sections) {
-     console.warn('Missing required project fields')
-     return false
-   }
-
-   if (!data.sections.order || !data.sections.content) {
-     console.warn('Missing sections structure')
-     return false
-   }
-
-   const requiredMetadataFields = ['title', 'description', 'imageUrl']
-   for (const field of requiredMetadataFields) {
-     if (!data.card[field]) {
-       console.warn(`Missing required card field: ${field}`)
-       return false
-     }
-   }
-
-   return true
- }
+    return sections;
+  }
 }

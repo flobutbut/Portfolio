@@ -2,18 +2,20 @@
 <template>
   <section class="cote-section">
     <div class="content-wrapper">
-      <h3 class="h3">{{ title }}</h3>
+      <h3 class="h3">{{ content }}</h3>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  title: string;
   content: string;
 }
 
-defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+  content: ''
+});
+console.log('CoteSection props:', props); // Debug
 </script>
 
 <style scoped>

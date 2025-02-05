@@ -5,7 +5,7 @@
     <p class="md-regular">{{ role }}</p>
     <p class="md-regular description">{{ description }}</p>
 
-    <Button class="card-button" @click="goToDetail">
+    <Button class="card-button" @click="navigateToDetail">
       Voir l'expérience
       <template #icon>
         <ArrowIcon />
@@ -15,21 +15,34 @@
 </template>
 
 <script setup lang="ts">
-import Button from './ui/Button.vue'
-import ArrowIcon from './icons/ArrowIcon.vue'
-import { useRouter } from 'vue-router'
+import Button from "./ui/Button.vue";
+import ArrowIcon from "./icons/ArrowIcon.vue";
+import { useRouter } from "vue-router";
 
 interface Props {
-  title: string
-  description: string
-  role: string
+  id: string;
+  title: string;
+  role: string;
+  description: string;
 }
 
-const router = useRouter()
-const props = defineProps<Props>()
-const goToDetail = () => {
-  router.push({ name: 'realization', params: { id: props.title.toLowerCase() }})
-}
+const props = defineProps<Props>();
+const router = useRouter();
+
+const navigateToDetail = () => {
+  console.log('Navigating to experience:', props.id);
+  console.log('Current route:', router.currentRoute.value.name);
+  
+  router.push({
+    name: 'realization',
+    params: { id: `exp-${props.id}` },
+    query: { from: router.currentRoute.value.name as string }
+  }).then(() => {
+    console.log('Navigation successful');
+  }).catch((error) => {
+    console.error('Navigation failed:', error);
+  });
+};
 </script>
 
 <style scoped>
@@ -51,13 +64,12 @@ const goToDetail = () => {
   color: var(--text-medium);
 }
 
-.description{
+.description {
   margin-top: calc(var(--space-md) * 2);
 }
 
 .card-button {
   margin-top: auto;
-  align-self: flex-start;
+  width: fit-content;
 }
 </style>
-

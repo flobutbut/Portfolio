@@ -1,20 +1,22 @@
-
-## @metadata
-onetouch
-onetouch-hospitality
-Application tablette de service dans l'hotellerie
-src/assets/projects/onetouch/Cover.png
+---
+type: project
+id: onetouch
+metadata:
+  title: Onetouch Hospitality
+  description: Application tablette de service dans l'hotellerie
+  cover: /src/assets/projects/onetouch/Cover.png
+---
 
 ## @hero
-Onetouch Hospitality
-Réinventer l'expérience client grâce à une conciergerie numérique d'exception
+client: Onetouch Hospitality
+title: Réinventer l'expérience client grâce à une conciergerie numérique d'exception
 
 ## @carousel
-- /src/assets/projects/onetouch/Modules.png
-- /src/assets/projects/onetouch/Menu.png
-- /src/assets/projects/onetouch/Boutique-2.png
-- /src/assets/projects/onetouch/BackOffice-3.png
-
+images:
+  - /src/assets/projects/onetouch/Modules.png
+  - /src/assets/projects/onetouch/Menu.png
+  - /src/assets/projects/onetouch/Boutique-2.png
+  - /src/assets/projects/onetouch/BackOffice-3.png
 
 ## @quote
 L'élégance du service traditionnel rencontre l'innovation numérique

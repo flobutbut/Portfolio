@@ -4,31 +4,56 @@
     <p class="subtitle md-regular">Plus de 10 ans d'expérience en conception de produits</p>
 
     <div class="experience-grid">
-      <ExperienceCard
-        v-for="experience in experiences"
-        :key="experience.id"
-        v-bind="experience"
-      />
+      <template v-if="experiences.length > 0">
+        <ExperienceCard
+          v-for="experience in experiences"
+          :key="experience.id"
+          v-bind="experience"
+        />
+      </template>
+      <p v-else>Chargement des expériences...</p>
     </div>
   </section>
 </template>
 
-<script setup lang="ts">
-import ExperienceCard from "../../components/ExperienceCard.vue";
-const experiences = [
-  {
-    id: 'sharingcloud',
-    title: "SharingCloud",
-    role: "Product designer - 2 ans",
-    description: "Refonte des produits de l'écosystème SharingCloud et mise en place d'un design system."
-  },
-  {
-    id: 'freelance',
-    title: "Freelance",
-    role: "Product designer - 9 ans",
-    description: "Conception et accompagnement sur des services SaaS B2B..."
+<script setup lang="ts">  
+import { ref, onMounted } from "vue";
+import ExperienceCard from "../ExperienceCard.vue";
+import { ContentParser } from "../../utils/markdownParser";
+
+const experiences = ref<any[]>([]);
+const parser = new ContentParser();
+onMounted(async () => {
+  try {
+    const modules = import.meta.glob('../../content/experience/exp-*.md', {
+      query: '?raw',
+      import: 'default',
+      eager: true
+    });
+
+    console.log('Found modules:', Object.keys(modules));
+
+    const loadedExperiences = Object.entries(modules).map(([path, content]) => {
+      console.log('Processing file:', path);
+      const expData = parser.parseForCard(content as string);
+      console.log('Parsed data:', expData);
+      
+      if (!expData) return null;
+      
+      return {
+        id: expData.id,
+        title: expData.title,
+        role: expData.role,
+        description: expData.description,
+      };
+    }).filter(e => e !== null);
+
+    console.log('Loaded experiences:', loadedExperiences);
+    experiences.value = loadedExperiences;
+  } catch (error) {
+    console.error('Error loading experiences:', error);
   }
-];
+});
 </script>
 
 <style scoped>

@@ -2,45 +2,45 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import RealizationCard from "../components/RealizationCard.vue";
-import { MarkdownProjectParser } from "../utils/markdownParser";
+import { ContentParser } from "../utils/markdownParser";
 
 interface Project {
   id: string;
-  card: {
-    title: string;
-    description: string;
-    imageUrl: string;
-  };
+  title: string;
+  description: string;
+  imageUrl: string;
 }
 
 const projects = ref<Project[]>([]);
-const parser = new MarkdownProjectParser();
+const parser = new ContentParser();
 
 onMounted(async () => {
   try {
-    const modules = (import.meta as any).glob("../content/projects/*.md", {
+    const modules = (await import.meta.glob("../content/projects/*.md", {
       query: "?raw",
-      eager: true,
       import: "default",
-    });
+      eager: true
+    })) as Record<string, string>;
 
-    console.log("Loaded modules:", modules);
+    console.log("Found modules:", Object.keys(modules));
 
     const loadedProjects = Object.entries(modules).map(([path, content]) => {
-      const projectData = parser.parseProject(content as string);
-      if (!projectData) {
-        console.warn("Failed to parse project:", path);
-        return null;
-      }
-
+      console.log('Processing file:', path);
+      const projectData = parser.parseForCard(content as string);
+      console.log('Parsed data:', projectData);
+      
+      if (!projectData) return null;
+      
       return {
         id: projectData.id,
-        card: projectData.card,
+        title: projectData.title,
+        description: projectData.description,
+        imageUrl: projectData.cover || '', // Utilise le cover comme imageUrl
       };
-    });
+    }).filter(p => p !== null);
 
-    projects.value = loadedProjects.filter((p): p is Project => p !== null);
-    console.log("Final projects:", projects.value);
+    console.log('Loaded projects:', loadedProjects);
+    projects.value = loadedProjects;
   } catch (error) {
     console.error("Error loading projects:", error);
   }
@@ -60,10 +60,7 @@ onMounted(async () => {
       <RealizationCard
         v-for="project in projects"
         :key="project.id"
-        :id="project.id"
-        :title="project.card.title"
-        :description="project.card.description"
-        :imageUrl="project.card.imageUrl"
+        v-bind="project"
       />
     </div>
     <p v-else>Chargement des projets...</p>

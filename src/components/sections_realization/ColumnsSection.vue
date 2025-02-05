@@ -4,25 +4,40 @@
     <div class="columns-wrapper">
       <!-- Colonne de gauche -->
       <div class="column left-column">
-        <h4 class="h4">{{ leftTitle }}</h4>
-        <p class="md-regular">{{ leftContent }}</p>
+        <h4 class="h4">{{ left.title }}</h4>
+        <ul>
+          <li v-for="(item, index) in left.items" 
+              :key="index" 
+              class="md-regular">
+            {{ item }}
+          </li>
+        </ul>
       </div>
 
       <!-- Colonne de droite -->
       <div class="column right-column">
-        <h4 class="h4">{{ rightTitle }}</h4>
-        <p class="md-regular">{{ rightContent }}</p>
+        <h4 class="h4">{{ right.title }}</h4>
+        <ul>
+          <li v-for="(item, index) in right.items" 
+              :key="index" 
+              class="md-regular">
+            {{ item }}
+          </li>
+        </ul>
       </div>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+interface Column {
+  title: string;
+  items: string[];
+}
+
 interface Props {
-  leftTitle: string;
-  leftContent: string;
-  rightTitle: string;
-  rightContent: string;
+  left: Column;
+  right: Column;
 }
 
 defineProps<Props>();

@@ -5,12 +5,14 @@
     </button>
 
     <main class="content" v-if="project">
-      <!-- Rendu dynamique des sections -->
-      <template v-for="sectionId in project.sections.order" :key="sectionId">
-        <component
-          :is="getSectionComponent(project.sections.content[sectionId].type)"
-          v-bind="project.sections.content[sectionId].data"
-        />
+      <template v-if="project.sections">
+        <template v-for="(section, index) in project.sections" :key="index">
+          <component
+            v-if="section.data" 
+            :is="getSectionComponent(section.component)"
+            v-bind="section.data"
+          />
+        </template>
       </template>
     </main>
     <ContactSection />
@@ -20,8 +22,7 @@
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
 import { useRouter } from "vue-router";
-import { MarkdownProjectParser } from "../utils/markdownParser";
-
+import { ContentParser } from "../utils/markdownParser";
 import CloseIcon from "../components/icons/CloseIcon.vue";
 import RealizationHero from "../components/sections_realization/RealizationHero.vue";
 import HorizontalCarousel from "../components/sections_realization/HorizontalCarousel.vue";
@@ -29,8 +30,6 @@ import ArticleSection from "../components/sections_realization/ArticleSection.vu
 import ColumnsSection from "../components/sections_realization/ColumnsSection.vue";
 import SingleImageSection from "../components/sections_realization/SingleImageSection.vue";
 import CoteSection from "../components/sections_realization/CoteSection.vue";
-import ParallaxImageSection from "../components/sections_realization/ParallaxImageSection.vue";
-
 import ContactSection from "../components/sections/ContactSection.vue";
 
 // Map des composants disponibles
@@ -40,7 +39,6 @@ const SECTION_COMPONENTS = {
   article: ArticleSection,
   columns: ColumnsSection,
   singleImage: SingleImageSection,
-  parallaxImage: ParallaxImageSection,
   quote: CoteSection,
 } as const;
 
@@ -58,42 +56,52 @@ const props = withDefaults(defineProps<Props>(), {
   returnRoute: "realizations",
 });
 
-const project = ref<ReturnType<MarkdownProjectParser["parseProject"]>>(null);
 const router = useRouter();
-const parser = new MarkdownProjectParser();
+const parser = new ContentParser();
+const project = ref<any>(null);
 
 const loadProject = async () => {
   try {
-    const modules = (import.meta as any).glob("../content/projects/*.md", {
+    const isExperience = props.projectId.startsWith('exp-');
+    const baseId = isExperience ? props.projectId.replace('exp-', '') : props.projectId;
+    
+    const modules = await import.meta.glob<string>("../content/**/*.md", {
       query: "?raw",
       eager: true,
       import: "default",
     });
 
-    // Trouver le module correspondant à l'ID du projet
-    const projectEntry = Object.entries(modules).find(([path]) =>
-      path.includes(props.projectId)
-    );
+    console.log('Recherche de l\'ID:', baseId);
+    
+    const projectEntry = Object.entries(modules).find(([path]) => {
+      const matchesFolder = isExperience 
+        ? path.includes('/experience/')
+        : path.includes('/projects/');
+      return matchesFolder && path.toLowerCase().includes(baseId.toLowerCase());
+    });
 
     if (!projectEntry) {
-      console.error("Project file not found");
+      console.error("Fichier projet non trouvé");
       router.push({ name: "realizations" });
       return;
     }
 
-    const [_, content] = projectEntry;
-    const projectData = parser.parseProject(content as string);
+    const [path, content] = projectEntry;
+    console.log('Fichier trouvé:', path);
+    
+    const projectData = await parser.parseContent(content as string);
+    console.log('Données projet parsées:', projectData);
 
     if (!projectData) {
-      console.error("Failed to parse project data");
+      console.error("Échec de l'analyse des données du projet");
       router.push({ name: "realizations" });
       return;
     }
 
     project.value = projectData;
-    console.log("Project loaded successfully:", projectData);
+    console.log("Projet chargé avec succès:", project.value);
   } catch (error) {
-    console.error("Error loading project:", error);
+    console.error("Erreur lors du chargement du projet:", error);
     router.push({ name: "realizations" });
   }
 };
@@ -113,7 +121,6 @@ const goBack = () => {
   background-color: var(--surface-back);
   position: relative;
   padding-bottom: calc(var(--space-md) * 20);
-
 }
 
 .close-button {
@@ -121,9 +128,7 @@ const goBack = () => {
   top: calc(var(--space-md) * 2);
   right: calc(var(--space-md) * 2);
   padding: var(--space-md);
-
   z-index: 100;
-
   background: none;
   border: none;
   color: var(--text-front);
@@ -132,7 +137,6 @@ const goBack = () => {
   display: flex;
   align-items: center;
   justify-content: center;
-
   transition: background-color 0.2s ease;
 }
 
