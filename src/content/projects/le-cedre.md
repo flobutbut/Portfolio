@@ -60,9 +60,10 @@ content: |
 
     Cette méthodologie a permis d'établir une base solide tout en restant aligné avec les contraintes pratiques du terrain.
 
-## @singleImage
+## @parallaxImage
 /assets/projects/lecedre/Contrat.png
 Description de l'image
+16/10
 
 ## @columns 
 left:

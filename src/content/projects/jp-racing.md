@@ -62,7 +62,7 @@ content: |
 ## @parallaxImage
 /assets/projects/jpracing/Explo.png
 Description de l'image
-16/10
+16/20
 
 ## @article
 title: Résultats

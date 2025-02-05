@@ -47,11 +47,11 @@
   background-color: var(--highlight-default);
   border-radius: var(--radius-lg) 0 0 var(--radius-lg);
 
-  padding: calc(var(--space-md) * 6) calc(var(--space-md) * 6);
+  padding: calc(var(--space-md) * 10) calc(var(--space-md) * 10);
+  gap: calc(var(--space-md) * 6);
 
   display: flex;
   flex-direction: column;
-  gap: calc(var(--space-md) * 4);
   overflow: visible;
 }
 
@@ -61,7 +61,7 @@
 
 .project-image {
   position: absolute;
-  width: calc(100% - calc(var(--space-md) * 12));
+  width: calc(100% - calc(var(--space-md) * 20));
   aspect-ratio: 16/9;
 }
 
@@ -86,6 +86,13 @@
   .project-text {
     width: 80%;
   }
+  .project-showcase {
+    padding: calc(var(--space-md) * 6) calc(var(--space-md) * 6);
+    gap: calc(var(--space-md) * 4);
+  }
+  .project-image {
+    width: calc(100% - calc(var(--space-md) * 12));
+  }
 }
 
 /* Mobile */
@@ -93,21 +100,21 @@
   .showcase-section {
     padding-top: calc(var(--space-md) * 4);
     padding-bottom: calc(var(--space-md) * 20);
-
     padding-left: calc(var(--space-md) * 3);
     padding-right: var(--space-none);
   }
 
   .project-showcase {
     padding: calc(var(--space-md) * 3);
-
     gap: calc(var(--space-md) * 3);
+    height: 520px;
+    aspect-ratio: unset;
   }
 
   .project-image {
-    position: absolute;
     width: 85%;
-    aspect-ratio: 16/9;
+    height: 65%;
+    aspect-ratio: unset;
   }
 
   .project-text {
