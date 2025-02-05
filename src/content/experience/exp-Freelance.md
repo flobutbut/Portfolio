@@ -13,10 +13,10 @@ title: Conception et accompagnement sur des services SaaS B2B, design systems et
 
 ## @carousel
 images:
-  - /src/assets/projects/desoutter/Multi.png
-  - /src/assets/projects/desoutter/Main.png
-  - /src/assets/projects/desoutter/Flow.png
-  - /src/assets/projects/desoutter/DesignSystem.png
+  - assets/projects/desoutter/Multi.png
+  - assets/projects/desoutter/Main.png
+  - assets/projects/desoutter/Flow.png
+  - assets/projects/desoutter/DesignSystem.png
 
 ## @article
 title: Contexte du projet
