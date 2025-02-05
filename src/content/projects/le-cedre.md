@@ -4,7 +4,7 @@ id: le-cedre
 metadata:
   title: Le Cèdre
   description: Outil de gestion de contrat de prestations immobilières
-  cover: /src/assets/projects/lecedre/Contrat.png
+  cover: /assets/projects/lecedre/Contrat.png
 ---
 
 ## @hero
@@ -13,10 +13,10 @@ title: Conception d'un outil de gestion de contrat de prestations immobilières
 
 ## @carousel
 images:
-  - /src/assets/projects/lecedre/Contrat.png
-  - /src/assets/projects/lecedre/Agenda.png
-  - /src/assets/projects/lecedre/TousLescontrats.png
-  - /src/assets/projects/lecedre/Sites.png
+  - /assets/projects/lecedre/Contrat.png
+  - /assets/projects/lecedre/Agenda.png
+  - /assets/projects/lecedre/TousLescontrats.png
+  - /assets/projects/lecedre/Sites.png
 
 ## @columns
 left:
@@ -60,10 +60,9 @@ content: |
 
     Cette méthodologie a permis d'établir une base solide tout en restant aligné avec les contraintes pratiques du terrain.
 
-## @singleImage 
-images:
-  - /src/assets/projects/lecedre/TousLescontrats.png
-  Description de l'image
+## @singleImage
+/assets/projects/lecedre/Contrat.png
+Description de l'image
 
 ## @columns 
 left:

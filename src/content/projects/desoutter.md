@@ -4,7 +4,7 @@ id: desoutter
 metadata:
   title: Desoutter
   description: Design system et ecosystem SaaS dans l'industrie du vissage
-  cover: /src/assets/projects/desoutter/Multi.png
+  cover: /assets/projects/desoutter/Multi.png
 ---
 
 ## @hero
@@ -13,10 +13,10 @@ title: Mise en place d'un design system et transformation des outils traditionne
 
 ## @carousel
 images:
-  - /src/assets/projects/desoutter/Multi.png
-  - /src/assets/projects/desoutter/Main.png
-  - /src/assets/projects/desoutter/Flow.png
-  - /src/assets/projects/desoutter/DesignSystem.png
+  - /assets/projects/desoutter/Multi.png
+  - /assets/projects/desoutter/Main.png
+  - /assets/projects/desoutter/Flow.png
+  - /assets/projects/desoutter/DesignSystem.png
 
 ## @article
 title: Contexte du projet
@@ -43,7 +43,7 @@ Ces interactions ont permis d'affiner le périmètre du projet et d'éviter les 
 L'approche OOUX permet d'établir une structure plus intuitive en modélisant les objets métier, leurs attributs et leurs relations. Cette méthode favorise ainsi la cohérence de l'expérience utilisateur, réduit la charge cognitive et améliore la navigation.
 
 ## @singleImage
-/src/assets/projects/desoutter/Flow.png
+/assets/projects/desoutter/Flow.png
 Description de l'image
 
 ## @columns

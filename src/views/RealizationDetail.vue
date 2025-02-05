@@ -31,6 +31,7 @@ import ColumnsSection from "../components/sections_realization/ColumnsSection.vu
 import SingleImageSection from "../components/sections_realization/SingleImageSection.vue";
 import CoteSection from "../components/sections_realization/CoteSection.vue";
 import ContactSection from "../components/sections/ContactSection.vue";
+import ParallaxImageSection from "../components/sections_realization/ParallaxImageSection.vue";
 
 // Map des composants disponibles
 const SECTION_COMPONENTS = {
@@ -39,6 +40,7 @@ const SECTION_COMPONENTS = {
   article: ArticleSection,
   columns: ColumnsSection,
   singleImage: SingleImageSection,
+  parallaxImage: ParallaxImageSection,
   quote: CoteSection,
 } as const;
 

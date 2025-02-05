@@ -4,7 +4,7 @@ id: jp-racing
 metadata:
   title: JP Racing
   description: Plateforme e-commerce et configurateur 3D pour roues de vélo
-  cover: /src/assets/Projects/jpracing/home.png
+  cover: /assets/projects/jpracing/Home.png
 ---
 
 ## @hero
@@ -13,10 +13,10 @@ title: Une solution digitale complète associant e-commerce et configurateur 3D 
 
 ## @carousel
 images:
-  - /src/assets/Projects/jpracing/home.png
-  - /src/assets/Projects/jpracing/Explo.png
-  - /src/assets/Projects/jpracing/Config-01.png
-  - /src/assets/Projects/jpracing/Comparaison.png
+  - /assets/projects/jpracing/Home.png
+  - /assets/projects/jpracing/Explo.png
+  - /assets/projects/jpracing/Config-01.png
+  - /assets/projects/jpracing/Comparaison.png
 
 ## @columns
 left:
@@ -59,9 +59,10 @@ title: Le configurateur
 content: |
   La conception du configurateur s'est appuyée sur une collaboration étroite avec JP Racing pour garantir la précision technique des options proposées. Cette approche a permis de développer un outil à la fois fonctionnel et accessible, répondant aux besoins des utilisateurs comme aux exigences techniques du produit.
 
-## @singleImage
-/src/assets/Projects/jpracing/Explo.png
+## @parallaxImage
+/assets/projects/jpracing/Explo.png
 Description de l'image
+16/10
 
 ## @article
 title: Résultats
@@ -78,9 +79,8 @@ content: Un configurateur 3D intuitif pour une personnalisation précise
 La conception du configurateur s'est appuyée sur une collaboration étroite avec JP Racing pour garantir la précision technique des options proposées. Cette approche a permis de développer un outil à la fois fonctionnel et accessible, répondant aux besoins des utilisateurs comme aux exigences techniques du produit.
 
 ## @singleImage
-images:
-  - /src/assets/Projects/jpracing/Config-02.png
-  Description de l'image
+/assets/projects/jpracing/Config-02.png
+Description de l'image
 
 
 ## @article

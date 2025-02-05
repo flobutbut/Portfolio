@@ -1,7 +1,11 @@
 <template>
   <section class="single-image-section">
     <div class="image-container">
-      <img :src="imageUrl" :alt="alt || ''" class="image" />
+      <img :src="imageUrl" :alt="description" class="image" />
+      <!-- Debug info -->
+      <div style="color: red;">
+        URL: {{ imageUrl }}
+      </div>
     </div>
   </section>
 </template>
@@ -9,10 +13,17 @@
 <script setup lang="ts">
 interface Props {
   imageUrl: string;
-  alt?: string;
+  description: string;
 }
 
-defineProps<Props>();
+const props = defineProps<Props>();
+
+// Debug logs
+console.log('SingleImageSection props:', props);
+console.log('Image URL:', props.imageUrl);
+
+// Destructure les propriétés du content
+const { imageUrl, description } = props;
 </script>
 
 <style scoped>
@@ -23,7 +34,6 @@ defineProps<Props>();
   padding-top: calc(var(--space-md) * 10);
   padding-bottom: calc(var(--space-md) * 10);
 
-  /* padding-right: calc(var(--space-md) * 0); */
   padding-right: 15%;
 }
 

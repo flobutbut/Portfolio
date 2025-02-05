@@ -5,6 +5,7 @@ metadata:
   title: MAIF
   role: Product designer - 1 an
   description: Améliorer l'expérience sociétaire grâce à des parcours plus fluides et une offre de services enrichie.
+  cover: /assets/projects/maif/img.png
 ---
 
 ## @hero
@@ -13,10 +14,10 @@ title: Transformer l'expérience des sociétaires par des parcours optimisés et
 
 ## @carousel
 images:
-  - /projects/maif/image1.jpg
-  - /projects/maif/image2.jpg
-  - /projects/maif/image3.jpg
-  - /projects/maif/image4.jpg
+  - /assets/projects/maif/image1.jpg
+  - /assets/projects/maif/image2.jpg
+  - /assets/projects/maif/image3.jpg
+  - /assets/projects/maif/image4.jpg
 
 ## @columns
 left:

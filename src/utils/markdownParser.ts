@@ -63,17 +63,46 @@ export class ContentParser {
   }
 
   private parseSections(content: string) {
-    const sectionRegex = /## @(\w+)\n([\s\S]*?)(?=## @|$)/g;
+    const sectionRegex = /## @(\w+)\n([\s\S]*?)(?=## @|\n## @|$)/g;
     const sections = [];
     let match;
 
     while ((match = sectionRegex.exec(content)) !== null) {
       const [_, component, rawData] = match;
       try {
-        // Si le contenu est une simple chaîne, on la traite différemment
-        const data = rawData.includes(':') 
-          ? yaml.load(rawData.trim())
-          : { content: rawData.trim() };
+        let data;
+        
+        if (component === 'singleImage' || component === 'parallaxImage') {
+          const lines = rawData.trim().split('\n').filter(line => line.trim());
+          data = {
+            imageUrl: lines[0]?.trim() || '',
+            alt: lines[1]?.trim() || '',  // Renommé en 'alt' pour ParallaxImage
+            aspectRatio: lines[2]?.trim() || '16/9'  // Optionnel, avec valeur par défaut
+          };
+        } else if (component === 'columns') {
+          // Parse le contenu markdown pour extraire les titres et les items
+          const parts = rawData.split('\n#').filter(Boolean);
+          if (parts.length >= 2) {
+            const [leftContent, rightContent] = parts;
+            const leftLines = leftContent.trim().split('\n').filter(Boolean);
+            const rightLines = rightContent.trim().split('\n').filter(Boolean);
+            
+            data = {
+              left: {
+                title: leftLines[0].trim(),
+                items: leftLines.slice(1).map(line => line.replace(/^[*-]\s*/, '').trim())
+              },
+              right: {
+                title: rightLines[0].trim(),
+                items: rightLines.slice(1).map(line => line.replace(/^[*-]\s*/, '').trim())
+              }
+            };
+          }
+        } else {
+          data = rawData.includes(':') 
+            ? yaml.load(rawData.trim())
+            : { content: rawData.trim() };
+        }
 
         sections.push({
           component,

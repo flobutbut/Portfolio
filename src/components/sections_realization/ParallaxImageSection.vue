@@ -6,14 +6,15 @@
       ref="containerRef"
       :style="containerStyle"
     >
-      <img 
-        :src="imageUrl" 
-        :alt="alt || ''" 
-        class="image" 
-        ref="imageRef"
-        :style="imageStyle"
-        @load="onImageLoad"
-      />
+      <div class="image-wrapper" :style="wrapperStyle">
+        <img 
+          :src="imageUrl" 
+          :alt="alt || ''" 
+          class="image" 
+          ref="imageRef"
+          @load="onImageLoad"
+        />
+      </div>
     </div>
   </section>
 </template>
@@ -33,10 +34,9 @@ const sectionRef = ref<HTMLElement | null>(null);
 const containerRef = ref<HTMLElement | null>(null);
 const imageRef = ref<HTMLImageElement | null>(null);
 const translateY = ref(0);
-const imageRatio = ref(1.5); // Default scaling factor for parallax effect
-const naturalRatio = ref(0); // Will store image's natural aspect ratio
+const imageRatio = ref(1.2);
 
-// Compute container style based on provided aspect ratio
+// Compute container style
 const containerStyle = computed(() => {
   if (props.aspectRatio) {
     const [width, height] = props.aspectRatio.split('/').map(Number);
@@ -48,9 +48,8 @@ const containerStyle = computed(() => {
   return {};
 });
 
-// Compute image style including transform
-const imageStyle = computed(() => ({
-  transform: `translateY(${translateY.value}px)`,
+const wrapperStyle = computed(() => ({
+  transform: `translate3d(0, ${translateY.value}px, 0)`,
   height: `${imageRatio.value * 100}%`
 }));
 
@@ -58,41 +57,39 @@ const imageStyle = computed(() => ({
 const onImageLoad = () => {
   if (imageRef.value) {
     const img = imageRef.value;
-    naturalRatio.value = img.naturalHeight / img.naturalWidth;
-    
-    // Adjust parallax scaling based on image dimensions
     const containerHeight = containerRef.value?.offsetHeight || 0;
-    const idealHeight = containerHeight * 1.5; // 50% more than container for parallax
-    imageRatio.value = Math.max(1.5, idealHeight / containerHeight);
+    imageRatio.value = Math.max(1.3, containerHeight / img.naturalHeight);
     
-    // Initial position calculation
+    // Reset la position initiale
+    translateY.value = 0;
     scrollHandler();
   }
 };
 
 const scrollHandler = () => {
-  if (!sectionRef.value || !containerRef.value || !imageRef.value) return;
+  if (!sectionRef.value) return;
 
   const rect = sectionRef.value.getBoundingClientRect();
-  const containerHeight = containerRef.value.offsetHeight;
-  const imageHeight = imageRef.value.offsetHeight;
   const windowHeight = window.innerHeight;
-
-  // Calculate maximum scroll distance based on image and container heights
-  const maxTranslate = imageHeight - containerHeight;
-
-  // Only animate when section is visible
-  if (rect.top < windowHeight && rect.bottom > 0) {
-    // Calculate progress (0 to 1) based on section visibility
-    const progress = (windowHeight - rect.top) / (windowHeight + rect.height);
-    
-    // Apply smooth translation with bounds checking
-    translateY.value = -Math.max(0, Math.min(maxTranslate, maxTranslate * progress));
+  
+  if (rect.bottom < 0 || rect.top > windowHeight) {
+    translateY.value = 0;
+    return;
   }
+
+  const startPoint = windowHeight * 0.85;
+  const endPoint = windowHeight * 0.15;
+  const totalDistance = rect.height + windowHeight * 0.3;
+  const currentProgress = (startPoint - rect.top) / totalDistance;
+  const progress = Math.max(0, Math.min(1, currentProgress));
+
+  const maxTranslate = 150;
+  const easeProgress = progress * (2 - progress);
+  translateY.value = -maxTranslate * easeProgress;
 };
 
-// Debounce helper for resize handling
-const debounce = (fn: Function, ms = 300) => {
+// Réduire le debounce pour une réponse plus rapide
+const debounce = (fn: Function, ms = 8) => {
   let timeoutId: ReturnType<typeof setTimeout>;
   return (...args: any[]) => {
     clearTimeout(timeoutId);
@@ -100,11 +97,8 @@ const debounce = (fn: Function, ms = 300) => {
   };
 };
 
-// Resize handler
-const handleResize = debounce(() => {
-  onImageLoad();
-  scrollHandler();
-});
+// Optimisation du scroll handler
+const debouncedScrollHandler = debounce(scrollHandler);
 
 // Set up intersection observer
 onMounted(() => {
@@ -112,9 +106,9 @@ onMounted(() => {
     (entries) => {
       entries.forEach((entry) => {
         if (entry.isIntersecting) {
-          window.addEventListener('scroll', scrollHandler, { passive: true });
+          window.addEventListener('scroll', debouncedScrollHandler, { passive: true });
         } else {
-          window.removeEventListener('scroll', scrollHandler);
+          window.removeEventListener('scroll', debouncedScrollHandler);
         }
       });
     },
@@ -124,14 +118,10 @@ onMounted(() => {
   if (sectionRef.value) {
     observer.observe(sectionRef.value);
   }
-
-  // Add resize listener
-  window.addEventListener('resize', handleResize, { passive: true });
 });
 
 onUnmounted(() => {
-  window.removeEventListener('scroll', scrollHandler);
-  window.removeEventListener('resize', handleResize);
+  window.removeEventListener('scroll', debouncedScrollHandler);
 });
 </script>
 
@@ -147,25 +137,32 @@ onUnmounted(() => {
 
 .image-container {
   width: calc(420px * 1.8);
+  height: 420px;
   position: relative;
   background-color: var(--highlight-default);
   overflow: hidden;
   border-radius: 6px;
 }
 
-/* When no aspect ratio is provided, use default height */
-.image-container:not([style*="aspect-ratio"]) {
-  height: 420px;
-}
-
-.image {
+.image-wrapper {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  object-fit: cover;
+  height: 100%;
   will-change: transform;
-  transition: transform 0.1s ease-out;
+}
+
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top; /* Force l'alignement en haut */
+}
+
+/* When no aspect ratio is provided, use default height */
+.image-container:not([style*="aspect-ratio"]) {
+  height: 420px;
 }
 
 /* Tablettes */
