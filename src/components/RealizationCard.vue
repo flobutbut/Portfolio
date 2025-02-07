@@ -5,7 +5,7 @@
       <img :src="imageUrl" :alt="title" class="card-image" />
     </div>
     <div class="content">
-      <h4 class="h4">{{ title }}</h4>
+      <h5 class="h5">{{ title }}</h5>
       <p class="md-regular">{{ description }}</p>
     </div>
   </div>
@@ -76,7 +76,7 @@ const navigateToDetail = () => {
   gap: var(--space-none);
 }
 
-.content h4 {
+.content h5 {
   color: var(--text-front);
 }
 

@@ -75,8 +75,9 @@ content: |
 content: Un configurateur 3D intuitif pour une personnalisation précise
 
 ## @article
-# Le configurateur
-La conception du configurateur s'est appuyée sur une collaboration étroite avec JP Racing pour garantir la précision technique des options proposées. Cette approche a permis de développer un outil à la fois fonctionnel et accessible, répondant aux besoins des utilisateurs comme aux exigences techniques du produit.
+title: Le configurateur
+content: |
+  La conception du configurateur s'est appuyée sur une collaboration étroite avec JP Racing pour garantir la précision technique des options proposées. Cette approche a permis de développer un outil à la fois fonctionnel et accessible, répondant aux besoins des utilisateurs comme aux exigences techniques du produit.
 
 ## @singleImage
 /assets/projects/jpracing/Config-02.png

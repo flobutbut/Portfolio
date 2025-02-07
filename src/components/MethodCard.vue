@@ -3,7 +3,7 @@
     <div class="method-icon">
       <slot name="icon"></slot>
     </div>
-    <h3 class="md-bold">{{ title }}</h3>
+    <h5 class="h5">{{ title }}</h5>
     <p class="md-regular">{{ description }}</p>
   </div>
 </template>
@@ -35,8 +35,7 @@ defineProps<Props>();
   display: flex;
 }
 
-
-.method-card h3 {
+.method-card h5 {
   color: var(--text-front);
 }
 

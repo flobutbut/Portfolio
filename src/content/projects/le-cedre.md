@@ -45,11 +45,6 @@ content: |
   Le contexte professionnel implique des interactions quotidiennes avec diverses entités (contrats, clients, documents) soumises à des règles spécifiques. L'approche OOUX permet d'éviter la fragmentation des fonctionnalités et offre une vision plus cohérente du système.
 
 ## @article
-title: Processus collaboratif
-content: |
-  La conception s'est appuyée sur un dialogue constant avec les équipes de Le Cèdre pour assurer l'adéquation de l'outil avec les besoins opérationnels.
-
-## @article
 title: Phases de conception
 content: |
   Le développement du projet s'est articulé autour de plusieurs étapes :

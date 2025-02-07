@@ -57,7 +57,6 @@ console.log('ColumnsSection props:', props); // Debug log
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: calc(var(--space-md) * 4);
-  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -84,15 +83,13 @@ console.log('ColumnsSection props:', props); // Debug log
   margin: 0;
 }
 
-.custom-list li {
-  position: relative;
-  padding-left: calc(var(--space-md) * 2);
+.column-list {
+  list-style: none;
+  padding-left: 0;
 }
 
-.custom-list li::before {
-  content: "•";
-  position: absolute;
-  left: 0;
+.column-list li {
+  margin-bottom: var(--space-md);
   color: var(--text-medium);
 }
 

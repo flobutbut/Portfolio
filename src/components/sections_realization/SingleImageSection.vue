@@ -44,6 +44,7 @@ const { imageUrl, description } = props;
   background-color: var(--highlight-default);
   overflow: hidden;
   border-radius: 6px;
+
 }
 
 .image {
@@ -61,13 +62,15 @@ const { imageUrl, description } = props;
     padding-bottom: calc(var(--space-md) * 2);
 
     padding-left: 10%;
-    padding-right: 0;
+    padding-right: O;
   }
 
   .image-container {
     width: 100%;
+    max-width: 800px;
     height: auto;
     aspect-ratio: 16/10;
+
   }
 }
 
@@ -77,5 +80,13 @@ const { imageUrl, description } = props;
     padding-left: 10%;
     padding-right: 0;
   }
+  .image-container {
+    width: 100%;
+    max-width: 800px;
+    height: auto;
+    aspect-ratio: 16/10;
+    border-radius: 6px 0 0 6px;
+  }
+
 }
 </style>

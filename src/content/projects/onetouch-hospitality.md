@@ -51,7 +51,7 @@ content: |
 ## @parallaxImage
 /assets/projects/onetouch/Modules.png
 Description de l'image
-16/17
+16/10
 
 ## @article
 title: Une expérience shopping personnalisée
@@ -61,7 +61,7 @@ content: |
 ## @parallaxImage
 /assets/projects/onetouch/Boutique-2.png
 Description de l'image
-16/22
+16/40
 
 ## @quote
 content: La boutique de luxe s'invite dans votre suite
@@ -94,13 +94,5 @@ content: |
   OneTouch Hospitality redéfinit les standards du service hôtelier de luxe. En mariant technologie de pointe et élégance traditionnelle, nous avons créé une solution qui améliore tant l'expérience client que l'efficacité opérationnelle. Cette plateforme évolutive pose les fondations d'une nouvelle ère dans l'hôtellerie de luxe, où le service d'exception devient encore plus personnalisé et accessible.
 
 ## @singleImage
-/assets/projects/onetouch/Modules.png
-Description de l'image
-
-## @singleImage
 /assets/projects/onetouch/Menu.png
-Description de l'image
-
-## @singleImage
-/assets/projects/onetouch/BackOffice-3.png
 Description de l'image

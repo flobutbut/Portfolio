@@ -1,7 +1,7 @@
 # components/ProjectCard.vue
 <template>
   <div class="experience-card">
-    <h4 class="h4">{{ title }}</h4>
+    <h5 class="h5">{{ title }}</h5>
     <p class="md-regular">{{ role }}</p>
     <p class="md-regular description">{{ description }}</p>
 
@@ -56,7 +56,7 @@ const navigateToDetail = () => {
   min-height: 304px;
 }
 
-.experience-card h3 {
+.experience-card h5 {
   color: var(--text-front);
 }
 

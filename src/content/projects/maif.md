@@ -33,11 +33,13 @@ content: |
 ## @article
 title: Méthodologie
 content: |
-  L'étude s'appuie sur une approche mixte combinant analyses qualitative et quantitative :
-
-  Immersion terrain : double écoute des échanges entre sociétaires et téléconseillers pour une compréhension fine des interactions et des difficultés rencontrées.
-  Analyse de données : exploitation d'une base de données d'appels qualifiés afin d'identifier les situations récurrentes.
-  Cartographie des parcours : élaboration de user journey maps détaillées pour visualiser les parcours des sociétaires et identifier les points de friction.
+  L'étude s'appuie sur une approche mixte combinant analyses qualitative et quantitative
+  # Immersion terrain
+  Double écoute des échanges entre sociétaires et téléconseillers pour une compréhension fine des interactions et des difficultés rencontrées.
+  # Analyse de données
+  Exploitation d'une base de données d'appels qualifiés afin d'identifier les situations récurrentes.
+  # Cartographie des parcours
+  Élaboration de user journey maps détaillées pour visualiser les parcours des sociétaires et identifier les points de friction.
 
 
 ## @article
@@ -49,8 +51,9 @@ content: |
   ## @article
 title: Pour les téléconseillers
 content: |
-  Gérer l'annonce d'un refus : communiquer un refus tout en maintenant une relation de confiance.
-  Identifier rapidement le service tiers adapté : naviguer efficacement dans un catalogue de solutions alternatives.
+  - Gérer l'annonce d'un refus
+  - Communiquer un refus tout en maintenant une relation de confiance.
+  - Identifier rapidement le service tiers adapté : naviguer efficacement dans un catalogue de solutions alternatives.
   Pour répondre à ces enjeux, des outils d'aide à la décision et des guides conversationnels ont été développés afin d'accompagner les téléconseillers dans la transformation d'un refus en proposition constructive.
 
 ## @quote

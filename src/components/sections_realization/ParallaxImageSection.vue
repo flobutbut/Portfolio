@@ -35,17 +35,36 @@ const containerRef = ref<HTMLElement | null>(null);
 const imageRef = ref<HTMLImageElement | null>(null);
 const translateY = ref(0);
 
+const handleScroll = () => {
+  if (!sectionRef.value || !containerRef.value) return;
+  
+  const rect = sectionRef.value.getBoundingClientRect();
+  const scrollProgress = rect.top / window.innerHeight;
+  translateY.value = scrollProgress * 300;
+};
+
+onMounted(() => {
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
+});
+
+onUnmounted(() => {
+  window.removeEventListener('scroll', handleScroll);
+});
+
 const containerStyle = computed(() => {
   if (props.aspectRatio) {
+    const [width, height] = props.aspectRatio.split('/').map(Number);
     return {
-      aspectRatio: props.aspectRatio,
+      aspectRatio: height > width ? '16/20' : props.aspectRatio,
       width: 'calc(100% - calc(var(--space-md) * 20))',
-      height: 'auto'
+      maxWidth: '800px'
     };
   }
   return {
     width: 'calc(100% - calc(var(--space-md) * 20))',
-    height: '420px'
+    height: '420px',
+    maxWidth: '800px'
   };
 });
 
@@ -56,68 +75,24 @@ const wrapperStyle = computed(() => ({
 const imageStyle = computed(() => {
   if (props.aspectRatio) {
     const [width, height] = props.aspectRatio.split('/').map(Number);
-    if (height > width) {
-      return { 
-        objectFit: 'contain' as const,
-        objectPosition: 'center'
-      };
-    }
+    return { 
+      width: '100%',
+      height: '100%',
+      objectFit: 'cover' as const,
+      objectPosition: height > width ? 'center' : 'top'
+    };
   }
   return { 
+    width: '100%',
+    height: '100%',
     objectFit: 'cover' as const,
     objectPosition: 'top'
   };
 });
 
-const scrollHandler = () => {
-  if (!sectionRef.value || !containerRef.value || !imageRef.value) return;
-
-  const rect = sectionRef.value.getBoundingClientRect();
-  const windowHeight = window.innerHeight;
-  
-  if (rect.bottom < 0 || rect.top > windowHeight) {
-    return;
-  }
-
-  const containerHeight = containerRef.value.offsetHeight;
-  const imageHeight = imageRef.value.offsetHeight;
-  const maxTranslate = imageHeight - containerHeight;
-  
-  const scrollDistance = windowHeight + containerHeight;
-  const relativePosition = windowHeight - rect.top;
-  const progress = Math.max(0, Math.min(1, relativePosition / scrollDistance));
-  
-  const initialOffset = containerHeight * 0.2;
-  translateY.value = (-maxTranslate * progress) + initialOffset;
-};
-
 const onImageLoad = () => {
-  if (!imageRef.value || !containerRef.value) return;
-  const containerHeight = containerRef.value.offsetHeight;
-  imageRef.value.style.height = `${containerHeight * 2}px`;
-  scrollHandler();
+  handleScroll();
 };
-
-let ticking = false;
-const onScroll = () => {
-  if (!ticking) {
-    requestAnimationFrame(() => {
-      scrollHandler();
-      ticking = false;
-    });
-    ticking = true;
-  }
-};
-
-onMounted(() => {
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-});
-
-onUnmounted(() => {
-  window.removeEventListener('scroll', onScroll);
-  window.removeEventListener('resize', onScroll);
-});
 </script>
 
 <style scoped>
@@ -137,17 +112,15 @@ onUnmounted(() => {
 }
 
 .image-wrapper {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  will-change: transform;
+  position: relative;
+  height: auto;
 }
 
 .image {
+  display: block;
   width: 100%;
-  height: 100%;
+  height: auto;
+  will-change: transform;
 }
 
 /* Tablettes */
