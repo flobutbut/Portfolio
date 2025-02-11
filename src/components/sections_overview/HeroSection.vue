@@ -1,12 +1,13 @@
 # components/sections/HeroSection.vue
 <template>
   <div class="hero">
-    <h1 class="h1">
-      Expert en design d'interfaces<br />pour solutions SaaS et B2B.
+    <h1 class="md-regular">
+      Florian Butour / Product Designer
     </h1>
-    <p class="md-regular">
-      Je conçois des solutions digitales innovantes et centrées utilisateur.
-    </p>
+    <h2 class="h1">
+      Expert en design d'interfaces<br />pour solutions SaaS et B2B.
+    </h2>
+
   </div>
 </template>
 

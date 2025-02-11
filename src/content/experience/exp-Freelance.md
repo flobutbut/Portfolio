@@ -9,7 +9,7 @@ metadata:
 
 ## @hero
 client: Freelance
-title: Conception et accompagnement sur des services SaaS B2B, design systems et outils métier. Intervention sur l'UX research, la stratégie produit et l'optimisation des interfaces.
+title: Conception et accompagnement sur des services SaaS B2B web et mobiles et design systems.
 
 ## @article
 title: De la vision à la réalité

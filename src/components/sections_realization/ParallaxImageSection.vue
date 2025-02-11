@@ -34,6 +34,11 @@ const sectionRef = ref<HTMLElement | null>(null);
 const containerRef = ref<HTMLElement | null>(null);
 const imageRef = ref<HTMLImageElement | null>(null);
 const translateY = ref(0);
+const isMobile = ref(false);
+
+const handleResize = () => {
+  isMobile.value = window.innerWidth <= 512;
+};
 
 const handleScroll = () => {
   if (!sectionRef.value || !containerRef.value) return;
@@ -45,26 +50,40 @@ const handleScroll = () => {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll, { passive: true });
+  window.addEventListener('resize', handleResize);
+  handleResize();
   handleScroll();
 });
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
+  window.removeEventListener('resize', handleResize);
 });
 
 const containerStyle = computed(() => {
   if (props.aspectRatio) {
     const [width, height] = props.aspectRatio.split('/').map(Number);
+    const isPortrait = height > width;
+    
+    if (isMobile.value) {
+      return {
+        aspectRatio: isPortrait ? '16/20' : props.aspectRatio,
+        width: '100%',
+        maxWidth: 'none'
+      };
+    }
+    
     return {
-      aspectRatio: height > width ? '16/20' : props.aspectRatio,
+      aspectRatio: isPortrait ? '16/20' : props.aspectRatio,
       width: 'calc(100% - calc(var(--space-md) * 20))',
       maxWidth: '800px'
     };
   }
+
   return {
-    width: 'calc(100% - calc(var(--space-md) * 20))',
+    width: isMobile.value ? '100%' : 'calc(100% - calc(var(--space-md) * 20))',
     height: '420px',
-    maxWidth: '800px'
+    maxWidth: isMobile.value ? 'none' : '800px'
   };
 });
 
@@ -142,13 +161,14 @@ const onImageLoad = () => {
 @media (max-width: 512px) {
   .parallax-image-section {
     padding-top: calc(var(--space-md) * 4);
-    padding-bottom: calc(var(--space-md) * 20);
-    padding-left: calc(var(--space-md) * 3);
-    padding-right: var(--space-none);
+    padding-bottom: calc(var(--space-md) * 7);
+    padding-left: 10%;
+    padding-right: 0;
   }
 
   .image-container {
-    width: calc(100% - calc(var(--space-md) * 6));
+    width: 100%;
+    border-radius: 6px 0 0 6px;
   }
 }
 </style>
