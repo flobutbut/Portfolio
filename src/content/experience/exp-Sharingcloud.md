@@ -17,29 +17,29 @@ title: L'Écosystème Sharingcloud
 content: |
   Au cours de mon expérience chez Sharingcloud, j'ai eu l'opportunité de travailler sur l'ensemble de l'écosystème de solutions smart office. Voici un aperçu des différents projets :
 
-  ### WorkplaceToBe
+  **WorkplaceToBe**
   - **Application Desktop** : Interface principale permettant la gestion complète des espaces de travail
   - **Application Mobile** : Version mobile optimisée pour l'usage nomade et la réservation rapide
 
-  ### Add-in Outlook
+  **Add-in Outlook**
   Extension intégrée à Microsoft Outlook permettant de :
   - Réserver des salles directement depuis l'interface de l'email
   - Gérer les réunions et les disponibilités
   - Synchroniser les agendas
 
-  ### Devices & Hardware
+  **Devices & Hardware**
   Solutions matérielles pour la gestion des espaces :
   - Capteurs de présence pour les bureaux
   - Displays pour les salles de réunion
   - Systèmes de badgeage et d'accès
 
-  ### Metrics
+  **Metrics**
   Plateforme de tableau de bord et d'analyse de données :
   - Visualisation des taux d'occupation
   - Rapports d'utilisation des espaces
   - Analyses prédictives pour l'optimisation des espaces
 
-  ### Signage
+  **Signage**
   Système de gestion de contenu pour les écrans d'affichage :
   - Création et diffusion de contenus institutionnels
   - Gestion des playlists et des horaires de diffusion
