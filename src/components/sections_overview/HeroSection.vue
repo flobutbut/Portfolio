@@ -1,4 +1,3 @@
-# components/sections/HeroSection.vue
 <template>
   <div class="hero">
     <h1 class="md-regular">
@@ -19,17 +18,17 @@
   flex-direction: column;
   justify-content: center;
 
-  padding-left: 15%;
-  padding-right: 15%;
-  
+  padding-left: var(--section-pad-x);
+  padding-right: var(--section-pad-x);
+
   gap: var(--space-md);
 }
 
 /* Tablettes */
 @media (max-width: 1024px) {
   .hero {
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: var(--section-pad-x-tablet);
+    padding-right: var(--section-pad-x-tablet);
     transform: translateY(-20px);
   }
 }
@@ -37,8 +36,8 @@
 /* Mobile */
 @media (max-width: 512px) {
   .hero {
-    padding-left: calc(var(--space-md) * 3);
-    padding-right: calc(var(--space-md) * 3);
+    padding-left: var(--section-pad-x-mobile);
+    padding-right: var(--section-pad-x-mobile);
 
     height: 60vh;
     transform: translateY(0);

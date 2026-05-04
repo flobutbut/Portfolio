@@ -1,4 +1,3 @@
-# components/ProjectCard.vue
 <template>
   <div class="experience-card">
     <h5 class="h5">{{ title }}</h5>
@@ -30,17 +29,10 @@ const props = defineProps<Props>();
 const router = useRouter();
 
 const navigateToDetail = () => {
-  console.log('Navigating to experience:', props.id);
-  console.log('Current route:', router.currentRoute.value.name);
-  
   router.push({
     name: 'realization',
     params: { id: `exp-${props.id}` },
     query: { from: router.currentRoute.value.name as string }
-  }).then(() => {
-    console.log('Navigation successful');
-  }).catch((error) => {
-    console.error('Navigation failed:', error);
   });
 };
 </script>

@@ -13,22 +13,13 @@
 </template>
 
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed } from 'vue'
 import { useRoute } from 'vue-router'
 import NavBar from './components/sections/NavBar.vue'
 import Footer from './components/sections/Footer.vue'
-import { Analytics } from '@vercel/analytics/vue'
 
 const route = useRoute()
 const isBlankLayout = computed(() => route.meta.layout === 'blank')
-
-watch(
-  () => route.path,
-  (newPath) => {
-    console.log('Route changed to:', newPath)
-  },
-  { immediate: true }
-)
 </script>
 <style>
 .app {

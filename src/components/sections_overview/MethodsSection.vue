@@ -1,4 +1,3 @@
-# components/sections/MethodsSection.vue
 <template>
   <div class="methods-section">
     <p class="subtitle md-regular">Méthodes</p>
@@ -64,7 +63,7 @@ const methods = [
 
   padding-top: calc(var(--space-md) * 20);
   padding-bottom: calc(var(--space-md) * 10);
-  padding-left: 15%;
+  padding-left: var(--section-pad-x);
   padding-right: 5%;
 }
 
@@ -104,7 +103,7 @@ const methods = [
     padding-top: calc(var(--space-md) * 10);
     padding-bottom: calc(var(--space-md) * 10);
 
-    padding-left: 10%;
+    padding-left: var(--section-pad-x-tablet);
     padding-right: 5%;
     gap: var(--space-none);
   }
@@ -124,8 +123,8 @@ const methods = [
     padding-top: calc(var(--space-md) * 4);
     padding-bottom: calc(var(--space-md) * 4);
 
-    padding-left: calc(var(--space-md) * 3);
-    padding-right: calc(var(--space-md) * 3);
+    padding-left: var(--section-pad-x-mobile);
+    padding-right: var(--section-pad-x-mobile);
     gap: var(--space-none);
   }
 

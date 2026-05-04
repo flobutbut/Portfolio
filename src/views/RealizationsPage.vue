@@ -22,24 +22,17 @@ onMounted(async () => {
       eager: true
     })) as Record<string, string>;
 
-    console.log("Found modules:", Object.keys(modules));
-
-    const loadedProjects = Object.entries(modules).map(([path, content]) => {
-      console.log('Processing file:', path);
+    const loadedProjects = Object.entries(modules).map(([_, content]) => {
       const projectData = parser.parseForCard(content as string);
-      console.log('Parsed data:', projectData);
-      
       if (!projectData) return null;
-      
       return {
         id: projectData.id,
         title: projectData.title,
         description: projectData.description,
-        imageUrl: projectData.cover || '', // Utilise le cover comme imageUrl
+        imageUrl: projectData.cover || '',
       };
     }).filter(p => p !== null);
 
-    console.log('Loaded projects:', loadedProjects);
     projects.value = loadedProjects;
   } catch (error) {
     console.error("Error loading projects:", error);

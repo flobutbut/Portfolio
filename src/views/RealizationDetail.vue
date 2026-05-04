@@ -73,35 +73,27 @@ const loadProject = async () => {
       import: "default",
     });
 
-    console.log('Recherche de l\'ID:', baseId);
-    
     const projectEntry = Object.entries(modules).find(([path]) => {
-      const matchesFolder = isExperience 
+      const matchesFolder = isExperience
         ? path.includes('/experience/')
         : path.includes('/projects/');
       return matchesFolder && path.toLowerCase().includes(baseId.toLowerCase());
     });
 
     if (!projectEntry) {
-      console.error("Fichier projet non trouvé");
       router.push({ name: "realizations" });
       return;
     }
 
-    const [path, content] = projectEntry;
-    console.log('Fichier trouvé:', path);
-    
+    const [, content] = projectEntry;
     const projectData = await parser.parseContent(content as string);
-    console.log('Données projet parsées:', projectData);
 
     if (!projectData) {
-      console.error("Échec de l'analyse des données du projet");
       router.push({ name: "realizations" });
       return;
     }
 
     project.value = projectData;
-    console.log("Projet chargé avec succès:", project.value);
   } catch (error) {
     console.error("Erreur lors du chargement du projet:", error);
     router.push({ name: "realizations" });

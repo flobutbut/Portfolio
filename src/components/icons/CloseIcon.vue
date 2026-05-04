@@ -1,4 +1,3 @@
-# components/icons/CloseIcon.vue
 <template>
   <svg
     width="24"

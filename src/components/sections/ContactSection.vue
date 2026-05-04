@@ -1,4 +1,3 @@
-# components/sections/ContactSection.vue
 <template>
   <section class="contact-section">
     <div class="contact-card">
@@ -40,16 +39,11 @@ import LinkedinIcon from "../icons/LinkedinIcon.vue";
   background-color: var(--surface-back);
   padding-top: calc(var(--space-md) * 10);
   padding-bottom: calc(var(--space-md) * 10);
-  padding-left: 15%;
-  padding-right: 15%;
+  padding-left: var(--section-pad-x);
+  padding-right: var(--section-pad-x);
 }
 
 .contact-card {
-  /* background-color: var(--surface-medium); 
-  padding: calc(var(--space-md) * 3);
-  border-radius: var(--radius-md); */
-
-
   width: 100%;
 }
 
@@ -97,14 +91,8 @@ import LinkedinIcon from "../icons/LinkedinIcon.vue";
   .contact-section {
     padding-top: calc(var(--space-md) * 10);
     padding-bottom: calc(var(--space-md) * 10);
-
-    padding-left: 10%;
-    padding-right: 10%;
-  }
-
-
-  .contact-card {
-    /* padding: calc(var(--space-md) * 6) */;
+    padding-left: var(--section-pad-x-tablet);
+    padding-right: var(--section-pad-x-tablet);
   }
 
   .contact-content {
@@ -117,14 +105,9 @@ import LinkedinIcon from "../icons/LinkedinIcon.vue";
 @media (max-width: 512px) {
   .contact-section {
     padding-top: calc(var(--space-md) * 20);
-    padding-right: calc(var(--space-md) * 3);
-    padding-left: calc(var(--space-md) * 3);
+    padding-right: var(--section-pad-x-mobile);
+    padding-left: var(--section-pad-x-mobile);
   }
-
-  .contact-card {
-    /* padding: calc(var(--space-md) * 4); */
-  }
-
 
   .contact-content {
     gap: calc(var(--space-md) * 2);

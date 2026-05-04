@@ -1,4 +1,3 @@
-# components/RealizationCard.vue
 <template>
   <div class="realization-card" @click="navigateToDetail">
     <div class="image-container">
@@ -25,17 +24,10 @@ const props = defineProps<Props>();
 const router = useRouter();
 
 const navigateToDetail = () => {
-  console.log('Navigating to project:', props.id);
-  console.log('Current route:', router.currentRoute.value.name);
-  
   router.push({
     name: 'realization',
     params: { id: props.id },
     query: { from: router.currentRoute.value.name as string }
-  }).then(() => {
-    console.log('Navigation successful');
-  }).catch((error) => {
-    console.error('Navigation failed:', error);
   });
 };
 </script>

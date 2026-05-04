@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted } from "vue";
+import { useBreakpoint } from "../../composables/useBreakpoint";
 
 interface Props {
   images: string[];
@@ -7,31 +8,28 @@ interface Props {
 
 const props = defineProps<Props>();
 
-const carouselContainer = ref<HTMLElement | null>(null);
+const carouselWrapper = ref<HTMLElement | null>(null);
+const carouselStickyEl = ref<HTMLElement | null>(null);
 const carousel = ref<HTMLElement | null>(null);
 const scrollProgress = ref(0);
-const isInView = ref(false);
-const currentImageIndex = ref(0);
-const isMobile = ref(false);
+const isMobile = useBreakpoint(768);
 let carouselWidth = 0;
+
+const currentImageIndex = ref(0);
 const touchStart = ref(0);
 const touchEnd = ref(0);
-const slideDirection = ref('');
-
-const checkMobile = () => {
-  isMobile.value = window.innerWidth <= 768;
-};
+const slideDirection = ref("");
 
 const nextImage = () => {
   if (currentImageIndex.value < props.images.length - 1) {
-    slideDirection.value = 'slide-left';
+    slideDirection.value = "slide-left";
     currentImageIndex.value++;
   }
 };
 
 const previousImage = () => {
   if (currentImageIndex.value > 0) {
-    slideDirection.value = 'slide-right';
+    slideDirection.value = "slide-right";
     currentImageIndex.value--;
   }
 };
@@ -43,136 +41,98 @@ const handleTouchStart = (e: TouchEvent) => {
 const handleTouchEnd = (e: TouchEvent) => {
   touchEnd.value = e.changedTouches[0].screenX;
   const swipeDistance = touchStart.value - touchEnd.value;
-  
   if (Math.abs(swipeDistance) > 50) {
-    if (swipeDistance > 0) {
-      nextImage();
-    } else {
-      previousImage();
-    }
+    if (swipeDistance > 0) nextImage();
+    else previousImage();
   }
 };
 
 const handleAnimationEnd = () => {
-  slideDirection.value = '';
+  slideDirection.value = "";
 };
 
 onMounted(() => {
-  checkMobile();
-  window.addEventListener('resize', checkMobile);
+  if (isMobile.value) return;
 
-  if (!isMobile.value) {
-    if (!carousel.value || !carouselContainer.value) return;
+  const updateLayout = () => {
+    if (!carousel.value || !carouselWrapper.value || !carouselStickyEl.value) return;
     carouselWidth = carousel.value.scrollWidth - window.innerWidth;
+    const stickyH = carouselStickyEl.value.offsetHeight;
+    carouselWrapper.value.style.height = `${carouselWidth + stickyH}px`;
+  };
 
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const entry = entries[0];
-        if (entry.intersectionRatio > 0.5) {
-          isInView.value = true;
-          document.body.style.overflow = "hidden";
-        } else {
-          isInView.value = false;
-          document.body.style.overflow = "";
-        }
-      },
-      {
-        threshold: 1,
-        rootMargin: "-100px 0px",
-      }
-    );
+  const handleScroll = () => {
+    if (!carouselWrapper.value) return;
+    const wrapperTop = carouselWrapper.value.getBoundingClientRect().top;
+    scrollProgress.value = Math.max(0, Math.min(-wrapperTop, carouselWidth));
+  };
 
-    if (carouselContainer.value) {
-      observer.observe(carouselContainer.value);
-    }
+  updateLayout();
 
-    const handleWheel = (e: WheelEvent) => {
-      if (!isInView.value) return;
-      e.preventDefault();
-      const delta = e.deltaY;
-      const newProgress = Math.max(
-        0,
-        Math.min(scrollProgress.value + delta, carouselWidth)
-      );
-      if (
-        (newProgress === 0 && delta < 0) ||
-        (newProgress === carouselWidth && delta > 0)
-      ) {
-        document.body.style.overflow = "";
-        isInView.value = false;
-      }
-      scrollProgress.value = newProgress;
-    };
+  window.addEventListener("scroll", handleScroll, { passive: true });
+  window.addEventListener("resize", () => {
+    updateLayout();
+    handleScroll();
+  });
 
-    window.addEventListener("wheel", handleWheel, { passive: false });
-
-    onUnmounted(() => {
-      window.removeEventListener("wheel", handleWheel);
-      window.removeEventListener('resize', checkMobile);
-      observer.disconnect();
-      document.body.style.overflow = "";
-    });
-  }
+  onUnmounted(() => {
+    window.removeEventListener("scroll", handleScroll);
+  });
 });
 </script>
 
 <template>
-  <div class="carousel-wrapper">
-    <!-- Version desktop avec scroll horizontal -->
-    <section v-if="!isMobile" ref="carouselContainer" class="carousel-section">
-      <div
-        ref="carousel"
-        class="carousel"
-        :style="{ transform: `translateX(${-scrollProgress}px)` }"
-      >
+  <div class="carousel-outer">
+    <!-- Desktop: sticky scroll -->
+    <div v-if="!isMobile" ref="carouselWrapper" class="carousel-sticky-wrapper">
+      <div ref="carouselStickyEl" class="carousel-sticky">
         <div
-          v-for="(image, index) in images"
-          :key="index"
-          class="carousel-item"
+          ref="carousel"
+          class="carousel"
+          :style="{ transform: `translateX(${-scrollProgress}px)` }"
         >
-          <img :src="image" :alt="`Slide ${index + 1}`" />
+          <div v-for="(image, index) in images" :key="index" class="carousel-item">
+            <img :src="image" :alt="`Slide ${index + 1}`" />
+          </div>
         </div>
       </div>
-    </section>
+    </div>
 
-    <!-- Version mobile avec points de navigation -->
-    <section 
-      v-else 
+    <!-- Mobile: swipe avec dots -->
+    <section
+      v-else
       class="carousel-section-mobile"
       @touchstart="handleTouchStart"
       @touchend="handleTouchEnd"
     >
       <div class="carousel-mobile">
         <div class="carousel-container">
-          <div 
+          <div
             class="carousel-item-mobile current"
             :class="slideDirection"
             @animationend="handleAnimationEnd"
           >
-            <img 
-              :src="images[currentImageIndex]" 
-              :alt="`Slide ${currentImageIndex + 1}`" 
-            />
+            <img :src="images[currentImageIndex]" :alt="`Slide ${currentImageIndex + 1}`" />
           </div>
-          <div 
+          <div
             v-if="slideDirection"
             class="carousel-item-mobile next"
             :class="slideDirection"
           >
-            <img 
-              :src="images[slideDirection === 'slide-left' ? currentImageIndex + 1 : currentImageIndex - 1]" 
-              :alt="`Slide ${slideDirection === 'slide-left' ? currentImageIndex + 2 : currentImageIndex}`" 
+            <img
+              :src="images[slideDirection === 'slide-left' ? currentImageIndex + 1 : currentImageIndex - 1]"
+              :alt="`Slide ${slideDirection === 'slide-left' ? currentImageIndex + 2 : currentImageIndex}`"
             />
           </div>
         </div>
         <div class="carousel-dots">
-          <button 
-            v-for="(_, index) in images" 
+          <button
+            v-for="(_, index) in images"
             :key="index"
             class="dot"
             :class="{ active: index === currentImageIndex }"
-            @click="currentImageIndex = index"
             :aria-label="`Aller à l'image ${index + 1}`"
+            @click="currentImageIndex = index"
           />
         </div>
       </div>
@@ -181,39 +141,32 @@ onMounted(() => {
 </template>
 
 <style scoped>
-.carousel-wrapper {
+.carousel-outer {
   margin-bottom: calc(var(--space-md) * 4);
 }
 
-.carousel-section {
-  width: 100%;
-  height: auto;
+/* ─── Desktop sticky ─── */
+
+.carousel-sticky-wrapper {
   position: relative;
-  display: flex;
-  align-items: center;
+  /* height définie dynamiquement en JS */
+}
+
+.carousel-sticky {
+  position: sticky;
+  top: 0;
+  overflow: hidden;
+  padding-top: calc(var(--space-md) * 6);
+  padding-bottom: calc(var(--space-md) * 6);
 }
 
 .carousel {
-  position: relative;
-  width: fit-content;
-  height: 440px;
   display: flex;
   gap: calc(var(--space-md) * 4);
-
-  padding-top: 0;
-  padding-bottom: 0;
-
   padding-left: 15%;
   padding-right: 15%;
-
+  width: fit-content;
   will-change: transform;
-  transition: transform 0.1s ease-out;
-}
-
-.carousel-item img {
-  width: 100%;
-  height: auto;
-  object-fit: cover;
 }
 
 .carousel-item {
@@ -225,7 +178,14 @@ onMounted(() => {
   border-radius: 6px;
 }
 
-/* Nouveaux styles mobile */
+.carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ─── Mobile ─── */
+
 .carousel-section-mobile {
   padding: 0 10%;
 }
@@ -239,11 +199,12 @@ onMounted(() => {
 .carousel-container {
   position: relative;
   overflow: hidden;
+  height: 280px;
 }
 
 .carousel-item-mobile {
   width: 100%;
-  height: 280px;
+  height: 100%;
   background-color: var(--highlight-default);
   overflow: hidden;
   position: absolute;
@@ -280,7 +241,6 @@ onMounted(() => {
   height: 100%;
   object-fit: cover;
   object-position: top;
-  transition: transform 0.3s ease-out;
 }
 
 .carousel-dots {
@@ -306,16 +266,11 @@ onMounted(() => {
   opacity: 1;
 }
 
-/* Tablettes */
+/* ─── Tablette ─── */
+
 @media (max-width: 1024px) {
-  .carousel-wrapper {
-    margin-bottom: calc(var(--space-md) * 4);
-  }
-
   .carousel {
-    height: 380px;
     gap: calc(var(--space-md) * 4);
-
     padding-left: 10%;
     padding-right: 10%;
   }
@@ -326,20 +281,10 @@ onMounted(() => {
   }
 }
 
-/* Mobile */
-@media (max-width: 768px) {
-  .carousel-wrapper {
-    margin-bottom: calc(var(--space-md) * 4);
-  }
+/* ─── Petit mobile ─── */
 
-  .carousel-container {
-    height: 280px;
-  }
-}
-
-/* Petit Mobile */
 @media (max-width: 480px) {
-  .carousel-wrapper {
+  .carousel-outer {
     margin-bottom: calc(var(--space-md) * 2);
   }
 
@@ -356,40 +301,25 @@ onMounted(() => {
   }
 }
 
-/* Animations de slide */
+/* ─── Animations mobile ─── */
+
 @keyframes slideLeft {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(-100%);
-  }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-100%); }
 }
 
 @keyframes slideRight {
-  from {
-    transform: translateX(0);
-  }
-  to {
-    transform: translateX(100%);
-  }
+  from { transform: translateX(0); }
+  to   { transform: translateX(100%); }
 }
 
 @keyframes slideInLeft {
-  from {
-    transform: translateX(100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+  from { transform: translateX(100%); }
+  to   { transform: translateX(0); }
 }
 
 @keyframes slideInRight {
-  from {
-    transform: translateX(-100%);
-  }
-  to {
-    transform: translateX(0);
-  }
+  from { transform: translateX(-100%); }
+  to   { transform: translateX(0); }
 }
 </style>

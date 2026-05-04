@@ -31,15 +31,9 @@ onMounted(async () => {
       eager: true
     });
 
-    console.log('Found modules:', Object.keys(modules));
-
-    const loadedExperiences = Object.entries(modules).map(([path, content]) => {
-      console.log('Processing file:', path);
+    const loadedExperiences = Object.entries(modules).map(([_, content]) => {
       const expData = parser.parseForCard(content as string);
-      console.log('Parsed data:', expData);
-      
       if (!expData) return null;
-      
       return {
         id: expData.id,
         title: expData.title,
@@ -48,7 +42,6 @@ onMounted(async () => {
       };
     }).filter(e => e !== null);
 
-    console.log('Loaded experiences:', loadedExperiences);
     experiences.value = loadedExperiences;
   } catch (error) {
     console.error('Error loading experiences:', error);
@@ -64,8 +57,8 @@ onMounted(async () => {
   padding-top: calc(var(--space-md) * 10);
   padding-bottom: calc(var(--space-md) * 10);
 
-  padding-right: 15%;
-  padding-left: 15%;
+  padding-right: var(--section-pad-x);
+  padding-left: var(--section-pad-x);
 }
 
 .subtitle {
@@ -86,8 +79,8 @@ onMounted(async () => {
     padding-top: calc(var(--space-md) * 10);
     padding-bottom: calc(var(--space-md) * 10);
 
-    padding-left: 10%;
-    padding-right: 10%;
+    padding-left: var(--section-pad-x-tablet);
+    padding-right: var(--section-pad-x-tablet);
   }
 
   .experience-grid {
@@ -106,8 +99,8 @@ onMounted(async () => {
     padding-top: calc(var(--space-md) * 10);
     padding-bottom: calc(var(--space-md) * 10);
 
-    padding-left: calc(var(--space-md) * 3);
-    padding-right: calc(var(--space-md) * 3);
+    padding-left: var(--section-pad-x-mobile);
+    padding-right: var(--section-pad-x-mobile);
   }
 
   .experience-grid {

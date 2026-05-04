@@ -93,16 +93,21 @@ const technicalSkillRefs = ref<any[]>([])
 const softSkillRefs = ref<any[]>([])
 let observer: IntersectionObserver | null = null
 
-// Fonction pour animer l'apparition/disparition séquentiellement
 const animateSequentially = (elements: Element[], entering: boolean) => {
   elements.forEach((element, index) => {
+    const el = element as HTMLElement
+    if (entering) el.style.willChange = 'opacity, transform'
     setTimeout(() => {
       if (entering) {
-        element.classList.add('visible')
+        el.classList.add('visible')
       } else {
-        element.classList.remove('visible')
+        el.classList.remove('visible')
+        el.style.willChange = ''
       }
-    }, index * 100) // 100ms de délai entre chaque élément
+      if (entering && index === elements.length - 1) {
+        setTimeout(() => { el.style.willChange = '' }, 600)
+      }
+    }, index * 100)
   })
 }
 
@@ -157,7 +162,7 @@ onBeforeUnmount(() => {
   padding-top: calc(var(--space-md) * 10);
   padding-bottom: calc(var(--space-md) * 10);
 
-  padding-left: 15%;
+  padding-left: var(--section-pad-x);
   padding-right: var(--space-none);
 }
 
@@ -188,7 +193,6 @@ onBeforeUnmount(() => {
   opacity: 0;
   transform: translateY(40px);
   transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-  will-change: opacity, transform;
 }
 
 .skill-fade.visible {
@@ -202,7 +206,7 @@ onBeforeUnmount(() => {
     padding-top: calc(var(--space-md) * 10);
     padding-bottom: calc(var(--space-md) * 10);
     
-    padding-left: 10%;
+    padding-left: var(--section-pad-x-tablet);
     padding-right: var(--space-none);
   }
 
@@ -221,7 +225,7 @@ onBeforeUnmount(() => {
   .competence-section {
     padding-top: calc(var(--space-md) * 4);
     padding-bottom: calc(var(--space-md) * 4);
-    padding-left: calc(var(--space-md) * 3);
+    padding-left: var(--section-pad-x-mobile);
     padding-right: var(--space-none);
   }
 

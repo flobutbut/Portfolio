@@ -20,6 +20,12 @@ node_modules
 dist
 dist-ssr
 
+# Editor local history (Cursor / VS Code)
+.history/
+
+# Vite ephemeral config chunks
+vite.config.ts.timestamp-*.mjs
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

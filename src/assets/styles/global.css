@@ -27,6 +27,10 @@
   --space-none: 0px;
   --space-md: 8px;
 
+  /* Section padding */
+  --section-pad-x: 15%;
+  --section-pad-x-tablet: 10%;
+  --section-pad-x-mobile: calc(var(--space-md) * 3);
 }
 
 /* Typography */

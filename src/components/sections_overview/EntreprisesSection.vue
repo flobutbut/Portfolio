@@ -1,4 +1,3 @@
-# components/sections/ExperienceSection.vue
 <template>
   <div class="entreprise-section">
     <h3 class="h3">Clients et entreprises</h3>
@@ -77,7 +76,7 @@ const companies = [
   padding-top: calc(var(--space-md) * 10);
   padding-bottom: calc(var(--space-md) * 10);
 
-  padding-left: 15%;
+  padding-left: var(--section-pad-x);
   padding-right: var(--space-none);
 }
 
@@ -117,7 +116,7 @@ const companies = [
     padding-top: calc(var(--space-md) * 10);
     padding-bottom: calc(var(--space-md) * 10);
 
-    padding-left: 10%;
+    padding-left: var(--section-pad-x-tablet);
     padding-right: var(--space-none);
     gap: 0px;
   }
@@ -138,8 +137,8 @@ const companies = [
     padding-top: calc(var(--space-md) * 10);
     padding-bottom: calc(var(--space-md) * 10);
 
-    padding-left: calc(var(--space-md) * 3);
-    padding-right: calc(var(--space-md) * 3);
+    padding-left: var(--section-pad-x-mobile);
+    padding-right: var(--section-pad-x-mobile);
   }
 
   .subtitle {

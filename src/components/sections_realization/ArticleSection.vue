@@ -1,4 +1,3 @@
-# components/sections/ArticleSection.vue
 <template>
   <section class="article-section">
     <div class="content-wrapper">
@@ -10,6 +9,7 @@
 
 <script setup lang="ts">
 import { computed } from 'vue';
+import MarkdownIt from 'markdown-it';
 
 interface Props {
   title: string;
@@ -17,51 +17,10 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-console.log('ArticleSection props:', props); // Debug
 
-// Formatage amélioré du markdown avec support du gras et des sous-titres
-const formattedContent = computed(() => {
-  let inList = false;
-  return props.content
-    .split('\n')
-    .map(line => {
-      const trimmedLine = line.trim();
-      
-      // Traitement du texte en gras
-      const formattedLine = trimmedLine.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
-      
-      // Traitement des sous-titres
-      if (trimmedLine.startsWith('# ')) {
-        return `<h5 class="h5">${formattedLine.substring(2)}</h5>`;
-      }
-      
-      // Début d'une liste
-      if (trimmedLine.startsWith('- ')) {
-        if (!inList) {
-          inList = true;
-          return '<ul>' + `<li>${formattedLine.substring(2)}</li>`;
-        }
-        return `<li>${formattedLine.substring(2)}</li>`;
-      }
-      // Fin de liste et début d'un paragraphe normal
-      if (inList && trimmedLine && !trimmedLine.startsWith('- ')) {
-        inList = false;
-        return '</ul>' + `<p>${formattedLine}</p>`;
-      }
-      // Paragraphe normal
-      if (!inList && trimmedLine) {
-        return `<p>${formattedLine}</p>`;
-      }
-      // Ligne vide dans une liste
-      if (inList && !trimmedLine) {
-        inList = false;
-        return '</ul>';
-      }
-      // Ligne vide hors liste
-      return '';
-    })
-    .join('') + (inList ? '</ul>' : '');
-});
+const md = new MarkdownIt({ breaks: true });
+
+const formattedContent = computed(() => md.render(props.content));
 </script>
 
 <style scoped>
@@ -84,7 +43,6 @@ const formattedContent = computed(() => {
 
 .content :deep(p) {
   margin-bottom: var(--space-md);
-  white-space: pre-wrap;
 }
 
 .content :deep(ul) {
@@ -106,6 +64,10 @@ const formattedContent = computed(() => {
   color: var(--text-medium);
 }
 
+.content :deep(h1),
+.content :deep(h2),
+.content :deep(h3),
+.content :deep(h4),
 .content :deep(h5) {
   color: var(--text-front);
   margin-top: calc(var(--space-md) * 2);

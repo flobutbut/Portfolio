@@ -14,6 +14,13 @@ export default defineConfig({
     }
   },
   base: '/',
+  // Port dédié : évite d’afficher un autre projet si un Vite tiers occupe encore 5173.
+  server: {
+    port: 5180,
+    host: true,
+    open: true,
+    strictPort: true
+  },
   build: {
     assetsDir: 'assets',
     rollupOptions: {

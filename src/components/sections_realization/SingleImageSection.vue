@@ -2,10 +2,6 @@
   <section class="single-image-section">
     <div class="image-container">
       <img :src="imageUrl" :alt="description" class="image" />
-      <!-- Debug info -->
-      <div style="color: red;">
-        URL: {{ imageUrl }}
-      </div>
     </div>
   </section>
 </template>
@@ -17,12 +13,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-
-// Debug logs
-console.log('SingleImageSection props:', props);
-console.log('Image URL:', props.imageUrl);
-
-// Destructure les propriétés du content
 const { imageUrl, description } = props;
 </script>
 
@@ -39,17 +29,16 @@ const { imageUrl, description } = props;
 
 .image-container {
   width: calc(420px * 1.8);
-  height: fit-content; /* au lieu de height fixe */
+  height: fit-content;
   max-height: 420px;
   background-color: var(--highlight-default);
   overflow: hidden;
   border-radius: 6px;
-
 }
 
 .image {
   width: 100%;
-  height: auto; /* au lieu de 100% */
+  height: auto;
   object-fit: contain;
 }
 
@@ -62,7 +51,7 @@ const { imageUrl, description } = props;
     padding-bottom: calc(var(--space-md) * 2);
 
     padding-left: 10%;
-    padding-right: O;
+    padding-right: 0;
   }
 
   .image-container {
@@ -70,7 +59,6 @@ const { imageUrl, description } = props;
     max-width: 800px;
     height: auto;
     aspect-ratio: 16/10;
-
   }
 }
 
@@ -87,6 +75,5 @@ const { imageUrl, description } = props;
     aspect-ratio: 16/10;
     border-radius: 6px 0 0 6px;
   }
-
 }
 </style>

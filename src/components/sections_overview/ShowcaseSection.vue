@@ -1,4 +1,3 @@
-# components/sections/ShowcaseSection.vue
 <template>
   <section class="showcase-section">
     <div class="showcase-container">

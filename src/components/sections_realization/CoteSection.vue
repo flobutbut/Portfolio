@@ -1,4 +1,3 @@
-# components/sections/CoteSection.vue
 <template>
   <section class="cote-section">
     <div class="content-wrapper">
@@ -15,7 +14,6 @@ interface Props {
 const props = withDefaults(defineProps<Props>(), {
   content: ''
 });
-console.log('CoteSection props:', props); // Debug
 </script>
 
 <style scoped>

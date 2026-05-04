@@ -1,18 +1,16 @@
-# components/sections/ParallaxImageSection.vue
 <template>
   <section class="parallax-image-section" ref="sectionRef">
-    <div 
-      class="image-container" 
+    <div
+      class="image-container"
       ref="containerRef"
       :style="containerStyle"
     >
       <div class="image-wrapper" :style="wrapperStyle">
-        <img 
-          :src="imageUrl" 
-          :alt="alt || ''" 
-          class="image" 
-          ref="imageRef"
-          @load="onImageLoad"
+        <img
+          :src="imageUrl"
+          :alt="alt || ''"
+          class="image"
+          @load="handleScroll"
           :style="imageStyle"
         />
       </div>
@@ -22,6 +20,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted, onUnmounted, computed } from 'vue';
+import { useBreakpoint } from '../../composables/useBreakpoint';
 
 interface Props {
   imageUrl: string;
@@ -32,17 +31,12 @@ interface Props {
 const props = defineProps<Props>();
 const sectionRef = ref<HTMLElement | null>(null);
 const containerRef = ref<HTMLElement | null>(null);
-const imageRef = ref<HTMLImageElement | null>(null);
 const translateY = ref(0);
-const isMobile = ref(false);
-
-const handleResize = () => {
-  isMobile.value = window.innerWidth <= 512;
-};
+const isMobile = useBreakpoint(512);
 
 const handleScroll = () => {
   if (!sectionRef.value || !containerRef.value) return;
-  
+
   const rect = sectionRef.value.getBoundingClientRect();
   const scrollProgress = rect.top / window.innerHeight;
   translateY.value = scrollProgress * 300;
@@ -50,21 +44,18 @@ const handleScroll = () => {
 
 onMounted(() => {
   window.addEventListener('scroll', handleScroll, { passive: true });
-  window.addEventListener('resize', handleResize);
-  handleResize();
   handleScroll();
 });
 
 onUnmounted(() => {
   window.removeEventListener('scroll', handleScroll);
-  window.removeEventListener('resize', handleResize);
 });
 
 const containerStyle = computed(() => {
   if (props.aspectRatio) {
     const [width, height] = props.aspectRatio.split('/').map(Number);
     const isPortrait = height > width;
-    
+
     if (isMobile.value) {
       return {
         aspectRatio: isPortrait ? '16/20' : props.aspectRatio,
@@ -72,7 +63,7 @@ const containerStyle = computed(() => {
         maxWidth: 'none'
       };
     }
-    
+
     return {
       aspectRatio: isPortrait ? '16/20' : props.aspectRatio,
       width: 'calc(100% - calc(var(--space-md) * 20))',
@@ -89,29 +80,26 @@ const containerStyle = computed(() => {
 
 const wrapperStyle = computed(() => ({
   transform: `translate3d(0, ${translateY.value}px, 0)`,
+  willChange: 'transform',
 }));
 
 const imageStyle = computed(() => {
   if (props.aspectRatio) {
     const [width, height] = props.aspectRatio.split('/').map(Number);
-    return { 
+    return {
       width: '100%',
       height: '100%',
       objectFit: 'cover' as const,
       objectPosition: height > width ? 'center' : 'top'
     };
   }
-  return { 
+  return {
     width: '100%',
     height: '100%',
     objectFit: 'cover' as const,
     objectPosition: 'top'
   };
 });
-
-const onImageLoad = () => {
-  handleScroll();
-};
 </script>
 
 <style scoped>
@@ -139,7 +127,6 @@ const onImageLoad = () => {
   display: block;
   width: 100%;
   height: auto;
-  will-change: transform;
 }
 
 /* Tablettes */

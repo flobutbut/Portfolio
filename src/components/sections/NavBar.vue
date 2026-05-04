@@ -1,4 +1,3 @@
-# components/NavBar.vue
 <template>
   <nav class="navbar">
     <div class="navbar-logo">
@@ -47,29 +46,22 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue'
+import { ref, onUnmounted } from 'vue'
 import { useRoute } from 'vue-router'
+import { useBreakpoint } from '../../composables/useBreakpoint'
 
 const route = useRoute()
 const isMenuOpen = ref(false)
-const isMobile = ref(false)
+const isMobile = useBreakpoint(768)
 
 const isActive = (routeName: string) => {
   const path = routeName === 'overview' ? '/' : `/${routeName}`
   return route.path === path
 }
 
-const checkMobile = () => {
-  isMobile.value = window.innerWidth <= 768
-}
-
 const toggleMenu = () => {
   isMenuOpen.value = !isMenuOpen.value
-  if (isMenuOpen.value) {
-    document.body.style.overflow = 'hidden'
-  } else {
-    document.body.style.overflow = ''
-  }
+  document.body.style.overflow = isMenuOpen.value ? 'hidden' : ''
 }
 
 const closeMenu = () => {
@@ -77,13 +69,7 @@ const closeMenu = () => {
   document.body.style.overflow = ''
 }
 
-onMounted(() => {
-  checkMobile()
-  window.addEventListener('resize', checkMobile)
-})
-
 onUnmounted(() => {
-  window.removeEventListener('resize', checkMobile)
   document.body.style.overflow = ''
 })
 </script>

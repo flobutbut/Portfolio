@@ -1,4 +1,3 @@
-# components/sections/ColumnsSection.vue
 <template>
   <section class="columns-section">
     <div class="columns-wrapper">
@@ -41,7 +40,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
-console.log('ColumnsSection props:', props); // Debug log
 </script>
 
 <style scoped>

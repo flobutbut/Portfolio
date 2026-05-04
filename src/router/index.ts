@@ -27,13 +27,10 @@ const router = createRouter({
     path: '/realization/:id', 
     component: RealizationDetail,
     name: 'realization',
-    props: route => {
-      console.log('Route params:', route.params);
-      return {
-        returnRoute: route.query.from || 'realizations',
-        projectId: route.params.id
-      };
-    },
+    props: route => ({
+      returnRoute: route.query.from || 'realizations',
+      projectId: route.params.id
+    }),
     meta: { layout: 'blank' } 
    },
    {
