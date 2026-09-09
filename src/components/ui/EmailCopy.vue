@@ -1,14 +1,23 @@
 <template>
-  <div class="email-copy">
-    <div class="email-input md-regular" :class="{ 'is-copied': isCopied }">{{ email }}</div>
-    <button class="copy-button" @click="copyEmail">
-      <span class="md-regular">Copier</span>
+  <div class="email-copy" :class="{ 'is-copied': isCopied }">
+    <a :href="`mailto:${email}`" class="email-copy__value md-regular">{{ email }}</a>
+    <button
+      type="button"
+      class="email-copy__button"
+      :aria-label="isCopied ? 'Adresse copiée' : `Copier l'adresse ${email}`"
+      @click="copyEmail"
+    >
+      <span class="email-copy__button-label" aria-live="polite">
+        {{ isCopied ? 'Copié' : 'Copier' }}
+      </span>
+      <CheckIcon v-if="isCopied" class="email-copy__check" />
     </button>
   </div>
 </template>
 
 <script setup lang="ts">
-import { ref } from 'vue'
+import { ref, onUnmounted } from 'vue'
+import CheckIcon from '../icons/CheckIcon.vue'
 
 interface Props {
   email: string
@@ -16,97 +25,89 @@ interface Props {
 
 const props = defineProps<Props>()
 const isCopied = ref(false)
+let timer: ReturnType<typeof setTimeout> | null = null
 
 const copyEmail = async () => {
   try {
     await navigator.clipboard.writeText(props.email)
     isCopied.value = true
-    setTimeout(() => {
+    if (timer) clearTimeout(timer)
+    timer = setTimeout(() => {
       isCopied.value = false
-    }, 1000)
-  } catch (err) {
-    console.error('Failed to copy email:', err)
+    }, 1800)
+  } catch (error) {
+    console.error("Impossible de copier l'adresse :", error)
   }
 }
+
+onUnmounted(() => {
+  if (timer) clearTimeout(timer)
+})
 </script>
 
 <style scoped>
 .email-copy {
   display: flex;
-  align-items: center;
+  align-items: stretch;
   background-color: var(--surface-medium);
+  border: 1px solid var(--border-medium);
   border-radius: var(--radius-sm);
   overflow: hidden;
+  transition: border-color var(--duration-fast) var(--ease-out);
 }
 
-.email-input {
+.email-copy.is-copied {
+  border-color: var(--highlight-default);
+}
+
+.email-copy__value {
   flex: 1;
-  padding: var(--space-md) calc(var(--space-md) * 2);
-  color: var(--text-medium);
-}
-
-.copy-button {
   display: flex;
   align-items: center;
-  gap: var(--space-md);
-  padding: var(--space-md) calc(var(--space-md) * 4);
-  background-color: var(--highlight-default);
-  border: none;
-  color: var(--text-front);
-  cursor: pointer;
-  transition: background-color 0.2s ease;
+  min-width: 0;
+  padding: var(--space-1) var(--space-2);
+  color: var(--text-medium);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
-.copy-button:hover {
+.email-copy__value:hover {
+  color: var(--text-front);
+}
+
+.email-copy__button {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-1);
+  min-height: 44px;
+  min-width: 108px;
+  justify-content: center;
+  padding: var(--space-1) var(--space-3);
+  background-color: var(--highlight-default);
+  color: var(--text-front);
+  font-weight: 500;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.email-copy__button:hover {
   background-color: var(--highlight-hover);
 }
 
-
-.email-input.is-copied {
-  position: relative;
+.email-copy__check {
+  width: 18px;
+  height: 18px;
 }
 
-.email-input.is-copied::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background-color: var(--highlight-default);
-  opacity: 0.2;
-  animation: highlight 1s ease-out forwards;
-}
-
-@keyframes highlight {
-  0% {
-    opacity: 0.4;
-  }
-  100% {
-    opacity: 0;
-  }
-}
-
-
-/* Mobile */
-@media (max-width: 512px) {
+@media (max-width: 640px) {
   .email-copy {
     flex-direction: column;
-    align-items: stretch;
-    background-color: transparent;
   }
 
-  .email-input {
-    background-color: var(--surface-back);
-    text-align: center;
-    border-radius: var(--radius-sm);
-    padding: calc(var(--space-md) * 2) calc(var(--space-md) * 2);
-  }
-  .email-input.is-copied::after {
-    border-radius: var(--radius-sm);
-  }
-
-  .copy-button {
-    margin-top: var(--space-md);
+  .email-copy__value {
     justify-content: center;
-    border-radius: var(--radius-sm);
+    padding-block: var(--space-2);
   }
 }
 </style>

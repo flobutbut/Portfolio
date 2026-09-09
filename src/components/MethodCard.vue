@@ -1,42 +1,43 @@
 <template>
-  <div class="method-card">
-    <div class="method-icon">
+  <article class="method-card">
+    <div class="method-card__icon" aria-hidden="true">
       <slot name="icon"></slot>
     </div>
-    <h5 class="h5">{{ title }}</h5>
+    <h3 class="h5">{{ title }}</h3>
     <p class="md-regular">{{ description }}</p>
-  </div>
+  </article>
 </template>
 
 <script setup lang="ts">
 interface Props {
-  title: string;
-  description: string;
+  title: string
+  description: string
 }
 
-defineProps<Props>();
+defineProps<Props>()
 </script>
 
 <style scoped>
 .method-card {
-  background-color: var(--surface-medium);
-  border-radius: var(--radius-md);
-  padding: calc(var(--space-md) * 3);
   display: flex;
   flex-direction: column;
-  gap: calc(var(--space-md) * 2);
+  gap: var(--space-2);
+  height: 100%;
+  padding: var(--space-3);
+  border-radius: var(--radius-md);
+  background-color: var(--surface-medium);
+  border: 1px solid var(--border-medium);
 }
 
-.method-icon {
+.method-card__icon {
+  margin-bottom: var(--space-1);
   color: var(--text-medium);
-  margin-bottom: var(--space-md);
-  width: 100%; /* Prend toute la largeur disponible */
-  height: auto; /* La hauteur s'adapte */
-  display: flex;
 }
 
-.method-card h5 {
-  color: var(--text-front);
+.method-card__icon :deep(svg) {
+  width: 100%;
+  max-width: 224px;
+  height: auto;
 }
 
 .method-card p {

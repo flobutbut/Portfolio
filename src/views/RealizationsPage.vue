@@ -1,124 +1,70 @@
-// Dans RealizationsPage.vue
-<script setup lang="ts">
-import { ref, onMounted } from "vue";
-import RealizationCard from "../components/RealizationCard.vue";
-import { ContentParser } from "../utils/markdownParser";
-
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  imageUrl: string;
-}
-
-const projects = ref<Project[]>([]);
-const parser = new ContentParser();
-
-onMounted(async () => {
-  try {
-    const modules = (await import.meta.glob("../content/projects/*.md", {
-      query: "?raw",
-      import: "default",
-      eager: true
-    })) as Record<string, string>;
-
-    const loadedProjects = Object.entries(modules).map(([_, content]) => {
-      const projectData = parser.parseForCard(content as string);
-      if (!projectData) return null;
-      return {
-        id: projectData.id,
-        title: projectData.title,
-        description: projectData.description,
-        imageUrl: projectData.cover || '',
-      };
-    }).filter(p => p !== null);
-
-    projects.value = loadedProjects;
-  } catch (error) {
-    console.error("Error loading projects:", error);
-  }
-});
-</script>
-
 <template>
-  <main class="realizations-page">
-    <header class="header">
-      <h1 class="h1">Réalisations</h1>
-      <p class="md-regular">
-        Découvrez mes derniers projets en tant que Product Designer
-      </p>
-    </header>
+  <main id="main" class="realizations">
+    <section class="realizations__hero section">
+      <div class="container">
+        <p class="eyebrow" v-reveal>Portfolio</p>
+        <h1 class="h1 realizations__title" v-reveal="{ delay: 80 }">Réalisations</h1>
+        <p class="lg-regular realizations__lead" v-reveal="{ delay: 160 }">
+          Une sélection de projets menés en tant que Product Designer : applications SaaS,
+          outils métier et design systems.
+        </p>
+      </div>
+    </section>
 
-    <div v-if="projects.length > 0" class="realizations-grid">
-      <RealizationCard
-        v-for="project in projects"
-        :key="project.id"
-        v-bind="project"
-      />
-    </div>
-    <p v-else>Chargement des projets...</p>
+    <section class="section realizations__list">
+      <div class="container">
+        <div class="realizations__grid">
+          <RealizationCard
+            v-for="(project, index) in projects"
+            :key="project.id"
+            :project="project"
+            v-reveal="{ delay: (index % 2) * 80 }"
+          />
+        </div>
+      </div>
+    </section>
+
+    <ContactSection />
   </main>
 </template>
 
-<style scoped>
-.realizations-page {
-  padding-left: 15%;
-  padding-right: 15%;
+<script setup lang="ts">
+import RealizationCard from '../components/RealizationCard.vue'
+import ContactSection from '../components/sections/ContactSection.vue'
+import { projects } from '../content'
+</script>
 
-  min-height: 100vh;
+<style scoped>
+.realizations__hero {
+  padding-top: clamp(48px, 10vw, 112px);
+  padding-bottom: clamp(24px, 4vw, 48px);
 }
 
-.header {
-  height: 70vh;
-  max-width: 800px;
+.realizations__hero .container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-
-  gap: var(--space-none);
+  gap: var(--space-2);
 }
 
-.header h1 {
-  color: var(--text-front);
-}
-
-.header p {
+.realizations__lead {
+  max-width: 56ch;
   color: var(--text-medium);
 }
 
-.realizations-grid {
+.realizations__list {
+  padding-top: var(--space-4);
+}
+
+.realizations__grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  gap: calc(var(--space-md) * 4);
-  padding-bottom: calc(var(--space-md) * 20);
-  margin: 0 auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-8) var(--space-4);
 }
 
-/* Tablettes */
-@media (max-width: 1024px) {
-  .realizations-page {
-    padding-left: 10%;
-    padding-right: 10%;
-    min-height: 100vh;
-  }
-  .realizations-grid {
-    padding-bottom: calc(var(--space-md) * 15);
-  }
-}
-
-/* Mobile */
-@media (max-width: 512px) {
-  .realizations-page {
-    padding-left: 6%;
-    padding-right: 6%;
-    min-height: 100vh;
-  }
-
-  .realizations-grid {
+@media (max-width: 640px) {
+  .realizations__grid {
     grid-template-columns: 1fr;
-
-
-    padding-bottom: calc(var(--space-md) * 15);
+    gap: var(--space-6);
   }
 }
 </style>

@@ -1,10 +1,8 @@
 <template>
-  <div class="skill-item">
-    <div class="skill-icon">
-      <CircleCheckIcon />
-    </div>
-    <p class="md-regular">{{ text }}</p>
-  </div>
+  <li class="skill-item">
+    <CircleCheckIcon class="skill-item__icon" />
+    <span class="md-regular">{{ text }}</span>
+  </li>
 </template>
 
 <script setup lang="ts">
@@ -21,18 +19,16 @@ defineProps<Props>()
 .skill-item {
   display: flex;
   align-items: center;
-  gap: calc(var(--space-md) );
-  padding: calc(var(--space-md) * 1.5) 0;
+  gap: var(--space-2);
+  padding: var(--space-2) 0;
   border-bottom: 1px solid var(--border-medium);
-}
-
-.skill-icon {
-  color: var(--text-medium);
-  display: flex;
-  align-items: center;
-}
-
-.skill-item p {
   color: var(--text-front);
+}
+
+.skill-item__icon {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  color: var(--highlight-default);
 }
 </style>

@@ -1,123 +1,86 @@
 <template>
-  <section class="showcase-section">
-    <div class="showcase-container">
-      <div class="project-showcase">
-        <div class="project-text">
-          <p class="md-regular">
-            Je crée des applications web et mobiles qui ne sont pas seulement
-            agréables visuellement, mais aussi intelligentes, évolutives et
-            fonctionnelles.
-          </p>
-        </div>
-        <div class="project-image-container">
-          <div class="project-image">
-            <img
-              src="../../assets/Visuels/LeCedre.png"
-              alt="Application Connor Corp"
-              class="rounded-image"
-            />
-          </div>
-        </div>
+  <section class="showcase section">
+    <div class="container">
+      <div class="showcase__panel" v-reveal>
+        <p class="lg-regular showcase__text">
+          Je crée des applications web et mobiles qui ne sont pas seulement agréables
+          visuellement, mais aussi intelligentes, évolutives et fonctionnelles.
+        </p>
+
+        <router-link
+          :to="{ name: 'realization', params: { id: 'le-cedre' } }"
+          class="showcase__media"
+          aria-label="Voir le projet Le Cèdre"
+        >
+          <img
+            src="/assets/projects/lecedre/Contrat.webp"
+            alt="Interface de gestion de contrats conçue pour Le Cèdre"
+            width="1440"
+            height="900"
+            decoding="async"
+          />
+        </router-link>
       </div>
     </div>
   </section>
 </template>
 
 <style scoped>
-.showcase-section {
-  background-color: var(--surface-back);
-
-  padding-top: calc(var(--space-md) * 10);
-  padding-bottom: calc(var(--space-md) * 10);
-
-  padding-left: 15%;
-  padding-right: var(--space-none);
+.showcase {
+  /* la visuel déborde du panneau vers le bas : on réserve l'espace */
+  --overlap: clamp(48px, 10vw, 120px);
+  padding-bottom: calc(var(--section-py) + var(--overlap));
 }
 
-.showcase-container {
+.showcase__panel {
   position: relative;
-  width: 100%;
-}
-
-.project-showcase {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16/9;
-  background-color: var(--highlight-default);
-  border-radius: var(--radius-lg) 0 0 var(--radius-lg);
-
-  padding: calc(var(--space-md) * 10) calc(var(--space-md) * 10);
-  gap: calc(var(--space-md) * 6);
-
   display: flex;
   flex-direction: column;
-  overflow: visible;
+  gap: clamp(28px, 5vw, 56px);
+  padding: clamp(28px, 6vw, 80px);
+  padding-bottom: 0;
+  border-radius: var(--radius-lg);
+  background-color: var(--highlight-default);
+  color: var(--text-front);
 }
 
-.project-text {
-  width: 70%;
+.showcase__text {
+  max-width: 34ch;
+  font-weight: 500;
+  color: var(--text-front);
 }
 
-.project-image {
-  position: absolute;
-  width: calc(100% - calc(var(--space-md) * 20));
-  aspect-ratio: 16/9;
+.showcase__media {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  margin-bottom: calc(var(--overlap) * -1);
+  overflow: hidden;
+  border-radius: var(--radius-md);
+  background-color: var(--surface-medium);
+  box-shadow: 0 24px 64px rgba(0, 0, 0, 0.35);
+  transition: transform var(--duration-slow) var(--ease-out);
 }
 
-.rounded-image {
+.showcase__media:hover {
+  transform: translateY(-4px);
+}
+
+.showcase__media img {
   width: 100%;
   height: 100%;
-  border-radius: var(--radius-sm);
   object-fit: cover;
   object-position: top;
 }
 
-/* Tablettes */
-@media (max-width: 1024px) {
-  .showcase-section {
-    padding-top: calc(var(--space-md) * 10);
-    padding-bottom: calc(var(--space-md) * 20);
-
-    padding-left: 10%;
-    padding-right: var(--space-none);
+@media (max-width: 640px) {
+  .showcase__panel {
+    border-radius: var(--radius-md);
   }
 
-  .project-text {
-    width: 80%;
-  }
-  .project-showcase {
-    padding: calc(var(--space-md) * 6) calc(var(--space-md) * 6);
-    gap: calc(var(--space-md) * 4);
-  }
-  .project-image {
-    width: calc(100% - calc(var(--space-md) * 12));
-  }
-}
-
-/* Mobile */
-@media (max-width: 512px) {
-  .showcase-section {
-    padding-top: calc(var(--space-md) * 4);
-    padding-bottom: calc(var(--space-md) * 20);
-    padding-left: calc(var(--space-md) * 3);
-    padding-right: var(--space-none);
-  }
-
-  .project-showcase {
-    padding: calc(var(--space-md) * 3);
-    gap: calc(var(--space-md) * 3);
-    height: 520px;
-    aspect-ratio: unset;
-  }
-
-  .project-image {
-    width: 85%;
-    height: 65%;
-    aspect-ratio: unset;
-  }
-
-  .project-text {
-    width: 100%;
+  .showcase__media {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-sm);
   }
 }
 </style>

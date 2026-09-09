@@ -1,27 +1,27 @@
 <template>
-  <section class="contact-section">
-    <div class="contact-card">
-      <div class="contact-content">
-        <h3 class="h3">Mon profil vous intéresse ?</h3>
-        <p class="md-regular">
-          Contactez moi pour un premier échange et discuter de votre vision
-          produit afin d'explorer ensemble comment mon expertise en design
-          contribuera à la réussite de vos projets.
-        </p>
+  <section class="contact section" id="contact">
+    <div class="container">
+      <div class="contact__card" v-reveal>
+        <div class="contact__content">
+          <p class="eyebrow">Contact</p>
+          <h2 class="h2">Mon profil vous intéresse ?</h2>
+          <p class="md-regular">
+            Contactez-moi pour un premier échange autour de votre vision produit. Nous
+            explorerons ensemble comment mon expertise en design peut contribuer à la réussite
+            de vos projets.
+          </p>
+        </div>
 
-        <div class="contact-actions">
+        <div class="contact__actions">
           <EmailCopy email="hello@florianbutour.com" />
-
           <a
             href="https://www.linkedin.com/in/florianbutour/"
             target="_blank"
             rel="noopener"
-            class="linkedin-link md-regular"
+            class="contact__linkedin md-regular"
           >
-            <div class="linkedin-icon">
-              <LinkedinIcon />
-            </div>
-            Linkedin
+            <LinkedinIcon />
+            <span>Me retrouver sur LinkedIn</span>
           </a>
         </div>
       </div>
@@ -30,91 +30,56 @@
 </template>
 
 <script setup lang="ts">
-import EmailCopy from "../ui/EmailCopy.vue";
-import LinkedinIcon from "../icons/LinkedinIcon.vue";
+import EmailCopy from '../ui/EmailCopy.vue'
+import LinkedinIcon from '../icons/LinkedinIcon.vue'
 </script>
 
 <style scoped>
-.contact-section {
-  background-color: var(--surface-back);
-  padding-top: calc(var(--space-md) * 10);
-  padding-bottom: calc(var(--space-md) * 10);
-  padding-left: var(--section-pad-x);
-  padding-right: var(--section-pad-x);
+.contact__card {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(280px, 1fr);
+  gap: var(--space-6);
+  align-items: center;
+  padding: clamp(28px, 5vw, 56px);
+  border-radius: var(--radius-lg);
+  background-color: var(--surface-medium);
+  border: 1px solid var(--border-medium);
 }
 
-.contact-card {
-  width: 100%;
-}
-
-.contact-content {
-  max-width: 600px;
+.contact__content {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--space-md) * 2);
+  gap: var(--space-2);
+  max-width: 560px;
 }
 
-.contact-content h3 {
-  color: var(--text-front);
-}
-
-.contact-content p {
+.contact__content p:not(.eyebrow) {
   color: var(--text-medium);
 }
 
-.contact-actions {
+.contact__actions {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--space-md) * 2);
+  gap: var(--space-2);
 }
 
-.linkedin-link {
-  display: flex;
+.contact__linkedin {
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-md);
+  gap: var(--space-1);
+  width: fit-content;
   color: var(--text-medium);
-  text-decoration: none;
-  transition: color 0.2s ease;
+  transition: color var(--duration-fast) var(--ease-out);
 }
 
-.linkedin-link:hover {
+.contact__linkedin:hover {
   color: var(--text-front);
 }
 
-.linkedin-icon {
-  display: flex;
-  align-items: center;
-}
-
-/* Tablettes */
 @media (max-width: 1024px) {
-  .contact-section {
-    padding-top: calc(var(--space-md) * 10);
-    padding-bottom: calc(var(--space-md) * 10);
-    padding-left: var(--section-pad-x-tablet);
-    padding-right: var(--section-pad-x-tablet);
-  }
-
-  .contact-content {
-    max-width: 600px;
-    gap: calc(var(--space-md) * 3);
-  }
-}
-
-/* Mobile */
-@media (max-width: 512px) {
-  .contact-section {
-    padding-top: calc(var(--space-md) * 20);
-    padding-right: var(--section-pad-x-mobile);
-    padding-left: var(--section-pad-x-mobile);
-  }
-
-  .contact-content {
-    gap: calc(var(--space-md) * 2);
-  }
-
-  .contact-actions {
-    gap: calc(var(--space-md) * 2);
+  .contact__card {
+    grid-template-columns: 1fr;
+    gap: var(--space-4);
   }
 }
 </style>

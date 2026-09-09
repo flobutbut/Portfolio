@@ -48,7 +48,8 @@ vite.config.ts.timestamp-*.mjs
 *.map
 *.js.map
 
-# Generated JavaScript files from TypeScript
-*.js
-!vite.config.js
-!eslint.config.jsnode_modules/.yarn-integrity
+# Artefacts vue-tsc générés par erreur à côté des .vue
+src/**/*.vue.js
+src/**/*.vue.js.map
+node_modules/.yarn-integrity
+

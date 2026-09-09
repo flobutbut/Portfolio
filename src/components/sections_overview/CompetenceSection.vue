@@ -1,242 +1,111 @@
 <template>
-  <div class="competence-section">
-    <h3 class="h3">Compétences</h3>
-    <p class="subtitle md-regular">
-      J'identifie les problèmes, conçois des solutions et optimise les
-      performances grâce à mon expertise en conception et stratégie UX/UI.
-    </p>
+  <section class="competences section">
+    <div class="container">
+      <header class="section-header" v-reveal>
+        <p class="eyebrow">Savoir-faire</p>
+        <h2 class="h2">Compétences</h2>
+        <p class="md-regular">
+          J'identifie les problèmes, conçois des solutions et optimise les performances grâce
+          à mon expertise en conception et stratégie UX/UI.
+        </p>
+      </header>
 
-    <div class="competence-container">
-      <div class="skills-list">
-        <SkillItem 
-          v-for="(skill, index) in technicalSkills" 
-          :key="skill" 
-          :text="skill"
-          class="skill-fade"
-          :style="{ '--delay': `${index * 100}ms` }"
-          :ref="(el) => { if (el) technicalSkillRefs[index] = el }"
+      <div class="competences__grid">
+        <div
+          v-for="group in skillGroups"
+          :key="group.title"
+          class="competences__group"
+          v-reveal
         >
-          <template #icon>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle
-                cx="12"
-                cy="12"
-                r="4"
-                stroke="currentColor"
-                stroke-width="2"
-              />
-            </svg>
-          </template>
-        </SkillItem>
-      </div>
-
-      <div class="skills-list">
-        <SkillItem 
-          v-for="(skill, index) in softSkills" 
-          :key="skill" 
-          :text="skill"
-          class="skill-fade"
-          :style="{ '--delay': `${(index + technicalSkills.length) * 100}ms` }"
-          :ref="(el) => { if (el) softSkillRefs[index] = el }"
-        >
-          <template #icon>
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-              <circle
-                cx="12"
-                cy="12"
-                r="4"
-                stroke="currentColor"
-                stroke-width="2"
-              />
-            </svg>
-          </template>
-        </SkillItem>
+          <h3 class="h4 competences__group-title">{{ group.title }}</h3>
+          <ul class="competences__list">
+            <SkillItem
+              v-for="(skill, index) in group.skills"
+              :key="skill"
+              :text="skill"
+              v-reveal="{ delay: Math.min(index, 8) * 50 }"
+            />
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
+  </section>
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted, onBeforeUnmount } from 'vue'
-import SkillItem from "../SkillItem.vue"
+import SkillItem from '../SkillItem.vue'
 
-const technicalSkills = [
-  "Audit d'interface",
-  "Recherche utilisateurs",
-  "Design de service",
-  "Design system",
-  "Branding d'interface",
-  "Mapping d'interface",
-  "Stratégie produit",
-  "Amélioration continue",
-  "Roadmap produit",
-  "Prototypage",
-  "Outils d'analyse",
-  "Gestion agile",
-  "Accessibilité",
-  "Gestion de projet",
+const skillGroups = [
+  {
+    title: 'Expertises',
+    skills: [
+      "Audit d'interface",
+      'Recherche utilisateur',
+      'Design de service',
+      'Design system',
+      "Branding d'interface",
+      "Mapping d'interface",
+      'Stratégie produit',
+      'Roadmap produit',
+      'Amélioration continue',
+      'Prototypage',
+      "Outils d'analyse",
+      'Accessibilité',
+      'Gestion de projet',
+      'Gestion agile',
+    ],
+  },
+  {
+    title: 'Savoir-être',
+    skills: [
+      'Esprit critique et analytique',
+      'Collaboration interdisciplinaire',
+      'Communication claire et persuasive',
+      'Empathie utilisateur',
+      'Prise de décision stratégique',
+      'Résolution de problèmes complexes',
+      'Adaptabilité face au changement',
+      'Organisation et gestion des priorités',
+      'Gestion des compétences',
+    ],
+  },
 ]
-
-const softSkills = [
-  "Esprit critique et analytique",
-  "Collaboration interdisciplinaire",
-  "Communication claire et persuasive",
-  "Empathie utilisateur",
-  "Prise de décision stratégique",
-  "Résolution de problèmes complexes",
-  "Adaptabilité face au changement",
-  "Organisation et gestion des priorités",
-  "Gestion de compétences",
-]
-
-const technicalSkillRefs = ref<any[]>([])
-const softSkillRefs = ref<any[]>([])
-let observer: IntersectionObserver | null = null
-
-const animateSequentially = (elements: Element[], entering: boolean) => {
-  elements.forEach((element, index) => {
-    const el = element as HTMLElement
-    if (entering) el.style.willChange = 'opacity, transform'
-    setTimeout(() => {
-      if (entering) {
-        el.classList.add('visible')
-      } else {
-        el.classList.remove('visible')
-        el.style.willChange = ''
-      }
-      if (entering && index === elements.length - 1) {
-        setTimeout(() => { el.style.willChange = '' }, 600)
-      }
-    }, index * 100)
-  })
-}
-
-onMounted(() => {
-  observer = new IntersectionObserver((entries) => {
-    // Regrouper les entrées par direction (entrante ou sortante)
-    const entering = entries.filter(entry => entry.isIntersecting)
-    const exiting = entries.filter(entry => !entry.isIntersecting)
-
-    // Trier les éléments par position verticale
-    const sortByPosition = (a: IntersectionObserverEntry, b: IntersectionObserverEntry) => {
-      const rectA = a.boundingClientRect
-      const rectB = b.boundingClientRect
-      return rectA.top - rectB.top
-    }
-
-    // Animer les entrées
-    if (entering.length) {
-      const sortedEntering = entering.sort(sortByPosition)
-      animateSequentially(sortedEntering.map(entry => entry.target), true)
-    }
-
-    // Animer les sorties
-    if (exiting.length) {
-      const sortedExiting = exiting.sort(sortByPosition)
-      animateSequentially(sortedExiting.map(entry => entry.target), false)
-    }
-  }, {
-    threshold: 0.1,
-    rootMargin: '50px'
-  })
-
-  // Observer tous les éléments
-  const allSkillElements = [...technicalSkillRefs.value, ...softSkillRefs.value]
-  allSkillElements.forEach(el => {
-    if (el.$el) observer?.observe(el.$el)
-  })
-})
-
-onBeforeUnmount(() => {
-  if (observer) {
-    observer.disconnect()
-  }
-})
 </script>
 
 <style scoped>
-.competence-section {
-  color: var(--text-front);
+.competences__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-8);
+}
+
+.competences__group {
   display: flex;
   flex-direction: column;
-  padding-top: calc(var(--space-md) * 10);
-  padding-bottom: calc(var(--space-md) * 10);
-
-  padding-left: var(--section-pad-x);
-  padding-right: var(--space-none);
+  gap: var(--space-2);
 }
 
-.subtitle {
-  color: var(--text-medium);
-  margin-bottom: calc(var(--space-md) * 2);
-  max-width: 600px;
+.competences__group-title {
+  padding-bottom: var(--space-1);
+  border-bottom: 2px solid var(--highlight-default);
+  width: fit-content;
 }
 
-.competence-section h3 {
-  margin-bottom: calc(var(--space-md) * 0);
-}
-
-.competence-container {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--space-md) * 8);
-}
-
-.skills-list {
-  flex: 1;
+.competences__list {
   display: flex;
   flex-direction: column;
 }
 
-/* Animation styles */
-.skill-fade {
-  opacity: 0;
-  transform: translateY(40px);
-  transition: opacity 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.skill-fade.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Tablettes */
 @media (max-width: 1024px) {
-  .competence-section {
-    padding-top: calc(var(--space-md) * 10);
-    padding-bottom: calc(var(--space-md) * 10);
-    
-    padding-left: var(--section-pad-x-tablet);
-    padding-right: var(--space-none);
-  }
-
-  .competence-container {
-    gap: calc(var(--space-md) * 6);
-  }
-
-  .subtitle {
-    max-width: 600px;
-    margin-right: 10%;
+  .competences__grid {
+    gap: var(--space-6);
   }
 }
 
-/* Mobile */
-@media (max-width: 512px) {
-  .competence-section {
-    padding-top: calc(var(--space-md) * 4);
-    padding-bottom: calc(var(--space-md) * 4);
-    padding-left: var(--section-pad-x-mobile);
-    padding-right: var(--space-none);
-  }
-
-  .competence-container {
-    flex-direction: column;
-    gap: calc(var(--space-md) * 4);
-  }
-
-  .subtitle {
-    max-width: 100%;
-    margin-bottom: calc(var(--space-md) * 4);
+@media (max-width: 640px) {
+  .competences__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-5);
   }
 }
 </style>

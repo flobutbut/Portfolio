@@ -1,116 +1,39 @@
 <template>
-  <section class="experience-section">
-    <h3 class="h3">Expériences professionnelles</h3>
-    <p class="subtitle md-regular">Plus de 10 ans d'expérience en conception de produits</p>
+  <section class="experiences section">
+    <div class="container">
+      <header class="section-header" v-reveal>
+        <p class="eyebrow">Parcours</p>
+        <h2 class="h2">Expériences professionnelles</h2>
+        <p class="md-regular">Plus de 10 ans d'expérience en conception de produits numériques.</p>
+      </header>
 
-    <div class="experience-grid">
-      <template v-if="experiences.length > 0">
+      <div class="experiences__grid">
         <ExperienceCard
-          v-for="experience in experiences"
+          v-for="(experience, index) in experiences"
           :key="experience.id"
-          v-bind="experience"
+          :experience="experience"
+          v-reveal="{ delay: index * 100 }"
         />
-      </template>
-      <p v-else>Chargement des expériences...</p>
+      </div>
     </div>
   </section>
 </template>
 
-<script setup lang="ts">  
-import { ref, onMounted } from "vue";
-import ExperienceCard from "../ExperienceCard.vue";
-import { ContentParser } from "../../utils/markdownParser";
-
-const experiences = ref<any[]>([]);
-const parser = new ContentParser();
-onMounted(async () => {
-  try {
-    const modules = import.meta.glob('../../content/experience/exp-*.md', {
-      query: '?raw',
-      import: 'default',
-      eager: true
-    });
-
-    const loadedExperiences = Object.entries(modules).map(([_, content]) => {
-      const expData = parser.parseForCard(content as string);
-      if (!expData) return null;
-      return {
-        id: expData.id,
-        title: expData.title,
-        role: expData.role,
-        description: expData.description,
-      };
-    }).filter(e => e !== null);
-
-    experiences.value = loadedExperiences;
-  } catch (error) {
-    console.error('Error loading experiences:', error);
-  }
-});
+<script setup lang="ts">
+import ExperienceCard from '../ExperienceCard.vue'
+import { experiences } from '../../content'
 </script>
 
 <style scoped>
-.experience-section {
-  display: flex;
-  flex-direction: column;
-
-  padding-top: calc(var(--space-md) * 10);
-  padding-bottom: calc(var(--space-md) * 10);
-
-  padding-right: var(--section-pad-x);
-  padding-left: var(--section-pad-x);
-}
-
-.subtitle {
-  color: var(--text-medium);
-  max-width: 700px;
-  margin-bottom: calc(var(--space-md) * 4);
-}
-
-.experience-grid {
+.experiences__grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: calc(var(--space-md) * 2);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-2);
 }
 
-/* Tablettes */
-@media (max-width: 1024px) {
-  .experience-section {
-    padding-top: calc(var(--space-md) * 10);
-    padding-bottom: calc(var(--space-md) * 10);
-
-    padding-left: var(--section-pad-x-tablet);
-    padding-right: var(--section-pad-x-tablet);
-  }
-
-  .experience-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: calc(var(--space-md) * 2);
-  }
-
-  .subtitle {
-    max-width: 600px;
-  }
-}
-
-/* Mobile */
-@media (max-width: 512px) {
-  .experience-section {
-    padding-top: calc(var(--space-md) * 10);
-    padding-bottom: calc(var(--space-md) * 10);
-
-    padding-left: var(--section-pad-x-mobile);
-    padding-right: var(--section-pad-x-mobile);
-  }
-
-  .experience-grid {
+@media (max-width: 640px) {
+  .experiences__grid {
     grid-template-columns: 1fr;
-    gap: calc(var(--space-md) * 2);
-    margin-top: var(--space-none);
-  }
-
-  .subtitle {
-    max-width: 100%;
   }
 }
 </style>

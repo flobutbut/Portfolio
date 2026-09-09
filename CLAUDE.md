@@ -5,11 +5,11 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 ## Commands
 
 ```sh
-yarn dev          # Start dev server at localhost:5180 (port dédié, voir vite.config)
-yarn build        # Type-check + build to ./dist
+yarn dev          # Start dev server at localhost:5180 (dedicated port, see vite.config.ts)
+yarn build        # Type-check (vue-tsc) + build to ./dist
 yarn preview      # Preview production build
 yarn type-check   # Run vue-tsc without emitting
-yarn lint         # Run ESLint with auto-fix
+yarn lint         # Run ESLint 9 (flat config, eslint.config.ts) with auto-fix
 yarn format       # Run Prettier on src/
 ```
 
@@ -17,59 +17,67 @@ There are no tests in this project.
 
 ## Architecture
 
-This is a Vue 3 + TypeScript portfolio site built with Vite. Deployed to GitHub Pages via `.github/workflow/deploy.yml` on pushes to `main`.
+Vue 3 + TypeScript portfolio built with Vite. Deployed to GitHub Pages via `.github/workflows/deploy.yml` on pushes to `main` (the workflow copies `index.html` to `404.html` so deep links work with history mode).
 
 ### Routing (`src/router/index.ts`)
 
-Four routes: `/` (OverviewPage), `/realizations` (RealizationsPage), `/contact` (ContactPage), `/realization/:id` (RealizationDetail). The detail route uses `meta: { layout: 'blank' }` which strips the NavBar/Footer in `App.vue`.
+| Path | View | Notes |
+|---|---|---|
+| `/` | `OverviewPage` | |
+| `/realizations` | `RealizationsPage` | grid of projects |
+| `/contact` | `ContactPage` | |
+| `/realization/:id` | `RealizationDetail` | `collection: 'projects'`, `meta.layout: 'blank'` |
+| `/experience/:id` | `RealizationDetail` | `collection: 'experiences'`, `meta.layout: 'blank'` |
 
-### Content system
+`layout: 'blank'` strips the NavBar/Footer in `App.vue`. Every route sets `document.title` via `meta.title` (detail pages set it from the entry).
 
-Projects and experience articles live in `src/content/` as Markdown files with a custom format:
+### Content system (`src/content/`)
 
-1. **YAML frontmatter** — `type`, `id`, `metadata` (title, description, cover image)
-2. **Section blocks** — `## @componentName` headers followed by YAML data
+Content is **typed TypeScript, not Markdown files**. Each project or experience is one module exporting `defineProject({...})` or `defineExperience({...})` from `src/content/types.ts`.
 
-`ContentParser` in `src/utils/markdownParser.ts` handles two modes:
-- `parseForCard()` — extracts frontmatter only (used for grid/card views)
-- `parseContent()` — parses frontmatter + all `## @component` sections into a `{ metadata, sections[] }` structure
+- `src/content/types.ts` — `Project`, `Experience`, the `Section` discriminated union and the section helpers.
+- `src/content/index.ts` — registry. Uses `import.meta.glob` on `./projects/*.ts` and `./experiences/*.ts`, sorts by `order`, throws on duplicate `id`. Exposes `projects`, `experiences`, `getProject(id)`, `getExperience(id)`.
+- `src/content/projects/*.ts`, `src/content/experiences/*.ts` — the entries.
 
-`RealizationsPage.vue` uses `import.meta.glob("../content/projects/*.md")` to load all project files eagerly.
+Section helpers (all return a `Section`):
 
-`RealizationDetail.vue` maps section component names to actual Vue components via `SECTION_COMPONENTS` and renders them dynamically with `<component :is="...">`.
+| Helper | Renders | Notes |
+|---|---|---|
+| `gallery([...])` | `GallerySection` | horizontal scroll-snap carousel; strings or `{ src, alt }` |
+| `columns({ Title: ['a', 'b'] })` | `ColumnsSection` | any number of columns |
+| `article(title, body)` | `ArticleSection` | `body` is Markdown; every heading level renders as `<h3>` |
+| `quote(text, author?)` | `QuoteSection` | |
+| `image(src, { alt, ratio?, parallax? })` | `ImageSection` | `ratio` like `'16/10'`; `parallax: true` enables scroll parallax |
 
-### Available section components for content files
+The hero of a detail page is not a section: it is rendered by `RealizationHero` from the entry's `headline`, `client` (projects) or `company/role/duration` (experiences), `tags` and `status`. `status: 'wip'` shows an "en cours de rédaction" badge on the card and the hero.
 
-| Key in `## @key` | Component |
-|---|---|
-| `hero` | `RealizationHero` |
-| `carousel` | `HorizontalCarousel` |
-| `article` | `ArticleSection` |
-| `columns` | `ColumnsSection` |
-| `singleImage` | `SingleImageSection` |
-| `parallaxImage` | `ParallaxImageSection` |
-| `quote` | `CoteSection` |
+Markdown in article bodies is rendered by `src/utils/markdown.ts` (markdown-it, `html: false`). Internal links (`/realization/...`) are intercepted by `ArticleSection` and routed client-side.
 
 ### Component layout
 
-- `src/components/sections/` — shared across pages (NavBar, Footer, ContactSection)
+- `src/components/sections/` — shared across pages: `AppNavBar`, `AppFooter`, `ContactSection`
 - `src/components/sections_overview/` — sections composing `OverviewPage`
-- `srctml/components/sections_realization/` — sections composing `RealizationDetail`
-- `src/components/` — reusable cards (ExperienceCard, RealizationCard, MethodCard, SkillItem)
+- `src/components/sections_realization/` — sections composing `RealizationDetail` (`RealizationHero`, `GallerySection`, `ArticleSection`, `ColumnsSection`, `ImageSection`, `QuoteSection`)
+- `src/components/` — cards (`ExperienceCard`, `RealizationCard`, `MethodCard`, `SkillItem`)
+- `src/components/ui/` — `AppButton` (renders `router-link`, `a` or `button` depending on `to`/`href`), `EmailCopy`
+- `src/components/icons/` — SVG icon components
+- `src/directives/reveal.ts` — `v-reveal` / `v-reveal="{ delay }"`: fade-up on first intersection, respects `prefers-reduced-motion`
+- `src/composables/` — `useBreakpoint(maxWidth)` (matchMedia), `useReducedMotion()`
 
-### Styling
+### Styling (`src/assets/styles/global.css`)
 
-Global design tokens are defined as CSS custom properties in `src/assets/styles/global.css`:
-- Colors: `--text-front`, `--text-medium`, `--surface-back`, `--surface-medium`, `--surface-bright`, `--highlight-default`, `--highlight-hover`, `--border-medium`
-- Spacing: `--space-none` (0px), `--space-md` (8px) — compound spacing uses `calc(var(--space-md) * N)`
-- Border radius: `--radius-sm`, `--radius-md`, `--radius-lg`
-- Font: Inter (loaded from local `/fonts/` via `@font-face`)
-- Breakpoints: tablet `max-width: 1024px`, mobile `max-width: 512px`
+Design tokens as CSS custom properties: colors (`--text-front`, `--text-medium`, `--text-muted`, `--surface-back`, `--surface-medium`, `--highlight-default`, `--highlight-hover`, `--border-medium`, …), spacing scale (`--space-1` = 8px … `--space-12` = 96px), radii, motion (`--ease-out`, `--duration-*`), fluid type sizes (`--fs-display`, `--fs-h2`, …).
+
+Layout helpers: `.section` (vertical rhythm `--section-py` + horizontal `--inset`), `.container` (`--content-max` = 1120px), `.section-header`, `.prose-column` (right-offset reading column on detail pages), `.prose` (Markdown output), `.eyebrow`.
+
+Font: Inter from Google Fonts (`index.html`, includes italic 600/700 for headings).
+
+Breakpoints (use these literal values): **mobile `max-width: 640px`**, **tablet `max-width: 1024px`**. `BREAKPOINTS` in `useBreakpoint.ts` mirrors them.
 
 The `@` alias resolves to `src/`.
 
 ### Adding a new project
 
-1. Create `src/content/projects/<id>.md` with frontmatter and `## @section` blocks
-2. Add project images to `public/assets/projects/<id>/`
-3. The file is auto-discovered via `import.meta.glob` — no registration needed
+1. Create `src/content/projects/<id>.ts` with `defineProject({ id, order, title, client, headline, description, cover, tags, sections: [...] })`
+2. Add images to `public/assets/projects/<id>/` and reference them as `/assets/projects/<id>/file.webp`
+3. Nothing to register: the file is auto-discovered. `yarn type-check` catches typos in section helpers.

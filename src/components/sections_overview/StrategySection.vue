@@ -1,142 +1,133 @@
 <template>
-  <section class="strategy-section">
-    <div class="strategy-block">
-      <h3 class="h3">Vision & flexibilité</h3>
-      <div class="strategy-grid">
-        <div class="strategy-item">
-          <h4 class="md-bold">Environnement agile</h4>
-          <p class="md-regular">
-            Chaque itération de sprint est une opportunité d'ajuster, tester et livrer des solutions alignées sur les objectifs stratégiques et les besoins des utilisateurs.
-          </p>
-        </div>
-        <div class="strategy-item">
-          <h4 class="md-bold">Stratégie produit</h4>
-          <p class="md-regular">
-            J'intègre la vision stratégique et les objectifs business dans la roadmap design afin d'assurer une évolution cohérente et alignée avec votre entreprise.
-          </p>
-        </div>
-      </div>
-    </div>
+  <section class="strategy section">
+    <div class="container">
+      <header class="section-header" v-reveal>
+        <p class="eyebrow">Approche</p>
+        <h2 class="h2">Une vision produit, de la stratégie à l'interface.</h2>
+      </header>
 
-    <div class="strategy-block">
-      <h3 class="h3">Écosystème & cohérence</h3>
-      <div class="strategy-grid">
-        <div class="strategy-item">
-          <h4 class="md-bold">Écosysteme produits</h4>
-          <p class="md-regular">
-            Je conçois des écosystèmes produits harmonieux, assurant une cohérence graphique et ergonomique, ainsi qu'une interopérabilité optimale pour une expérience utilisateur fluide et évolutive.
-          </p>
-        </div>
-        <div class="strategy-item">
-          <h4 class="md-bold">Design system</h4>
-          <p class="md-regular">
-            Je mets en place des Design Systems pour garantir une unité visuelle et ergonomique entre vos produits. J’optimise également les processus de conception et de développement afin de vous faire gagner du temps.
-          </p>
-        </div>
-      </div>
-    </div>
-
-    <div class="strategy-block">
-      <h3 class="h3">Optimisation & adaptation</h3>
-      <div class="strategy-grid">
-        <div class="strategy-item">
-          <h4 class="md-bold">Outils d’analyse</h4>
-          <p class="md-regular">
-            J’analyse les données utilisateurs pour extraire des insights pertinents qui orientent les décisions stratégiques et optimisent la performance des produits
-          </p>
-        </div>
-        <div class="strategy-item">
-          <h4 class="md-bold">Indicateurs de performance</h4>
-          <p class="md-regular">
-            J'intègre des KPIs pour évaluer l'efficacité des interfaces et ajuster les choix de conception en fonction des besoins réels des utilisateurs.
-          </p>
-        </div>
+      <div class="strategy__blocks">
+        <article
+          v-for="(block, index) in blocks"
+          :key="block.title"
+          class="strategy__block"
+          v-reveal="{ delay: index * 80 }"
+        >
+          <h3 class="h3 strategy__title">{{ block.title }}</h3>
+          <div class="strategy__grid">
+            <div v-for="item in block.items" :key="item.title" class="strategy__item">
+              <h4 class="md-bold">{{ item.title }}</h4>
+              <p class="md-regular">{{ item.text }}</p>
+            </div>
+          </div>
+        </article>
       </div>
     </div>
   </section>
 </template>
 
+<script setup lang="ts">
+const blocks = [
+  {
+    title: 'Vision & flexibilité',
+    items: [
+      {
+        title: 'Environnement agile',
+        text: "Chaque itération de sprint est une opportunité d'ajuster, tester et livrer des solutions alignées sur les objectifs stratégiques et les besoins des utilisateurs.",
+      },
+      {
+        title: 'Stratégie produit',
+        text: "J'intègre la vision stratégique et les objectifs business dans la roadmap design afin d'assurer une évolution cohérente et alignée avec votre entreprise.",
+      },
+    ],
+  },
+  {
+    title: 'Écosystème & cohérence',
+    items: [
+      {
+        title: 'Écosystème produits',
+        text: 'Je conçois des écosystèmes produits harmonieux, assurant une cohérence graphique et ergonomique, ainsi qu’une interopérabilité optimale pour une expérience utilisateur fluide et évolutive.',
+      },
+      {
+        title: 'Design system',
+        text: 'Je mets en place des design systems pour garantir une unité visuelle et ergonomique entre vos produits. J’optimise également les processus de conception et de développement afin de vous faire gagner du temps.',
+      },
+    ],
+  },
+  {
+    title: 'Optimisation & adaptation',
+    items: [
+      {
+        title: "Outils d'analyse",
+        text: 'J’analyse les données utilisateurs pour extraire des insights pertinents qui orientent les décisions stratégiques et optimisent la performance des produits.',
+      },
+      {
+        title: 'Indicateurs de performance',
+        text: "J'intègre des KPI pour évaluer l'efficacité des interfaces et ajuster les choix de conception en fonction des besoins réels des utilisateurs.",
+      },
+    ],
+  },
+]
+</script>
+
 <style scoped>
-.strategy-section {
+.strategy__blocks {
   display: flex;
   flex-direction: column;
-  gap: calc(var(--space-md) * 10);
-  color: var(--text-front);
-
-  padding-top: calc(var(--space-md) * 10);
-  padding-bottom: calc(var(--space-md) * 10);
-
-  padding-left: 30%;
-  padding-right: 15%;
-
+  gap: var(--space-8);
 }
 
-/* Tablettes */
-@media (max-width: 1024px) {
-  .strategy-section {
-    padding-left: 25%;
-    padding-right: 10%;
-
-    gap: calc(var(--space-md) * 8);
-  }
-}
-
-/* Mobile */
-@media (max-width: 512px) {
-  .strategy-section {
-    padding-left: calc(var(--space-md) * 6 );
-    padding-right: calc(var(--space-md) * 3 );
-
-    padding-top: calc(var(--space-md) * 4);
-    padding-bottom: calc(var(--space-md) * 4);
-    
-    gap: calc(var(--space-md) * 6);
-  }
-
-  .strategy-grid {
-    grid-template-columns: 1fr;
-    gap: calc(var(--space-md) * 3);
-  }
-}
-
-.strategy-block {
-  display: flex;
-  flex-direction: column;
-  gap: calc(var(--space-md) * 2);
-}
-
-.strategy-block h3 {
-  max-width: 512px;
-}
-
-.strategy-grid {
+.strategy__block {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: calc(var(--space-md) * 4);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 2fr);
+  gap: var(--space-4) var(--space-6);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--border-medium);
 }
 
-.strategy-item {
+.strategy__title {
+  max-width: 14ch;
+}
+
+.strategy__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: var(--space-4);
+}
+
+.strategy__item {
   display: flex;
   flex-direction: column;
-  gap: var(--space-none);
+  gap: var(--space-1);
 }
 
-.strategy-item h3 {
+.strategy__item h4 {
   color: var(--text-front);
 }
 
-.strategy-item p {
+.strategy__item p {
   color: var(--text-medium);
 }
 
-@media (max-width: 768px) {
-  .strategy-grid {
+@media (max-width: 1024px) {
+  .strategy__block {
     grid-template-columns: 1fr;
-    gap: calc(var(--space-md) * 4);
+    gap: var(--space-3);
   }
 
-  .strategy-section {
-    gap: calc(var(--space-md) * 8);
+  .strategy__title {
+    max-width: none;
+  }
+}
+
+@media (max-width: 640px) {
+  .strategy__blocks {
+    gap: var(--space-6);
+  }
+
+  .strategy__grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
   }
 }
 </style>
