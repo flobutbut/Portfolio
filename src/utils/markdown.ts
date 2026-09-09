@@ -22,7 +22,7 @@ const defaultLinkOpen =
 
 md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
   const token = tokens[idx]
-  const href = token.attrGet('href') ?? ''
+  const href = String(token.attrGet('href') ?? '')
   if (/^https?:\/\//.test(href)) {
     token.attrSet('target', '_blank')
     token.attrSet('rel', 'noopener')

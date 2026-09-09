@@ -9,7 +9,7 @@ yarn dev          # Start dev server at localhost:5180 (dedicated port, see vite
 yarn build        # Type-check (vue-tsc) + build to ./dist
 yarn preview      # Preview production build
 yarn type-check   # Run vue-tsc without emitting
-yarn lint         # Run ESLint 9 (flat config, eslint.config.ts) with auto-fix
+yarn lint         # Run ESLint 10 (flat config, eslint.config.ts) with auto-fix
 yarn format       # Run Prettier on src/
 ```
 
@@ -17,7 +17,7 @@ There are no tests in this project.
 
 ## Architecture
 
-Vue 3 + TypeScript portfolio built with Vite. Deployed to GitHub Pages via `.github/workflows/deploy.yml` on pushes to `main` (the workflow copies `index.html` to `404.html` so deep links work with history mode).
+Vue 3 + TypeScript portfolio built with Vite. Hosted on Vercel (project `portfolio`, linked to the GitHub repo): every push to `main` deploys automatically. Vercel serves `index.html` for unknown paths, so history-mode routes work without extra config.
 
 ### Routing (`src/router/index.ts`)
 
