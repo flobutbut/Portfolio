@@ -17,7 +17,7 @@ There are no tests in this project.
 
 ## Architecture
 
-Vue 3 + TypeScript portfolio built with Vite. Hosted on Vercel (project `portfolio`, linked to the GitHub repo): every push to `main` deploys automatically. Vercel serves `index.html` for unknown paths, so history-mode routes work without extra config.
+Vue 3 + TypeScript portfolio built with Vite. Hosted on Vercel (project `portfolio`, linked to the GitHub repo): every push to `main` deploys automatically. History-mode routes rely on the SPA rewrite in `vercel.json` (every path falls back to `index.html`; real files in `dist/` are served first). Without it, any direct load of a route other than `/` returns a Vercel 404.
 
 ### Routing (`src/router/index.ts`)
 
