@@ -13,7 +13,7 @@
         </div>
 
         <div class="contact__actions">
-          <EmailCopy email="hello@florianbutour.com" />
+          <EmailCopy email="f.butour@gmail.com" />
           <a
             href="https://www.linkedin.com/in/florianbutour/"
             target="_blank"

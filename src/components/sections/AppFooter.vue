@@ -8,8 +8,8 @@
 
       <div class="footer__column">
         <p class="md-bold footer__title">Contact</p>
-        <a href="mailto:hello@florianbutour.com" class="footer__link md-regular">
-          hello@florianbutour.com
+        <a href="mailto:f.butour@gmail.com" class="footer__link md-regular">
+          f.butour@gmail.com
         </a>
         <a href="tel:+33761288820" class="footer__link md-regular">07 61 28 88 20</a>
       </div>
